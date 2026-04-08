@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Каталог</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">KAIF SMOKE</div>
+    <nav>
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="cart.html">Корзина <span id="cart-count">0</span></a>
+    </nav>
+</header>
+
+<div class="catalog-layout">
+
+  <!-- ФИЛЬТР -->
+<aside class="filter">
+    <h3 class="filter-title">ФИЛЬТРЫ</h3>
+    
+    <button class="all-categories-btn" onclick="setFilter('all')">
+        <span class="square"></span>
+        <span class="text">ВСЕ КАТЕГОРИИ</span>
+    </button>
+    
+    <div class="filter-list">
+        <button class="filter-item" onclick="setFilter('liquid')">Жидкости <span class="count">10</span></button>
+        <button class="filter-item" onclick="setFilter('disposable')">Одноразки <span class="count">20</span></button>
+        <button class="filter-item" onclick="setFilter('soon')">Скоро <span class="count">///</span></button>
+    </div>
+
+
+<div class="filter-section brands-section">
+    <h3 class="filter-title">— БРЕНДЫ</h3>
+    
+    <div class="brand-grid-compact">
+        <button class="brand-mini-btn active" onclick="filterByBrand('all')">Все</button>
+        <button class="brand-mini-btn" onclick="filterByBrand('Elf Bar')">Elf Bar</button>
+        <button class="brand-mini-btn" onclick="filterByBrand('Lost Mary')">Lost Mary</button>
+        <button class="brand-mini-btn" onclick="filterByBrand('HQD')">HQD</button>
+        <button class="brand-mini-btn" onclick="filterByBrand('Vaporesso')">Vaporesso</button>
+        <button class="brand-mini-btn" onclick="filterByBrand('Voopoo')">Voopoo</button>
+        <button class="brand-mini-btn" onclick="filterByBrand('Brusko')">Brusko</button>
+        <button class="brand-mini-btn" onclick="filterByBrand('Chaser')">Chaser</button>
+    </div>
+</div>
+</aside>
+
+  <main>
+
+   <div class="grid-5" id="catalog-grid"></div>
+
+<div class="pagination">
+  <div class="pagination-item" onclick="setFilter('liquid')">Жижи</div>
+  <div class="pagination-item" onclick="setFilter('disposable')">Одноразки</div>
+  <div class="pagination-item" onclick="setFilter('soon')">Скоро</div>
+</div>
+
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

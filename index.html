@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vape Premium</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <img src="logo.png" alt="KAIF SMOKE" class="main-logo-img"> <div class="logo-text">KAIF SMOKE</div>
+    </div>
+    
+    <nav class="header-nav">
+        <a href="catalog.html" class="nav-item">Каталог</a>
+        <a href="cart.html" class="nav-item cart-icon">
+            <img src="https://img.icons8.com/ios/50/ffffff/shopping-cart.png" alt="Корзина">
+        </a>
+        <div class="burger-menu" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</header>
+<div id="side-menu" class="side-menu">
+    <div class="menu-header">
+        <span class="menu-title">МЕНЮ</span>
+        <button class="close-btn" onclick="toggleMenu()">&times;</button>
+    </div>
+    
+    <div class="menu-items">
+        <div class="menu-link"><span class="emoji">🏠</span> О магазине</div>
+        <div class="menu-link"><span class="emoji">🚚</span> Доставка</div>
+        <div class="menu-link"><span class="emoji">💳</span> Оплата</div>
+        <div class="menu-link"><span class="emoji">❓</span> FAQ</div>
+        <div class="menu-link"><span class="emoji">⭐</span> Отзывы клиентов</div>
+    </div>
+
+    <div class="menu-footer">
+       <a href="https://t.me/managerelfbarow">
+        <button class="btn-manager">💬 Связаться с менеджером</button>
+      </a> 
+       <a href="https://t.me/managerelfbarow">
+        <button class="btn-tg">✈️ Telegram-канал</button>
+        </a> 
+    </div>
+</div>
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<section class="hero-premium">
+    <div class="hero-bg-text">VAPE</div>
+
+    <div class="container hero-content">
+        
+        <div class="hero-top-badge">
+            <span class="dot"></span> ПОЛЬША • БЫСТРАЯ ДОСТАВКА <span class="dot"></span>
+        </div>
+
+        <h1 class="hero-title">
+            <span class="text-white">KAIF</span><br>
+            <span class="text-yellow">SMOKE</span>
+        </h1>
+
+        <p class="hero-subtitle">ПРЕМИУМ ВЕЙП-ШОП В ПОЛЬШЕ</p>
+        
+        <p class="hero-description">
+            Только оригинальная продукция от официальных дистрибьюторов.<br>
+            Лучшие цены и гарантия качества.
+        </p>
+
+        <div class="hero-btns">
+            <a href="catalog.html" class="btn-skew-yellow">
+                <span class="btn-text">СМОТРЕТЬ КАТАЛОГ →</span>
+            </a>
+            
+            <a href="https://t.me/managerelfbarow" class="btn-outline-white">
+                <span class="icon-tg"></span> НАПИСАТЬ В TELEGRAM
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-info-bar">
+        <div class="info-item">
+            <span class="info-num">500+</span>
+            <span class="info-text">ТОВАРОВ<br>В КАТАЛОГЕ</span>
+        </div>
+        <div class="info-item">
+            <span class="info-num">1-2</span>
+            <span class="info-text">ДНЯ<br>ДОСТАВКА</span>
+        </div>
+        <div class="info-item">
+            <span class="info-num">100%</span>
+            <span class="info-text">ОРИГИНАЛЬНАЯ<br>ПРОДУКЦИЯ</span>
+        </div>
+        <div class="info-item">
+            <span class="info-num">24/7</span>
+            <span class="info-text">ПОДДЕРЖКА<br>КЛИЕНТОВ</span>
+        </div>
+    </div>
+
+    <div class="marquee-ticker">
+        <div class="marquee-content">
+            ✦ ELF BAR 2000 ✦ CHASER ✦ ЖИДКОСТИ ✦ ГАРАНТИЯ КАЧЕСТВА ✦ KAIFSMOKE.COM ✦ БЫСТРАЯ ДОСТАВКА ✦ ОРИГИНАЛ ✦ ELF BAR 2000 ✦ CHASER ✦ ЖИДКОСТИ ✦ ГАРАНТИЯ КАЧЕСТВА ✦ KAIFSMOKE.COM ✦ БЫСТРАЯ ДОСТАВКА ✦ ОРИГИНАЛ 
+        </div>
+    </div>
+</section>
+
+<section class="categories-section">
+    <div class="container">
+        
+        <h2 class="section-title">Категории</h2>
+
+        <div class="categories-grid-3">
+            
+            <a href="catalog.html?type=liquid" class="category-card" style="background-image: url('images/bg-liquids.jpg');">
+                <div class="card-overlay">
+                    <span class="category-label label-blue">Жидкости</span>
+                </div>
+            </a>
+
+            <a href="catalog.html?type=disposable" class="category-card" style="background-image: url('images/bg-disposables.jpg');">
+                <div class="card-overlay">
+                    <span class="category-label label-pink">Одноразки</span>
+                </div>
+            </a>
+
+            <a href="catalog.html?type=pods" class="category-card" style="background-image: url('images/bg-pods.jpg');">
+                <div class="card-overlay">
+                    <span class="category-label label-green">Скоро</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<section class="popular-section">
+    <div class="container">
+        <div class="popular-header">
+            <div class="popular-title-group">
+                <h2 class="section-title-large">ПОПУЛЯРНЫЕ</h2>
+                <p class="section-subtitle">Хиты продаж этого месяца</p>
+            </div>
+            <a href="catalog.html" class="all-products-link">Все товары →</a>
+        </div>
+
+        <div class="popular-grid">
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="path_to_image_1.jpg" alt="Product" class="product-img">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Название товара 1</h3>
+                    <p class="product-desc">Описание или вкус</p>
+                    <div class="product-footer">
+                        <span class="product-price">55.00 zł</span>
+                        <button class="add-to-cart-pink">В корзину</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="path_to_image_2.jpg" alt="Product" class="product-img">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Название товара 2</h3>
+                    <p class="product-desc">Описание или вкус</p>
+                    <div class="product-footer">
+                        <span class="product-price">55.00 zł</span>
+                        <button class="add-to-cart-pink">В корзину</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="path_to_image_3.jpg" alt="Product" class="product-img">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Название товара 3</h3>
+                    <p class="product-desc">Описание или вкус</p>
+                    <div class="product-footer">
+                        <span class="product-price">30.00 zł</span>
+                        <button class="add-to-cart-pink">В корзину</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="path_to_image_4.jpg" alt="Product" class="product-img">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Название товара 4</h3>
+                    <p class="product-desc">Описание или вкус</p>
+                    <div class="product-footer">
+                        <span class="product-price">30.00 zł</span>
+                        <button class="add-to-cart-pink">В корзину</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="path_to_image_5.jpg" alt="Product" class="product-img">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Название товара 5</h3>
+                    <p class="product-desc">Описание или вкус</p>
+                    <div class="product-footer">
+                        <span class="product-price">30.00 zł</span>
+                        <button class="add-to-cart-pink">В корзину</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="path_to_image_6.jpg" alt="Product" class="product-img">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Название товара 6</h3>
+                    <p class="product-desc">Описание или вкус</p>
+                    <div class="product-footer">
+                        <span class="product-price">30.00 zł</span>
+                        <button class="add-to-cart-pink">В корзину</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="path_to_image_7.jpg" alt="Product" class="product-img">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Название товара 7</h3>
+                    <p class="product-desc">Описание или вкус</p>
+                    <div class="product-footer">
+                        <span class="product-price">30.00 zł</span>
+                        <button class="add-to-cart-pink">В корзину</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="path_to_image_8.jpg" alt="Product" class="product-img">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Название товара 8</h3>
+                    <p class="product-desc">Описание или вкус</p>
+                    <div class="product-footer">
+                        <span class="product-price">30.00 zł</span>
+                        <button class="add-to-cart-pink">В корзину</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature-card">
+        <div class="feature-icon icon-pink">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/checkmark--v1.png" alt="Оригинал">
+        </div>
+        <h3>ОРИГИНАЛ</h3>
+        <p>Только сертифицированная продукция от официальных дистрибьюторов с гарантией качества.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon icon-blue">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/delivery.png" alt="Доставка">
+        </div>
+        <h3>ДОСТАВКА</h3>
+        <p>Быстрая доставка по всей стране за 1-2 рабочих дня. Надежная упаковка.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon icon-green">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/chat--v1.png" alt="Поддержка">
+        </div>
+        <h3>ПОДДЕРЖКА</h3>
+        <p>Профессиональная консультация и помощь в выборе 24/7 в Telegram.</p>
+    </div>
+</section>
+
+<footer class="main-footer">
+    <div class="footer-grid">
+        <div class="footer-info">
+            <div class="footer-logo">KAIF SMOKE</div>
+            <p>Ваш надежный поставщик вейп-продукции. Только оригинальные товары и лучший сервис.</p>
+        </div>
+
+        <div class="footer-links">
+            <h4>Каталог</h4>
+            <a href="#">Одноразки</a>
+            <a href="#">Жидкости</a>
+            <a href="#">Поды</a>
+            <a href="#">Картриджи</a>
+        </div>
+
+        <div class="footer-links">
+            <h4>Информация</h4>
+            <a href="#">Доставка</a>
+            <a href="#">Оплата</a>
+            <a href="#">FAQ</a>
+        </div>
+
+        <div class="footer-links">
+            <h4>Контакты</h4>
+            <div class="contact-box">
+                <span>График работы:</span>
+                <p>Пн-Пт: 12:00-20:00</p>
+            </div>
+            <a href="#" class="tg-link">Telegram: @kaif_smoke_admin</a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 KAIF SMOKE</p>
+        <div class="age-limit">
+            <img src="https://img.icons8.com/ios-filled/20/ffffff/18-plus.png">
+            Продукция содержит никотин и предназначена для лиц старше 18 лет
+        </div>
+    </div>
+</footer>
+
+<button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+<script src="script.js"></script>
+</body>
+</html>
