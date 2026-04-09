@@ -1,3 +1,76 @@
+/* --- ГЛОБАЛЬНЫЙ МОБИЛЬНЫЙ ФИКС (ЧТОБЫ НЕ ВЫЛАЗИЛО) --- */
+@media (max-width: 768px) {
+    /* 1. Убираем горизонтальный скролл у всей страницы */
+    html, body {
+        width: 100vw;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* 2. Сетки: Популярные и Категории — строго 2 в ряд */
+    .products-grid-8, 
+    .popular-grid, 
+    .grid-4, 
+    .categories-flex {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* Ровно 2 колонки */
+        gap: 8px !important; /* Маленький зазор, чтобы не распирало */
+        width: 100% !important;
+        padding: 10px !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 3. Карточки товаров и категорий */
+    .product-card, .popular-card, .card, .cat-item {
+        width: 100% !important;
+        min-width: 0 !important; /* Убираем то, что выталкивало вправо */
+        margin: 0 !important;
+        height: auto !important; /* Для товаров высота по контенту */
+    }
+
+    /* Фикс высоты категорий для 2х2 */
+    .cat-item {
+        height: 220px !important; 
+        border-right: 1px solid #1a1a1a !important;
+    }
+
+    /* 4. Заголовки (KAIF SMOKE и другие) */
+    .hero-title, .kaifsmoke-title {
+        font-size: 50px !important; /* Уменьшаем, чтобы не ломало экран */
+        letter-spacing: -1px !important;
+        line-height: 1 !important;
+        width: 100% !important;
+        padding: 0 10px !important;
+    }
+
+    .giant-title {
+        font-size: 36px !important;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* 5. Убираем лишние отступы у контейнеров */
+    .container, .catalog-layout, .main-content {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        width: 100% !important;
+    }
+
+    /* 6. Инфо-панель в Hero (цифры 100% и т.д.) */
+    .hero-info-bar {
+        grid-template-columns: repeat(2, 1fr) !important;
+        position: relative !important;
+        bottom: 0 !important;
+        margin-top: 20px !important;
+    }
+
+    /* Скрываем описание на мобилках, чтобы сэкономить место */
+    .prod-desc, .hero-description {
+        display: none !important;
+    }
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700;900&display=swap');
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: black; color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
