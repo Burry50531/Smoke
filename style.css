@@ -628,22 +628,69 @@ body {
 }
 
 /* ФИНАЛЬНЫЙ КОД ДЛЯ МОБИЛЬНОЙ СЕТКИ 2х2 */
-@media screen and (max-width: 900px) {
-    
-    /* Родительский контейнер */
-    .categories-flex {
-        display: flex !important;
-        flex-wrap: wrap !important; /* Разрешает перенос на вторую строку */
-        flex-direction: row !important; /* Строго горизонтально */
-        width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
+/* --- АДАПТИВНОСТЬ ДЛЯ КАТЕГОРИЙ (2х2 НА МОБИЛКЕ) --- */
 
+@media (max-width: 768px) {
+    .categories-flex {
+        /* Переключаем с flex на grid для точности */
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; /* Строго 2 колонки */
+        width: 100% !important;
+        border-top: 1px solid #1a1a1a;
     }
-.giant-title  {
-    font-size: 32px !important; /* Уменьшаем основной заголовок */
-        letter-spacing: 1px !important;
+
+    .cat-item {
+        /* Сбрасываем ширину и высоту для мобилки */
+        min-width: 0 !important; 
+        width: 100% !important;
+        height: 250px !important; /* Уменьшаем высоту, чтобы 4 карточки влезли в экран */
+        padding: 20px !important;
+        border-right: 1px solid #1a1a1a !important;
+        border-bottom: 1px solid #1a1a1a !important;
+    }
+
+    /* Убираем правую границу у каждой второй карточки, чтобы не было двойных линий */
+    .cat-item:nth-child(2n) {
+        border-right: none !important;
+    }
+
+    /* Настраиваем текст и иконки под малый экран */
+    .cat-emoji {
+        font-size: 30px !important;
+        margin: 10px 0 !important;
+    }
+
+    .cat-name {
+        font-size: 18px !important; /* Уменьшаем шрифт, чтобы не переносился */
+        margin-bottom: 2px !important;
+    }
+
+    .cat-number {
+        font-size: 10px !important;
+    }
+
+    .cat-count {
+        font-size: 9px !important;
+    }
+
+    /* Уменьшаем стрелку ↗ */
+    .cat-arrow {
+        width: 25px !important;
+        height: 25px !important;
+        top: 15px !important;
+        right: 15px !important;
+        font-size: 14px !important;
+    }
 }
+
+/* Совсем для мелких телефонов (типа SE) */
+@media (max-width: 380px) {
+    .cat-item {
+        height: 200px !important;
+    }
+    .cat-name {
+        font-size: 16px !important;
+    }
 }
 /* --- ПОПУЛЯРНЫЕ ТОВАРЫ --- */
 .popular-products {
