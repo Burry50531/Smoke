@@ -90,64 +90,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+
+
+
+
+
+
+
+// Загружаем корзину из памяти браузера
 let cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
+updateCounterDisplay();
 
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    if (product) {
-        cart.push(product);
-        localStorage.setItem('kaif_cart', JSON.stringify(cart));
-        updateCartCount();
-        alert(`Товар ${product.name} добавлен в корзину!`);
+function addToCart(name, price, img) {
+    // Добавляем товар в список
+    cart.push({ name, price, img });
+    
+    // Сохраняем
+    localStorage.setItem('kaif_cart', JSON.stringify(cart));
+    
+    // Обновляем цифру на корзине
+    updateCounterDisplay();
+    
+    // Показываем надпись "Добавлено"
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2000);
+}
+
+function updateCounterDisplay() {
+    const counter = document.getElementById('cart-counter');
+    if (counter) {
+        counter.innerText = cart.length;
+        // Скрываем кружок, если в корзине 0
+        counter.style.display = cart.length > 0 ? 'flex' : 'none';
     }
 }
 
-function updateCartCount() {
-    const countEl = document.getElementById('cart-count');
-    if (countEl) countEl.innerText = cart.length;
-}
-
-function renderCatalog(items) {
-    const grid = document.getElementById('catalog-grid');
-    if (!grid) return;
-
-    grid.innerHTML = items.map(p => `
-        <div class="card">
-            <div class="img-stub">IMG</div>
-            <h3>${p.name}</h3>
-            <button class="buy-btn" onclick="addToCart(${p.id})">
-                <span class="price-tag">${p.price} ₽</span>
-                <span class="add-label">В КОРЗИНУ</span>
-            </button>
-        </div>
-    `).join('');
-    
-    grid.innerHTML += `
-        <div class="pagination">
-            <button class="pagination-item" onclick="setFilter('liquid')">Жижи</button>
-            <button class="pagination-item" onclick="setFilter('disposable')">Одноразки</button>
-            <button class="pagination-item" onclick="setFilter('soon')">Скоро</button>
-        </div>
-    `;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    updateCartCount();
-});
-
-function filterByBrand(brandName) {
-    if (brandName === 'all') {
-        renderCatalog(products);
-    } else {
-        const filtered = products.filter(p => p.brand === brandName);
-        renderCatalog(filtered);
-    }
-
-    document.querySelectorAll('.brand-mini-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    
-    event.currentTarget.classList.add('active');
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+function toggleMenu() {
+    // Код для бургера
 }

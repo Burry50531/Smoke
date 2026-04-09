@@ -12,21 +12,25 @@
 
 <header class="header">
     <div class="header-left">
-        <img src="logo.png" alt="KAIF SMOKE" class="main-logo-img"> <div class="logo-text">KAIF SMOKE</div>
+        <img src="images/2025-12-14 19.05.08.jpg" alt="Logo" class="main-logo-img">
+        <div class="logo-text">KAIF SMOKE</div>
     </div>
     
     <nav class="header-nav">
         <a href="catalog.html" class="nav-item">Каталог</a>
-        <a href="cart.html" class="nav-item cart-icon">
-            <img src="https://img.icons8.com/ios/50/ffffff/shopping-cart.png" alt="Корзина">
+        
+        <a href="cart.html" class="cart-container-link">
+            <img src="images/Знімок екрана 2026-04-09 о 01.39.49.png" alt="Корзина" class="header-cart-icon">
+            <div id="cart-counter" class="cart-badge">0</div>
         </a>
+
         <div class="burger-menu" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
     </nav>
 </header>
+
+<div id="toast" class="toast-success">Успешно добавлено в корзину!</div>
 <div id="side-menu" class="side-menu">
     <div class="menu-header">
         <span class="menu-title">МЕНЮ</span>
@@ -51,6 +55,8 @@
     </div>
 </div>
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+
 
 <section class="hero-premium">
     <div class="hero-bg-text">VAPE</div>
@@ -109,158 +115,193 @@
         </div>
     </div>
 </section>
-
-<section class="categories-section">
-    <div class="container">
-        
-        <h2 class="section-title">Категории</h2>
-
-        <div class="categories-grid-3">
-            
-            <a href="catalog.html?type=liquid" class="category-card" style="background-image: url('images/bg-liquids.jpg');">
-                <div class="card-overlay">
-                    <span class="category-label label-blue">Жидкости</span>
+<section class="minimal-categories" id="catalog">
+        <div class="container">
+            <div class="categories-header">
+                <div class="accent-line">—— АССОРТИМЕНТ</div>
+                <div class="header-main-row">
+                    <h2 class="giant-title">КАТЕГОРИИ</h2>
+                    <a href="#" class="view-all-btn">ВЕСЬ КАТАЛОГ <span class="arrow">→</span></a>
                 </div>
-            </a>
+            </div>
 
-            <a href="catalog.html?type=disposable" class="category-card" style="background-image: url('images/bg-disposables.jpg');">
-                <div class="card-overlay">
-                    <span class="category-label label-pink">Одноразки</span>
-                </div>
-            </a>
+            <div class="categories-flex">
+                <a href="catalog.html" class="cat-item">
+                    <div class="cat-number">01 / ЖИДКОСТИ</div>
+                    <div class="cat-arrow">↗</div>
+                    <div class="cat-emoji">💨</div>
+                    <div class="cat-name">ЖИДКОСТИ</div>
+                    <div class="cat-count">120+ ПОЗИЦИЙ</div>
+                </a>
 
-            <a href="catalog.html?type=pods" class="category-card" style="background-image: url('images/bg-pods.jpg');">
-                <div class="card-overlay">
-                    <span class="category-label label-green">Скоро</span>
-                </div>
-            </a>
+                <a href="catalog.html" class="cat-item">
+                    <div class="cat-number">02</div>
+                    <div class="cat-arrow">↗</div>
+                    <div class="cat-emoji">🔄</div>
+                    <div class="cat-name">ОДНОРАЗКИ</div>
+                    <div class="cat-count">80+ ПОЗИЦИЙ</div>
+                </a>
 
+                <a href="#" class="cat-item">
+                    <div class="cat-number">03</div>
+                    <div class="cat-arrow">↗</div>
+                    <div class="cat-emoji">⚡</div>
+                    <div class="cat-name">СКОРО</div>
+                    <div class="cat-count">??? ПОЗИЦИЙ</div>
+                </a>
+
+                <a href="#" class="cat-item">
+                    <div class="cat-number">04</div>
+                    <div class="cat-arrow">↗</div>
+                    <div class="cat-emoji">🎯</div>
+                    <div class="cat-name">СКОРО</div>
+                    <div class="cat-count">??? ПОЗИЦИЙ</div>
+                </a>
+
+                <a href="#" class="cat-item">
+                    <div class="cat-number">05</div>
+                    <div class="cat-arrow">↗</div>
+                    <div class="cat-emoji">⚫</div>
+                    <div class="cat-name">СКОРО</div>
+                    <div class="cat-count">??? ПОЗИЦИЙ</div>
+                </a>
+            </div>
         </div>
-    </div>
-</section>
-
-<section class="popular-section">
+    </section>
+<section class="popular-products">
     <div class="container">
         <div class="popular-header">
-            <div class="popular-title-group">
-                <h2 class="section-title-large">ПОПУЛЯРНЫЕ</h2>
-                <p class="section-subtitle">Хиты продаж этого месяца</p>
+            <div class="accent-line">—— ХИТЫ ПРОДАЖ</div>
+            <div class="header-main-row">
+                <h2 class="giant-title">ПОПУЛЯРНЫЕ</h2>
+                <a href="#" class="view-all-btn">ВСЕ ТОВАРЫ <span class="arrow">→</span></a>
             </div>
-            <a href="catalog.html" class="all-products-link">Все товары →</a>
         </div>
 
-        <div class="popular-grid">
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="path_to_image_1.jpg" alt="Product" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Название товара 1</h3>
-                    <p class="product-desc">Описание или вкус</p>
-                    <div class="product-footer">
-                        <span class="product-price">55.00 zł</span>
-                        <button class="add-to-cart-pink">В корзину</button>
-                    </div>
-                </div>
+        <div class="products-grid-8">
+            
+            
+    <div class="product-card" onclick="addToCart('Chaser For Pods 30ml', 55, 'img/prod1.png')">
+        <div class="product-image-box">
+            <img src="img/prod1.png" alt="Product" class="main-img">
+        </div>
+        <div class="product-info">
+            <div class="prod-category">ЖИДКОСТИ</div>
+            <h3 class="prod-title">Chaser For Pods 30ml</h3>
+            <p class="prod-desc">Blueberry Mint Limited</p>
+            <div class="prod-footer">
+                <span class="prod-price">55 zł</span>
+                <button class="add-to-cart-skew"><span class="plus-text">+</span></button>
             </div>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="path_to_image_2.jpg" alt="Product" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Название товара 2</h3>
-                    <p class="product-desc">Описание или вкус</p>
-                    <div class="product-footer">
-                        <span class="product-price">55.00 zł</span>
-                        <button class="add-to-cart-pink">В корзину</button>
-                    </div>
-                </div>
+    <div class="product-card" onclick="addToCart('Chaser Mix 10ml', 25, 'img/prod2.png')">
+        <div class="product-image-box">
+            <img src="img/prod2.png" alt="Product" class="main-img">
+        </div>
+        <div class="product-info">
+            <div class="prod-category">ЖИДКОСТИ</div>
+            <h3 class="prod-title">Chaser Mix 10ml</h3>
+            <p class="prod-desc">Strawberry Ice</p>
+            <div class="prod-footer">
+                <span class="prod-price">25 zł</span>
+                <button class="add-to-cart-skew"><span class="plus-text">+</span></button>
             </div>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="path_to_image_3.jpg" alt="Product" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Название товара 3</h3>
-                    <p class="product-desc">Описание или вкус</p>
-                    <div class="product-footer">
-                        <span class="product-price">30.00 zł</span>
-                        <button class="add-to-cart-pink">В корзину</button>
-                    </div>
-                </div>
+    <div class="product-card" onclick="addToCart('Chaser Black New', 50, 'img/prod3.png')">
+        <div class="product-image-box">
+            <img src="img/prod3.png" alt="Product" class="main-img">
+        </div>
+        <div class="product-info">
+            <div class="prod-category">ЖИДКОСТИ</div>
+            <h3 class="prod-title">Chaser Black</h3>
+            <p class="prod-desc">Triple Berry</p>
+            <div class="prod-footer">
+                <span class="prod-price">50 zł</span>
+                <button class="add-to-cart-skew"><span class="plus-text">+</span></button>
             </div>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="path_to_image_4.jpg" alt="Product" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Название товара 4</h3>
-                    <p class="product-desc">Описание или вкус</p>
-                    <div class="product-footer">
-                        <span class="product-price">30.00 zł</span>
-                        <button class="add-to-cart-pink">В корзину</button>
-                    </div>
-                </div>
+    <div class="product-card" onclick="addToCart('Chaser LUX Premium', 60, 'img/prod4.png')">
+        <div class="product-image-box">
+            <img src="img/prod4.png" alt="Product" class="main-img">
+        </div>
+        <div class="product-info">
+            <div class="prod-category">ЖИДКОСТИ</div>
+            <h3 class="prod-title">Chaser LUX</h3>
+            <p class="prod-desc">Energy Drink</p>
+            <div class="prod-footer">
+                <span class="prod-price">60 zł</span>
+                <button class="add-to-cart-skew"><span class="plus-text">+</span></button>
             </div>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="path_to_image_5.jpg" alt="Product" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Название товара 5</h3>
-                    <p class="product-desc">Описание или вкус</p>
-                    <div class="product-footer">
-                        <span class="product-price">30.00 zł</span>
-                        <button class="add-to-cart-pink">В корзину</button>
-                    </div>
-                </div>
+    <div class="product-card" onclick="addToCart('Elf Bar 2000', 45, 'img/prod5.png')">
+        <div class="product-image-box">
+            <img src="img/prod5.png" alt="Product" class="main-img">
+        </div>
+        <div class="product-info">
+            <div class="prod-category">ОДНОРАЗКИ</div>
+            <h3 class="prod-title">Elf Bar 2000</h3>
+            <p class="prod-desc">Watermelon Ice</p>
+            <div class="prod-footer">
+                <span class="prod-price">45 zł</span>
+                <button class="add-to-cart-skew"><span class="plus-text">+</span></button>
             </div>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="path_to_image_6.jpg" alt="Product" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Название товара 6</h3>
-                    <p class="product-desc">Описание или вкус</p>
-                    <div class="product-footer">
-                        <span class="product-price">30.00 zł</span>
-                        <button class="add-to-cart-pink">В корзину</button>
-                    </div>
-                </div>
+    <div class="product-card" onclick="addToCart('Vaporesso XROS 3', 130, 'img/prod6.png')">
+        <div class="product-image-box">
+            <img src="img/prod6.png" alt="Product" class="main-img">
+        </div>
+        <div class="product-info">
+            <div class="prod-category">ПОДЫ</div>
+            <h3 class="prod-title">Vaporesso XROS 3</h3>
+            <p class="prod-desc">Space Grey</p>
+            <div class="prod-footer">
+                <span class="prod-price">130 zł</span>
+                <button class="add-to-cart-skew"><span class="plus-text">+</span></button>
             </div>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="path_to_image_7.jpg" alt="Product" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Название товара 7</h3>
-                    <p class="product-desc">Описание или вкус</p>
-                    <div class="product-footer">
-                        <span class="product-price">30.00 zł</span>
-                        <button class="add-to-cart-pink">В корзину</button>
-                    </div>
-                </div>
+    <div class="product-card" onclick="addToCart('XROS Pod 0.8', 20, 'img/prod7.png')">
+        <div class="product-image-box">
+            <img src="img/prod7.png" alt="Product" class="main-img">
+        </div>
+        <div class="product-info">
+            <div class="prod-category">КАРТРИДЖИ</div>
+            <h3 class="prod-title">XROS Pod 0.8</h3>
+            <p class="prod-desc">Replacement Cartridge</p>
+            <div class="prod-footer">
+                <span class="prod-price">20 zł</span>
+                <button class="add-to-cart-skew"><span class="plus-text">+</span></button>
             </div>
+        </div>
+    </div>
 
-            <div class="product-card">
-                <div class="product-img-container">
-                    <img src="path_to_image_8.jpg" alt="Product" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">Название товара 8</h3>
-                    <p class="product-desc">Описание или вкус</p>
-                    <div class="product-footer">
-                        <span class="product-price">30.00 zł</span>
-                        <button class="add-to-cart-pink">В корзину</button>
-                    </div>
-                </div>
+    <div class="product-card" onclick="addToCart('Chaser For Pods Triple Apple', 55, 'img/prod8.png')">
+        <div class="product-image-box">
+            <img src="img/prod8.png" alt="Product" class="main-img">
+        </div>
+        <div class="product-info">
+            <div class="prod-category">ЖИДКОСТИ</div>
+            <h3 class="prod-title">Chaser For Pods</h3>
+            <p class="prod-desc">Triple Apple</p>
+            <div class="prod-footer">
+                <span class="prod-price">55 zł</span>
+                <button class="add-to-cart-skew"><span class="plus-text">+</span></button>
             </div>
+        </div>
+    </div>
+</div>
+
         </div>
     </div>
 </section>

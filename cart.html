@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина | KAIF SMOKE</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Специфические стили для страницы корзины */
+        .cart-page-container { padding: 120px 20px 60px; max-width: 800px; margin: 0 auto; }
+        .cart-title { font-size: 40px; font-weight: 900; margin-bottom: 30px; border-left: 5px solid #e6b130; padding-left: 15px; }
+        .cart-item { 
+            display: flex; align-items: center; background: #111; 
+            padding: 15px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #222;
+        }
+        .cart-item img { width: 70px; height: 70px; object-fit: contain; margin-right: 20px; }
+        .cart-item-info { flex-grow: 1; }
+        .cart-item-name { font-weight: 700; font-size: 18px; margin-bottom: 5px; }
+        .cart-item-price { color: #e6b130; font-weight: 900; }
+        .remove-btn { background: #ff4444; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        .cart-total { margin-top: 30px; text-align: right; font-size: 24px; font-weight: 900; border-top: 2px solid #222; padding-top: 20px; }
+        .order-btn { 
+            display: block; width: 100%; background: #e6b130; color: #000; text-align: center; 
+            padding: 20px; margin-top: 20px; text-decoration: none; font-weight: 900; font-size: 20px; border-radius: 5px;
+        }
+        .empty-msg { text-align: center; padding: 50px; color: #666; font-size: 20px; }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <a href="index.html" style="text-decoration: none; color: white; display: flex; align-items: center; gap: 10px;">
+            <img src="images/2025-12-14 19.05.08.jpg" class="main-logo-img">
+            <span class="logo-text">KAIF SMOKE</span>
+        </a>
+    </div>
+    <a href="index.html" class="nav-item">← На главную</a>
+</header>
+
+<div class="cart-page-container">
+    <h1 class="cart-title">ВАША КОРЗИНА</h1>
+    
+    <div id="cart-items-list">
+        </div>
+
+    <div id="cart-summary" style="display: none;">
+        <div class="cart-total">ИТОГО: <span id="total-price">0</span> zł</div>
+        <a href="https://t.me/managerelfbarow" class="order-btn">ОФОРМИТЬ ЗАКАЗ В TELEGRAM</a>
+    </div>
+</div>
+
+<script>
+    // Скрипт специально для страницы корзины
+    function renderCart() {
+        const cartList = document.getElementById('cart-items-list');
+        const summary = document.getElementById('cart-summary');
+        const totalSpan = document.getElementById('total-price');
+        
+        // Получаем данные из LocalStorage
+        let cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
+
+        if (cart.length === 0) {
+            cartList.innerHTML = '<div class="empty-msg">Ваша корзина пуста...</div>';
+            summary.style.display = 'none';
+            return;
+        }
+
+        summary.style.display = 'block';
+        cartList.innerHTML = '';
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            total += parseFloat(item.price);
+            cartList.innerHTML += `
+                <div class="cart-item">
+                    <img src="${item.img}" alt="">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${item.price} zł</div>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromCart(${index})">Удалить</button>
+                </div>
+            `;
+        });
+
+        totalSpan.innerText = total;
+    }
+
+    function removeFromCart(index) {
+        let cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
+        cart.splice(index, 1); // Удаляем один элемент по индексу
+        localStorage.setItem('kaif_cart', JSON.stringify(cart));
+        renderCart(); // Перерисовываем список
+    }
+
+    // Запускаем отрисовку при загрузке страницы
+    document.addEventListener('DOMContentLoaded', renderCart);
+</script>
+
+</body>
+</html>
