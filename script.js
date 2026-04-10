@@ -500,40 +500,46 @@ function applyUrlFilter() {
     }
 }
 
-// Твоя функция setFilter (обновленная)
 function setFilter(category) {
+    console.log("Запуск фильтра для мобилки:", category);
+    
+    // 1. Ищем ВСЕ карточки (и обычные, и те, что могут быть скрыты)
     const cards = document.querySelectorAll('.card');
-    let hasItems = false;
+    
+    if (cards.length === 0) {
+        console.error("Ошибка: Карточки товаров не найдены в DOM!");
+        return;
+    }
 
     cards.forEach(card => {
-        // Проверяем: есть ли у карточки класс (liquid/disposable) 
-        // ИЛИ смотрим на data-атрибут, если ты его используешь
+        // Проверяем: либо 'all', либо наличие класса категории
+        // Мы используем classList.contains — это самый надежный метод
         if (category === 'all' || card.classList.contains(category)) {
-            card.style.display = 'flex';
-            hasItems = true;
+            card.style.setProperty('display', 'flex', 'important');
         } else {
-            card.style.display = 'none';
+            card.style.setProperty('display', 'none', 'important');
         }
     });
 
-    // Убираем/показываем сообщение "Нет товаров"
-    const grid = document.getElementById('catalog-grid');
-    let msg = document.getElementById('no-products');
-
-    if (!hasItems) {
-        if (!msg) {
-            grid.insertAdjacentHTML('beforeend', '<div id="no-products" style="grid-column: 1/-1; text-align:center; padding:50px; color:#555;">В данной категории товаров пока нет</div>');
+    // 2. Меняем заголовок (только на мобилке, где есть dynamic-title)
+    const dynamicTitle = document.getElementById('dynamic-title');
+    if (dynamicTitle) {
+        // Берем текст из кнопки, которая вызвала функцию
+        // Ищем через [onclick*="..."], чтобы точно найти ту самую кнопку
+        const clickedBtn = document.querySelector(`[onclick*="setFilter('${category}')"]`);
+        if (clickedBtn) {
+            let text = clickedBtn.innerText.replace(/[0-9]/g, '').replace('///', '').trim();
+            dynamicTitle.innerText = text.toUpperCase();
         }
-    } else if (msg) {
-        msg.remove();
     }
-    
-    // Подсвечиваем активную кнопку в меню
-    document.querySelectorAll('.filter-item').forEach(btn => {
-        btn.classList.remove('active');
-        if(btn.getAttribute('data-category') === category) btn.classList.add('active');
-    });
+
+
+
 }
+
+
+
+
 
 // Запускаем проверку ссылки сразу при загрузке
 window.addEventListener('DOMContentLoaded', applyUrlFilter);
@@ -553,3 +559,82 @@ function searchProducts() {
         }
     });
 }
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Функция для обновления заголовка
+    function updateMobileTitle(text) {
+        const titleElement = document.getElementById('dynamic-title');
+        if (titleElement) {
+            // Убираем лишние цифры и спецсимволы, оставляем только текст
+            let cleanText = text.replace(/[0-9]/g, '').replace('///', '').trim();
+            titleElement.innerText = cleanText.toUpperCase() || 'ВСЕ КАТЕГОРИИ';
+        }
+    }
+
+    // Ловим клики по категориям (Все, Жидкости, Одноразки)
+    const categoryButtons = document.querySelectorAll('.filter-item, .all-categories-btn');
+    categoryButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            updateMobileTitle(this.innerText);
+        });
+    });
+
+    // Ловим клики по брендам
+    const brandButtons = document.querySelectorAll('.brand-mini-btn');
+    brandButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Если нажали на бренд "Все", лучше написать "БРЕНДЫ" или название категории
+            if (this.innerText.trim().toUpperCase() === 'ВСЕ') {
+                updateMobileTitle('ВСЕ БРЕНДЫ');
+            } else {
+                updateMobileTitle(this.innerText);
+            }
+        });
+    });
+});
+
+
+
+function searchProducts() {
+    // Получаем текст из поиска
+    let input = document.getElementById('catalog-search').value.toLowerCase().trim();
+    let cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        // Ищем название внутри карточки
+        let name = card.querySelector('.card-title').innerText.toLowerCase();
+        
+        if (name.includes(input)) {
+            // Показываем карточку
+            card.style.setProperty('display', 'flex', 'important');
+        } else {
+            // Скрываем карточку
+            card.style.setProperty('display', 'none', 'important');
+        }
+    });
+}
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('catalog-search');
+
+    if (searchInput) {
+        // Слушаем ввод текста (работает на всех устройствах)
+        searchInput.addEventListener('input', function() {
+            searchProducts(); 
+        });
+
+        // Для надежности на мобилках: срабатывает, когда нажимают "Enter" или "Go"
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                searchProducts();
+                this.blur(); // Скрывает клавиатуру после нажатия Enter
+            }
+        });
+    }
+});
