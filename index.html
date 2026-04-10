@@ -10,22 +10,26 @@
 </head>
 <body>
 
-<header class="header">
+<header class="header fixed-header">
     <div class="header-left">
-        <img src="images/IMG_2073.PNG"Logo" class="main-logo-img">
-        <div class="logo-text">KAIF SMOKE</div>
+        <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+            <img src="images/IMG_2073.PNG" alt="Logo" class="main-logo-img">
+            <div class="logo-text" style="color: white;">KAIF SMOKE</div>
+        </a>
     </div>
     
     <nav class="header-nav">
-        <a href="catalog.html" class="nav-item">Каталог</a>
+        <a href="catalog.html" class="nav-item desktop-only">Каталог</a>
         
-        <a href="cart.html" class="cart-container-link">
-            <img src="images/Знімок екрана 2026-04-09 о 01.39.49.png" alt="Корзина" class="header-cart-icon">
-            <div id="cart-counter" class="cart-badge">0</div>
-        </a>
+        <div class="header-right-actions">
+            <a href="cart.html" class="cart-container-link">
+                <img src="https://img.icons8.com/material-outlined/50/000000/shopping-bag--v1.png" alt="Корзина" class="header-cart-icon">
+                <div id="cart-counter" class="cart-badge">0</div>
+            </a>
 
-        <div class="burger-menu" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
+            <div class="burger-menu" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
         </div>
     </nav>
 </header>
@@ -111,7 +115,7 @@
 
     <div class="marquee-ticker">
         <div class="marquee-content">
-            ✦ ELF BAR 2000 ✦ CHASER ✦ ЖИДКОСТИ ✦ ГАРАНТИЯ КАЧЕСТВА ✦ KAIFSMOKE.COM ✦ БЫСТРАЯ ДОСТАВКА ✦ ОРИГИНАЛ ✦ ELF BAR 2000 ✦ CHASER ✦ ЖИДКОСТИ ✦ ГАРАНТИЯ КАЧЕСТВА ✦ KAIFSMOKE.COM ✦ БЫСТРАЯ ДОСТАВКА ✦ ОРИГИНАЛ 
+            ✦ ELF BAR Raya D3 25000 5% ✦ ELFLIQ ✦ ЖИДКОСТИ ✦ ГАРАНТИЯ КАЧЕСТВА ✦ KAIFSMOKE.COM ✦ БЫСТРАЯ ДОСТАВКА ✦ ОРИГИНАЛ ✦ ELF BAR Trio 40000 5% ✦ Vozol Prime ✦ ЖИДКОСТИ ✦ ГАРАНТИЯ КАЧЕСТВА ✦ KAIFSMOKE.COM ✦ БЫСТРАЯ ДОСТАВКА ✦ ОРИГИНАЛ 
         </div>
     </div>
 </section>
@@ -126,34 +130,34 @@
             </div>
 
             <div class="categories-flex">
-                <a href="catalog.html" class="cat-item">
-                    <div class="cat-number">01 / ЖИДКОСТИ</div>
-                    <div class="cat-arrow">↗</div>
-                    <img src="images/image" alt="">
-                    <div class="cat-name">ЖИДКОСТИ</div>
-                    <div class="cat-count">120+ ПОЗИЦИЙ</div>
-                </a>
+                <a href="catalog.html?cat=liquid" class="cat-item">
+        <div class="cat-number">01 / ЖИДКОСТИ</div>
+        <div class="cat-arrow">↗</div>
+        <img src="images/image" alt="">
+        <div class="cat-name">ЖИДКОСТИ</div>
+        <div class="cat-count">50+ ПОЗИЦИЙ</div>
+    </a>
+
+               <a href="catalog.html?cat=disposable" class="cat-item">
+        <div class="cat-number">02</div>
+        <div class="cat-arrow">↗</div>
+        <img src="images/image" alt="">
+        <div class="cat-name">ОДНОРАЗКИ</div>
+        <div class="cat-count">36+ ПОЗИЦИЙ</div>
+    </a>
 
                 <a href="catalog.html" class="cat-item">
-                    <div class="cat-number">02</div>
-                    <div class="cat-arrow">↗</div>
-                    <img src="images/image" alt="">
-                    <div class="cat-name">ОДНОРАЗКИ</div>
-                    <div class="cat-count">80+ ПОЗИЦИЙ</div>
-                </a>
-
-                <a href="#" class="cat-item">
                     <div class="cat-number">03</div>
                     <div class="cat-arrow">↗</div>
-                    <img src="images/image" alt="">
+                    <img src="images/92184a471672bcd65d46557674d14206.jpg" alt="">
                     <div class="cat-name">СКОРО</div>
                     <div class="cat-count">??? ПОЗИЦИЙ</div>
                 </a>
 
-                <a href="#" class="cat-item">
+                <a href="catalog.html" class="cat-item">
                     <div class="cat-number">04</div>
                     <div class="cat-arrow">↗</div>
-                    <img src="images/image" alt="">
+                    <img src="images/92184a471672bcd65d46557674d14206.jpg" alt="">
                     <div class="cat-name">СКОРО</div>
                     <div class="cat-count">??? ПОЗИЦИЙ</div>
                 </a>
@@ -301,39 +305,6 @@
     </div>
 </section>
 
-<section class="product-showcase">
-        <div class="container showcase-grid">
-            
-            <div class="showcase-gallery">
-                <img id="main-product-img" src="images/image" alt="Product Image" class="product-gallery-img">
-            </div>
-
-            <div class="showcase-info">
-                <div class="breadcrumbs">ГЛАВНАЯ / КАТАЛОГ / <span class="active-crumb">ЖИДКОСТИ / ОДНОРАЗКИ</span></div>
-                
-                <h1 id="product-title" class="product-main-title">CHASER For Pods</h1>
-                <p id="product-description" class="product-main-desc">Premium Blueberry Mint Liquid (30ml, 50mg nicotine)</p>
-                
-                <div class="flavor-selection">
-                    <h3 class="selection-title">ВЫБЕРИТЕ ВКУС:</h3>
-                    
-                    <div class="flavor-options">
-                        <button class="flavor-btn active" onclick="selectVariant(0)">Blueberry</button>
-                        <button class="flavor-btn" onclick="selectVariant(1)">Strawberry Ice</button>
-                        <button class="flavor-btn" onclick="selectVariant(2)">Baron Mint</button>
-                    </div>
-                </div>
-
-                <div class="purchase-block">
-                    <div id="product-price" class="product-main-price">55.00 zł</div>
-                    
-                    <button id="add-btn" class="buy-btn-skew" onclick="addCurrentToCart()">
-                        <span class="btn-text">ДОБАВИТЬ В КОРЗИНУ +</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
 
 <section class="features">
     <div class="feature-card">

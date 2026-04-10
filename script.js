@@ -41,73 +41,60 @@ const products = [
     { name: "Strawberry Orange Lime", brand: "Elf Bar Trio", category: "disposable", price: "40000", count: "5%", img: "images/1248e4ce-afa0-4bd9-9001-4bff0b1331da.png" },
 
     // --- ELFLIQ 30 ML (50MG) ---
-    { name: "Watermelon Cherry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/image" },
-    { name: "Strawberry Cherry Lemon", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Strawberry Banana", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Pink Lemonade Soda", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Green Grape Rose", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Cherry Lemon Peach", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Blueberry Raspberry Pomegranate", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Blue Razz Ice", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Pineapple Colada", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Jasmine Raspberry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Grape Cherry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Double Apple", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Cool Mint", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Blueberry Rose Mint", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Apple Pear", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Cherry Cola", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Peach Ice", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Strawberry Kiwi", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Blackcurrant Aniseed", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Pina Colada", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Rhubarb Snow", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Strawberry Raspberry Cherry Ice", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Blackberry Lemon", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "ELF Jack", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Blue Razz Lemonade", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Blueberry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Blueberry Sour Raspberry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Cherry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Elfbull Ice", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Grape", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Pink Lemonade", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Spearmint", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
-    { name: "Watermelon", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "img/elfliq.jpg" },
+    { name: "Watermelon Cherry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Strawberry Cherry Lemon", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Strawberry Banana", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Pink Lemonade Soda", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Green Grape Rose", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Cherry Lemon Peach", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Blueberry Raspberry Pomegranate", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Blue Razz Ice", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Pineapple Colada", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Jasmine Raspberry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Grape Cherry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Double Apple", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Cool Mint", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Blueberry Rose Mint", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Apple Pear", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Cherry Cola", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Peach Ice", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Strawberry Kiwi", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Blackcurrant Aniseed", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Pina Colada", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Rhubarb Snow", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Strawberry Raspberry Cherry Ice", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Blackberry Lemon", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "ELF Jack", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Blue Razz Lemonade", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Blueberry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Blueberry Sour Raspberry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Cherry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Elfbull Ice", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Grape", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Pink Lemonade", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Spearmint", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
+    { name: "Watermelon", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/2bcaee88-a8f1-4aa3-9bc0-b70d931b2388.png" },
 
     // --- VOZOL PRIME 30 ML (50MG) NEW ---
-    { name: "Watermelon Ice", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/image" },
-    { name: "Blue Razz Lemon", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Kiwi Passion Fruit Guava", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Mint Ice", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Purple Candy", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Lavafire", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Berry", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Pineapple Passion Fruit Lime", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Peach Ice", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Perfume Lemon", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Blueberry Watermelon", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Pomegranate Lemonade", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Berry Peach", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Cherry Cola", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Love 777", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Strawberry Watermelon", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" },
-    { name: "Grape Ice", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "img/vozol.jpg" }
-];;
-const brands = ['Elf Bar', 'Lost Mary', 'HQD', 'Vaporesso'];
+    { name: "Watermelon Ice", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Blue Razz Lemon", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Kiwi Passion Fruit Guava", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Mint Ice", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Purple Candy", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Lavafire", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Berry", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Pineapple Passion Fruit Lime", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Peach Ice", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Perfume Lemon", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Blueberry Watermelon", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Pomegranate Lemonade", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Berry Peach", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Cherry Cola", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Love 777", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Strawberry Watermelon", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" },
+    { name: "Grape Ice", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/3e01adae-617e-499b-b434-0931733e6488.png" }
+];
 
-for (let i = 1; i <= 50; i++) {
-    let type = i <= 20 ? 'liquid' : (i <= 40 ? 'disposable' : 'soon');
-    let brand = brands[Math.floor(Math.random() * brands.length)]; 
-    
-    products.push({
-        id: i,
-        brand: brand,
-        name: type === 'liquid' ? `${brand} Жижа #${i}` : (type === 'disposable' ? `${brand} Одноразка #${i}` : `Скоро в продаже`),
-        price: 1500 + (i * 10),
-        type: type
-    });
-}
 
 function toggleMenu() {
     const menu = document.getElementById('side-menu');
@@ -122,27 +109,24 @@ function toggleMenu() {
         document.body.style.overflow = 'auto';
     }
 }
+// --- 2. ОТРИСОВКА КАТАЛОГА (С ДОБАВЛЕНИЕМ КЛАССОВ) ---
 function renderCatalog(items) {
     const grid = document.getElementById('catalog-grid');
     if (!grid) return;
 
     if (items.length === 0) {
-        grid.innerHTML = `
-            <p style="grid-column: 1/5; text-align:center; padding:50px; color:#666;">
-                Товары не найдены
-            </p>`;
+        grid.innerHTML = `<p id="no-products" style="grid-column: 1/5; text-align:center; padding:50px; color:#666;">Товары не найдены</p>`;
         return;
     }
 
+    // ВАЖНО: Мы добавляем ${p.category} в class="card ..."
     grid.innerHTML = items.map(p => `
-        <div class="card">
+        <div class="card ${p.category}">
             <div class="card-img-container">
                 <img src="${p.img}" alt="${p.name}">
             </div>
-
             <div class="card-info">
                 <div class="card-title">${p.name}</div>
-
                 <div class="card-price-row">
                     <div class="card-price">${p.price} ₽</div>
                     <button class="add-btn" onclick="addToCart('${p.name}', '${p.price}', '${p.img}')">+</button>
@@ -166,19 +150,26 @@ function renderHome() {
     `).join('');
 }
 
+// --- 3. ФУНКЦИЯ ФИЛЬТРА (ИСПРАВЛЕННАЯ) ---
 function setFilter(categoryType) {
+    console.log("Фильтр по:", categoryType);
     let filtered;
 
     if (categoryType === 'all') {
         filtered = products;
     } else {
+        // Теперь p.category точно существует
         filtered = products.filter(p => p.category === categoryType);
     }
 
     renderCatalog(filtered);
 
+    // Подсветка кнопок
     document.querySelectorAll('.filter-item').forEach(btn => {
         btn.classList.remove('active');
+        if(btn.getAttribute('onclick') === `setFilter('${categoryType}')`) {
+            btn.classList.add('active');
+        }
     });
 }
 
@@ -363,3 +354,69 @@ function updateCounterDisplay() {
     const counter = document.getElementById('cart-counter');
     if(counter) counter.innerText = cart.length;
 }
+
+// Функция, которая делает саму фильтрацию
+function applyUrlFilter() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const cat = urlParams.get('cat');
+
+    if (cat) {
+        console.log("URL фильтр запущен для:", cat);
+        
+        // Ждем появления карточек в DOM (максимум 2 секунды)
+        let attempts = 0;
+        const checkExist = setInterval(() => {
+            const cards = document.querySelectorAll('.card');
+            attempts++;
+
+            if (cards.length > 0) {
+                console.log("Карточки найдены, фильтруем...");
+                clearInterval(checkExist);
+                setFilter(cat); // Твоя функция фильтрации
+            } 
+            
+            if (attempts > 20) { // Если за 2 сек товары не появились - отключаемся
+                clearInterval(checkExist);
+                console.log("Товары не подгрузились вовремя");
+            }
+        }, 100);
+    }
+}
+
+// Твоя функция setFilter (обновленная)
+function setFilter(category) {
+    const cards = document.querySelectorAll('.card');
+    let hasItems = false;
+
+    cards.forEach(card => {
+        // Проверяем: есть ли у карточки класс (liquid/disposable) 
+        // ИЛИ смотрим на data-атрибут, если ты его используешь
+        if (category === 'all' || card.classList.contains(category)) {
+            card.style.display = 'flex';
+            hasItems = true;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    // Убираем/показываем сообщение "Нет товаров"
+    const grid = document.getElementById('catalog-grid');
+    let msg = document.getElementById('no-products');
+
+    if (!hasItems) {
+        if (!msg) {
+            grid.insertAdjacentHTML('beforeend', '<div id="no-products" style="grid-column: 1/-1; text-align:center; padding:50px; color:#555;">В данной категории товаров пока нет</div>');
+        }
+    } else if (msg) {
+        msg.remove();
+    }
+    
+    // Подсвечиваем активную кнопку в меню
+    document.querySelectorAll('.filter-item').forEach(btn => {
+        btn.classList.remove('active');
+        if(btn.getAttribute('data-category') === category) btn.classList.add('active');
+    });
+}
+
+// Запускаем проверку ссылки сразу при загрузке
+window.addEventListener('DOMContentLoaded', applyUrlFilter);

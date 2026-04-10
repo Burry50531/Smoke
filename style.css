@@ -72,8 +72,224 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700;900&display=swap');
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: black; color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+
+body { 
+    background: black; 
+    color: #fff; 
+    font-family: 'Montserrat', sans-serif; 
+    overflow-x: hidden; /* Защита от горизонтального скролла */
+    padding-top: 70px; 
+}
+
+/* --- ШАПКА (ИДЕАЛЬНОЕ ВЫРАВНИВАНИЕ ПРАВОЙ ЧАСТИ) --- */
+.header.fixed-header {
+    position: fixed !important;
+    top: 0; left: 0; width: 100%; height: 70px;
+    display: flex; 
+    justify-content: space-between; /* Лого слева, всё остальное справа */
+    align-items: center;
+    padding: 0 20px; 
+    background: rgba(0, 0, 0, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 9999;
+}
+
+.header-left { display: flex; align-items: center; gap: 12px; }
+.main-logo-img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+.logo-text { font-size: 20px; font-weight: 900; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
+
+/* Обертка для всей правой части (Каталог + Действия) */
+.header-right-wrap {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Расстояние между "Каталог" и блоком корзины/бургера */
+}
+
+.nav-item {
+    color: #fff; text-decoration: none; font-weight: 700; font-size: 16px; transition: 0.3s;
+}
+.nav-item:hover { color: #e6b130; }
+
+/* Блок действий: Корзина и Бургер */
+.header-right-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Расстояние между корзиной и бургером */
+}
+
+.cart-container-link { position: relative; display: flex; align-items: center; }
+.header-cart-icon { width: 28px; filter: invert(1); } /* Делает иконку белой */
+
+.cart-badge {
+    position: absolute; top: -5px; right: -8px;
+    background: #e6b130; color: #000;
+    font-size: 10px; font-weight: 900;
+    width: 17px; height: 17px; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.burger-menu { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+.burger-menu span { display: block; width: 25px; height: 2px; background: #fff; }
+
+/* --- ГЛАВНЫЙ ЭКРАН (ПК: ИДЕАЛЬНЫЙ ЦЕНТР) --- */
+.hero-premium {
+    min-height: calc(100vh - 70px);
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; /* Центр по вертикали */
+    align-items: center;     /* Центр по горизонтали */
+    text-align: center;
+    position: relative;
+    padding: 40px 20px;
+    width: 100%;
+}
+
+.hero-bg-text {
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40vw;
+    color: rgba(255, 255, 255, 0.02);
+    font-weight: 900;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 800px; /* Ограничиваем ширину контента на ПК */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем элементы внутри контента */
+}
+
+.hero-top-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e6b130; padding: 6px 15px;
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 15vw, 160px); /* Адаптивный размер */
+    line-height: 0.85; margin-bottom: 20px;
+}
+.text-white { color: #fff; }
+.text-yellow { color: #e6b130; }
+
+.hero-subtitle {
+    font-size: 14px; letter-spacing: 4px; color: #fff;
+    margin-bottom: 15px; font-weight: 700;
+}
+
+.hero-description {
+    font-size: 14px; color: #888; line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 500px; /* Ограничение описания */
+}
+
+/* КНОПКИ */
+.hero-btns {
+    display: flex;
+    flex-direction: column; /* На мобилке в столбик */
+    gap: 15px;
+    width: 100%;
+    max-width: 320px; /* Ограничение ширины кнопок на мобилке */
+}
+
+.btn-skew-yellow {
+    background: #e6b130; color: #000; text-decoration: none;
+    font-weight: 900; font-size: 14px;
+    padding: 20px; display: block;
+    clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%); /* Четкий скос */
+}
+
+.btn-outline-white {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff; text-decoration: none;
+    font-weight: 700; font-size: 13px;
+    padding: 18px; display: block;
+}
+
+/* --- ИНФО-БАР (НИЗ: ПК И МОБИЛКА) --- */
+.hero-info-bar {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 колонки на мобилке */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0,0,0,0.5);
+    margin-top: auto; /* Прижимаем к низу Hero-секции */
+}
+
+.info-item {
+    padding: 20px 10px;
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+
+.info-num { font-size: 28px; font-weight: 900; color: #e6b130; }
+.info-text { font-size: 9px; color: #fff; font-weight: 600; text-transform: uppercase; }
+
+/* БЕГУЩАЯ СТРОКА */
+.marquee-ticker {
+    width: 100%; background: #e6b130; color: #000;
+    padding: 10px 0; font-weight: 900; font-size: 11px;
+    overflow: hidden; white-space: nowrap;
+}
+.marquee-content { display: inline-block; animation: marquee 20s linear infinite; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* --- ПРАВКИ ДЛЯ КОМПЬЮТЕРА (DESKTOP) --- */
+@media (min-width: 769px) {
+    .header.fixed-header { padding: 0 40px; }
+    
+    .hero-btns {
+        flex-direction: row; /* Кнопки в ряд */
+        max-width: none;
+        justify-content: center;
+    }
+    .btn-skew-yellow, .btn-outline-white { width: auto; padding: 18px 45px; }
+
+    .hero-info-bar {
+        grid-template-columns: repeat(4, 1fr); /* 4 колонки в ряд */
+        position: absolute; bottom: 40px; /* Прижимаем к бегущей строке */
+    }
+    .desktop-only { display: block; }
+}
+
+/* --- МОБИЛЬНАЯ ВЕРСИЯ (ЗАЩИТА ОТ ВЫЛЕЗАНИЯ) --- */
+@media (max-width: 768px) {
+    .desktop-only { display: none; } /* Прячем "Каталог" */
+    
+    /* Жесткое ограничение ширины Hero контента */
+    .hero-content {
+        padding: 0 15px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero-title { font-size: 80px; } /* Уменьшаем заголовок на мобилке */
+    
+    /* Кнопки на мобилке */
+    .hero-btns {
+        width: 100%;
+        max-width: 280px; /* Чуть уже, чтобы точно влезли */
+        padding: 0;
+    }
+    
+    .btn-skew-yellow, .btn-outline-white {
+        transform: none; /* Убираем наклон на мобилке для надежности */
+        clip-path: none;
+        width: 100%;
+        text-align: center;
+    }
+}
 
 
 .header .logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: #fff; }
@@ -1540,119 +1756,3 @@ body {
 }
 
 
-/* Карточка товара */
-.product-card {
-    background: #0b0a09;
-    border-right: 1px solid #1a1a1a;
-    border-bottom: 1px solid #1a1a1a;
-    position: relative;
-    transition: 0.3s;
-}
-
-/* Желтая рамка при наведении */
-.product-card:hover { outline: 1px solid #e6b130; outline-offset: -1px; z-index: 5; }
-
-/* Сероватый фон внутри под картинку */
-.product-image-box { background: #110f0e; height: 250px; display: flex; justify-content: center; align-items: center; }
-.main-img { max-width: 80%; }
-
-.product-info { padding: 20px; }
-.prod-price { font-size: 20px; font-weight: bold; }
-
-/* Скошенная кнопка плюс */
-.add-to-cart-skew { 
-    background: #e6b130; border: none; width: 40px; height: 35px;
-    transform: skewX(-15deg); cursor: pointer;
-}
-.plus-text { transform: skewX(15deg); display: block; font-weight: bold; }
-
-
-.cart-widget { position: fixed; top: 20px; right: 20px; background: #e6b130; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; z-index: 100; }
-.cart-count { position: absolute; top: 0; right: 0; background: #fff; color: #000; width: 20px; height: 20px; border-radius: 50%; text-align: center; font-size: 12px; font-weight: bold; }
-.toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: #28a745; padding: 15px 30px; border-radius: 50px; transition: 0.5s; }
-.toast.show { bottom: 30px; }
-
-.showcase-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    height: 100vh;
-    align-items: center;
-}
-
-/* ЛЕВАЯ ЧАСТЬ (ГАЛЕРЕЯ) */
-.showcase-gallery {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
-}
-.product-gallery-img { max-width: 70%; max-height: 80%; object-fit: contain; }
-
-/* ПРАВАЯ ЧАСТЬ (ИНФО) */
-.showcase-info { padding: 60px; }
-
-/* Крошки */
-.breadcrumbs { color: #555; font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 30px; }
-.active-crumb { color: #e6b130; }
-
-/* Название и описание */
-.product-main-title { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: #fff; margin: 0 0 10px 0; }
-.product-main-desc { color: #aaa; font-size: 14px; line-height: 1.6; max-width: 600px; margin-bottom: 40px; }
-
-/* ВЫБОР ВКУСА */
-.flavor-selection { margin-bottom: 60px; }
-.selection-title { color: #555; font-size: 10px; font-weight: 900; letter-spacing: 2px; margin-bottom: 20px; }
-
-.flavor-options { display: flex; gap: 10px; flex-wrap: wrap; }
-.flavor-btn {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #888;
-    padding: 10px 20px;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-.flavor-btn:hover { border-color: #e6b130; color: #e6b130; }
-.flavor-btn.active { background: #e6b130; color: #000; border-color: #e6b130; }
-
-/* ПОКУПКА (ЦЕНА И КНОПКА) */
-.purchase-block {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 30px;
-}
-
-.product-main-price { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: #fff; }
-
-/* СКОШЕННАЯ КНОПКА */
-.buy-btn-skew {
-    background: #e6b130;
-    color: #000;
-    border: none;
-    padding: 20px 60px;
-    font-size: 16px;
-    font-weight: 900;
-    cursor: pointer;
-    transform: skewX(-15deg);
-    transition: 0.3s ease;
-}
-.buy-btn-skew:hover { background: #fff; transform: skewX(-15deg) translateY(-5px); }
-.btn-text { display: block; transform: skewX(15deg); letter-spacing: 1px; }
-
-/* ВИДЖЕТ КОРЗИНЫ */
-.cart-widget {
-    position: fixed; top: 30px; right: 30px; background: #e6b130;
-    width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;
-    border-radius: 50%; cursor: pointer; z-index: 1000; text-decoration: none;
-}
-.cart-icon { font-size: 25px; }
-.cart-count {
-    position: absolute; top: -5px; right: -5px; background: #fff;
-    color: #000; font-weight: 900; font-size: 14px; width: 24px; height: 24px;
-    border-radius: 50%; display: flex; justify-content: center; align-items: center;
-}
