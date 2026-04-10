@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Каталог</title>
 <link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
 
@@ -54,10 +55,14 @@
 </div>
   </aside>
 
-  <main class="main-content">
-    <div class="grid-4" id="catalog-grid">
+ <main class="main-content">
+        <div class="search-container">
+            <input type="text" id="catalog-search" placeholder="Поиск товаров..." onkeyup="searchProducts()">
         </div>
-  </main>
+
+        <div class="grid-4" id="catalog-grid">
+            </div>
+    </main>
 </div>
 
 

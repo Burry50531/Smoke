@@ -537,3 +537,19 @@ function setFilter(category) {
 
 // Запускаем проверку ссылки сразу при загрузке
 window.addEventListener('DOMContentLoaded', applyUrlFilter);
+
+function searchProducts() {
+    let input = document.getElementById('catalog-search').value.toLowerCase();
+    let cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        // Ищем название внутри заголовка карточки
+        let name = card.querySelector('.card-title').innerText.toLowerCase();
+        
+        if (name.includes(input)) {
+            card.style.display = "flex";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}

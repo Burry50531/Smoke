@@ -266,33 +266,126 @@ body {
     .desktop-only { display: block; }
 }
 
-/* --- МОБИЛЬНАЯ ВЕРСИЯ (ЗАЩИТА ОТ ВЫЛЕЗАНИЯ) --- */
 @media (max-width: 768px) {
-    .desktop-only { display: none; } /* Прячем "Каталог" */
-    
-    /* Жесткое ограничение ширины Hero контента */
-    .hero-content {
-        padding: 0 15px;
-        width: 100%;
-        max-width: 100%;
+    /* Контейнер для четырех блоков */
+    .hero-info-bar {
+        display: grid !important;
+        /* Делаем ровно две колонки */
+        grid-template-columns: 1fr 1fr !important; 
+        /* Убираем стандартные флекс-настройки, если были */
+        gap: 0 !important; 
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 30px;
     }
 
-    .hero-title { font-size: 80px; } /* Уменьшаем заголовок на мобилке */
-    
-    /* Кнопки на мобилке */
+    /* Каждый отдельный блок (500+, 1-2 дня и т.д.) */
+    .info-item {
+        padding: 20px 10px !important;
+        display: flex !important;
+        flex-direction: row !important; /* Число и текст в одну строку */
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-sizing: border-box;
+    }
+
+    /* Вертикальная линия между колонками (только для левых блоков) */
+    .info-item:nth-child(odd) {
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Настройка шрифтов, чтобы всё влезло в 2 колонки */
+    .info-num {
+        font-size: 22px !important;
+        font-weight: 800 !important;
+        color: #e6b130; /* Твой золотой цвет */
+    }
+
+    .info-text {
+        font-size: 9px !important;
+        line-height: 1.1 !important;
+        text-align: left !important;
+        color: #fff;
+        text-transform: uppercase;
+    }
+
+    /* 2. ТЕКСТ ПОД ЗАГОЛОВКОМ (Премиум...) */
+    .hero-subtitle {
+        font-size: 13px !important;
+        letter-spacing: 2px !important;
+        margin-bottom: 10px !important;
+        text-align: center !important;
+    }
+
+    .hero-description {
+        display: block !important;
+        font-size: 11px !important;
+        line-height: 1.4 !important;
+        max-width: 290px !important;
+        margin: 0 auto 30px auto !important;
+        text-align: center !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    /* 3. КНОПКИ: ОДИНАКОВЫЕ И НАКЛОННЫЕ */
     .hero-btns {
-        width: 100%;
-        max-width: 280px; /* Чуть уже, чтобы точно влезли */
-        padding: 0;
+        display: flex !important;
+        flex-direction: column !important; /* Друг под другом */
+        align-items: center !important;
+        gap: 15px !important;
+        width: 100% !important;
     }
-    
+
+    /* Общий стиль для обеих кнопок, чтобы были один в один */
     .btn-skew-yellow, .btn-outline-white {
-        transform: none; /* Убираем наклон на мобилке для надежности */
-        clip-path: none;
-        width: 100%;
-        text-align: center;
+        width: 260px !important; /* Одинаковая ширина */
+        height: 50px !important; /* Одинаковая высота */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-decoration: none !important;
+        font-weight: 800 !important;
+        font-size: 12px !important;
+        text-transform: uppercase !important;
+        
+        /* ГЛАВНОЕ: НАКЛОН ПО ДИАГОНАЛИ */
+        transform: skewX(-15deg) !important; 
+        transition: all 0.3s ease !important;
     }
+
+    /* Желтая кнопка */
+    .btn-skew-yellow {
+        background: #e6b130 !important;
+        color: #000 !important;
+        border: none !important;
+    }
+
+    /* Белая кнопка (Telegram) — теперь такая же наклонная */
+    .btn-outline-white {
+        background: transparent !important;
+        border: 1px solid #fff !important;
+        color: #fff !important;
+    }
+
+    /* ВЫРАВНИВАЕМ ТЕКСТ (чтобы буквы не были косыми) */
+    .btn-text, .btn-outline-white span {
+        display: block !important;
+        transform: skewX(15deg) !important; /* Обратный наклон */
+    }
+
+    /* ЭФФЕКТ ВСПЛЫВАНИЯ (при нажатии/наведении) */
+    .btn-skew-yellow:hover, .btn-skew-yellow:active,
+    .btn-outline-white:hover, .btn-outline-white:active {
+        transform: skewX(-15deg) translateY(-5px) !important; /* Всплывает вверх */
+        filter: brightness(1.1) !important;
+    }
+
 }
+
+
+
+
 
 .cart-wrapper {
     position: relative;
@@ -1637,15 +1730,123 @@ body {
 
 /* --- АДАПТИВ --- */
 @media (max-width: 1200px) {
-    .grid-4 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { 
+        grid-template-columns: repeat(3, 1fr); 
+    }
 }
 
-@media (max-width: 900px) {
-    .catalog-layout { flex-direction: column; padding: 70px 15px; }
-    .filter { width: 100%; border-right: none; padding-right: 0; }
-    .grid-4 { grid-template-columns: repeat(2, 1fr); }
-}
+@media (max-width: 768px) {
+    /* --- 1. ШАПКА: ТЕПЕРЬ ТОЧНО СТОИТ НА МЕСТЕ --- */
+    .header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 50px !important;
+        background: #000 !important;
+        z-index: 999999 !important; /* Максимальный приоритет */
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 10px !important;
+        border-bottom: 1px solid #222 !important;
+        box-sizing: border-box !important;
+    }
 
+    /* Уменьшаем элементы в шапке */
+    .header .logo, .logo-text { font-size: 13px !important; }
+    .header nav a { font-size: 10px !important; margin-left: 6px !important; }
+
+    /* Отступ, чтобы контент не нырял под шапку */
+    body { padding-top: 60px !important; }
+
+    /* --- 2. ЛЕВАЯ ПАНЕЛЬ (ФИЛЬТРЫ) --- */
+    .catalog-layout {
+        display: flex !important;
+        flex-direction: row !important;
+        padding: 5px !important;
+        gap: 8px !important;
+    }
+
+    .filter {
+        width: 95px !important; /* Сделали еще чуть уже */
+        flex-shrink: 0 !important;
+        background: #0a0a0a !important;
+        padding: 6px 3px !important;
+    }
+
+    .filter-title {
+        font-size: 9px !important; /* Уменьшили заголовки "ФИЛЬТРЫ" и "БРЕНДЫ" */
+        text-align: center !important;
+        margin: 10px 0 5px 0 !important;
+        color: #e6b130;
+    }
+
+    /* Жидкости, Одноразки, Скоро */
+    .filter-item {
+        font-size: 8.5px !important; /* Уменьшили текст, чтобы цифры не налезали */
+        padding: 6px 2px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        background: transparent !important;
+        border: none !important;
+        color: #ccc !important;
+    }
+
+    .filter-item span {
+        font-size: 8px !important;
+        opacity: 0.6;
+    }
+
+    .all-categories-btn {
+        font-size: 8px !important;
+        padding: 7px 2px !important;
+        width: 100% !important;
+    }
+
+    /* --- 3. БРЕНДЫ: ОДИН ЗА ДРУГИМ (СТОЛБИКОМ) --- */
+    .brand-grid-compact {
+        display: flex !important;
+        flex-direction: column !important; /* Строго в колонку */
+        gap: 4px !important;
+    }
+
+    .brand-mini-btn {
+        width: 100% !important;
+        font-size: 8px !important;
+        padding: 5px 2px !important;
+        text-align: center !important;
+        white-space: normal !important; /* Разрешаем перенос, если имя длинное */
+        line-height: 1 !important;
+    }
+
+    /* --- 4. КАРТОЧКИ ТОВАРОВ --- */
+    .main-content { flex: 1; min-width: 0; }
+
+    .grid-4 {
+        grid-template-columns: 1fr 1fr !important; /* 2 в ряд идеально */
+        gap: 8px !important;
+    }
+
+    .card-title {
+        font-size: 9.5px !important; /* Текст вкуса еще чуть компактнее */
+        margin: 4px 0 !important;
+    }
+
+    .card-price {
+        font-size: 10.5px !important;
+    }
+}
+#catalog-search {
+    width: 100%;
+    padding: 15px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+}
 
 /* Стили для всплывающего уведомления */
 #toast-notification {
