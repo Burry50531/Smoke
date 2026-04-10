@@ -72,6 +72,9 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700;900&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: black; color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700;900&display=swap');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -291,6 +294,150 @@ body {
     }
 }
 
+.cart-wrapper {
+    position: relative;
+    padding: 10px; /* Увеличиваем зону, чтобы мышка не "теряла" корзину */
+}
+
+.cart-popup {
+    position: absolute;
+    top: 100%; /* Прямо под иконкой */
+    right: 0;
+    width: 320px;
+    background: #0a0a0a !important;
+    border: 1px solid #222;
+    border-top: 3px solid #e6b130 !important;
+    padding: 20px;
+    display: none; /* Скрыто по умолчанию */
+    z-index: 999999;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.9);
+}
+
+/* Класс, который добавляет JS */
+.cart-popup.visible {
+    display: block !important;
+}
+
+.cart-main-title { color: #fff; font-weight: bold; }
+.cart-count-text { color: #555; font-size: 12px; margin-left: 10px; }
+
+.btn-clear {
+    background: transparent;
+    border: 1px solid #333;
+    color: #666;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.btn-clear:hover {
+    color: #ff4444;
+    border-color: #ff4444;
+}
+
+/* --- МОБИЛЬНОЕ МЕНЮ: ЭФФЕКТ ПРОЕКТОРА --- */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100%;
+    /* Жестко задаем радиальный желтоватый градиент (эффект света в темноте) */
+    background: radial-gradient(circle at center, #2b2200 0%, #000000 100%) !important;
+    z-index: 100000;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgba(230, 177, 48, 0.3);
+}
+
+.side-menu.active {
+    right: 0;
+}
+
+/* --- ПУНКТЫ МЕНЮ: ПОЛНАЯ ПОДСВЕТКА --- */
+.menu-link {
+    color: #fff;
+    padding: 15px 20px;
+    margin-bottom: 5px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* При наведении: фон становится золотым, текст черным */
+.menu-link:hover {
+    background: #e6b130 !important; /* Полностью желтый фон */
+    color: #000 !important;        /* Черный текст для контраста */
+    transform: translateX(10px);   /* Сдвиг вправо */
+    box-shadow: 0 5px 15px rgba(230, 177, 48, 0.4);
+}
+
+/* Изменяем цвет текста внутри ссылки при наведении, если он там есть */
+.menu-link:hover .emoji {
+    filter: brightness(0); /* Эмодзи тоже подстраивается под черный текст */
+}
+
+/* --- КНОПКИ ВНИЗУ: ЭФФЕКТ ВСПЛЫТИЯ --- */
+.menu-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-manager, .btn-tg {
+    width: 100%;
+    height: 60px;
+    border-radius: 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: none;
+    cursor: pointer;
+}
+
+/* Желтая кнопка "Связаться" */
+.btn-manager {
+    background: #e6b130;
+    color: #000;
+}
+
+.btn-manager:hover {
+    transform: translateY(-8px) scale(1.02); /* Всплывает выше и чуть увеличивается */
+    background: #ffcc00;
+    box-shadow: 0 10px 25px rgba(230, 177, 48, 0.6);
+}
+
+/* Синяя кнопка "Telegram" */
+.btn-tg {
+    background: #1a2533;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-tg:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: #253547;
+    border-color: #e6b130;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* --- ТЕМНЫЙ ФОН (OVERLAY) --- */
+.overlay {
+    backdrop-filter: blur(8px); /* Сильное размытие сайта сзади */
+    background: rgba(0, 0, 0, 0.7);
+}
 
 .header .logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: #fff; }
 .header nav { display: flex; align-items: center; }
@@ -1756,3 +1903,119 @@ body {
 }
 
 
+/* Карточка товара */
+.product-card {
+    background: #0b0a09;
+    border-right: 1px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+    position: relative;
+    transition: 0.3s;
+}
+
+/* Желтая рамка при наведении */
+.product-card:hover { outline: 1px solid #e6b130; outline-offset: -1px; z-index: 5; }
+
+/* Сероватый фон внутри под картинку */
+.product-image-box { background: #110f0e; height: 250px; display: flex; justify-content: center; align-items: center; }
+.main-img { max-width: 80%; }
+
+.product-info { padding: 20px; }
+.prod-price { font-size: 20px; font-weight: bold; }
+
+/* Скошенная кнопка плюс */
+.add-to-cart-skew { 
+    background: #e6b130; border: none; width: 40px; height: 35px;
+    transform: skewX(-15deg); cursor: pointer;
+}
+.plus-text { transform: skewX(15deg); display: block; font-weight: bold; }
+
+
+.cart-widget { position: fixed; top: 20px; right: 20px; background: #e6b130; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; z-index: 100; }
+.cart-count { position: absolute; top: 0; right: 0; background: #fff; color: #000; width: 20px; height: 20px; border-radius: 50%; text-align: center; font-size: 12px; font-weight: bold; }
+.toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: #28a745; padding: 15px 30px; border-radius: 50px; transition: 0.5s; }
+.toast.show { bottom: 30px; }
+
+.showcase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    height: 100vh;
+    align-items: center;
+}
+
+/* ЛЕВАЯ ЧАСТЬ (ГАЛЕРЕЯ) */
+.showcase-gallery {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+.product-gallery-img { max-width: 70%; max-height: 80%; object-fit: contain; }
+
+/* ПРАВАЯ ЧАСТЬ (ИНФО) */
+.showcase-info { padding: 60px; }
+
+/* Крошки */
+.breadcrumbs { color: #555; font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 30px; }
+.active-crumb { color: #e6b130; }
+
+/* Название и описание */
+.product-main-title { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: #fff; margin: 0 0 10px 0; }
+.product-main-desc { color: #aaa; font-size: 14px; line-height: 1.6; max-width: 600px; margin-bottom: 40px; }
+
+/* ВЫБОР ВКУСА */
+.flavor-selection { margin-bottom: 60px; }
+.selection-title { color: #555; font-size: 10px; font-weight: 900; letter-spacing: 2px; margin-bottom: 20px; }
+
+.flavor-options { display: flex; gap: 10px; flex-wrap: wrap; }
+.flavor-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #888;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.flavor-btn:hover { border-color: #e6b130; color: #e6b130; }
+.flavor-btn.active { background: #e6b130; color: #000; border-color: #e6b130; }
+
+/* ПОКУПКА (ЦЕНА И КНОПКА) */
+.purchase-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 30px;
+}
+
+.product-main-price { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: #fff; }
+
+/* СКОШЕННАЯ КНОПКА */
+.buy-btn-skew {
+    background: #e6b130;
+    color: #000;
+    border: none;
+    padding: 20px 60px;
+    font-size: 16px;
+    font-weight: 900;
+    cursor: pointer;
+    transform: skewX(-15deg);
+    transition: 0.3s ease;
+}
+.buy-btn-skew:hover { background: #fff; transform: skewX(-15deg) translateY(-5px); }
+.btn-text { display: block; transform: skewX(15deg); letter-spacing: 1px; }
+
+/* ВИДЖЕТ КОРЗИНЫ */
+.cart-widget {
+    position: fixed; top: 30px; right: 30px; background: #e6b130;
+    width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;
+    border-radius: 50%; cursor: pointer; z-index: 1000; text-decoration: none;
+}
+.cart-icon { font-size: 25px; }
+.cart-count {
+    position: absolute; top: -5px; right: -5px; background: #fff;
+    color: #000; font-weight: 900; font-size: 14px; width: 24px; height: 24px;
+    border-radius: 50%; display: flex; justify-content: center; align-items: center;
+}

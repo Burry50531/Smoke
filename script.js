@@ -97,18 +97,137 @@ const products = [
 
 
 function toggleMenu() {
+    // Ищем элементы по тем ID, которые ты указал в HTML
     const menu = document.getElementById('side-menu');
     const overlay = document.getElementById('overlay');
     
+    // Переключаем класс active
     menu.classList.toggle('active');
-    overlay.classList.toggle('active');
     
+    // Если overlay существует, тоже переключаем
+    if (overlay) {
+        overlay.classList.toggle('active');
+    }
+
+    // Запрещаем скролл страницы, когда меню открыто
     if (menu.classList.contains('active')) {
         document.body.style.overflow = 'hidden';
     } else {
         document.body.style.overflow = 'auto';
     }
 }
+// 1. НАХОДИМ ЭЛЕМЕНТЫ И ДОБАВЛЯЕМ СОБЫТИЯ (Вставь это в конец файла)
+document.addEventListener('DOMContentLoaded', () => {
+    const cartWrapper = document.querySelector('.cart-wrapper');
+    if (cartWrapper) {
+        // Когда мышка заходит в зону корзины
+        cartWrapper.addEventListener('mouseenter', showCart);
+        // Когда мышка уходит
+        cartWrapper.addEventListener('mouseleave', hideCart);
+    }
+});
+
+// 2. САМИ ФУНКЦИИ ПОКАЗА (Проверь, чтобы названия классов совпадали с CSS)
+function showCart() {
+    const popup = document.getElementById('cart-popup');
+    if (popup) {
+        popup.style.display = 'block'; // Принудительно показываем
+        // Если у тебя в CSS анимация через класс, раскомментируй строку ниже:
+        // popup.classList.add('visible'); 
+        renderCartPopup(); // Твоя функция отрисовки товаров
+    }
+}
+
+function hideCart() {
+    const popup = document.getElementById('cart-popup');
+    if (popup) {
+        popup.style.display = 'none'; // Скрываем
+        // popup.classList.remove('visible');
+    }
+}
+
+// Обновленная функция счетчиков
+function updateCounterDisplay() {
+    const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
+    
+    // 1. Счетчик на иконке (желтый круг)
+    const badge = document.getElementById('cart-counter');
+    if (badge) {
+        badge.innerText = cart.length;
+        badge.style.display = cart.length > 0 ? 'flex' : 'none';
+    }
+    
+    // 2. Текст внутри выпадающего окна (например: "2 ТОВАРОВ")
+    const popupText = document.getElementById('cart-items-count');
+    if (popupText) {
+        popupText.innerText = `${cart.length} ТОВАРОВ`;
+    }
+}
+
+// Показать корзину
+function showCart() {
+    const popup = document.getElementById('cart-popup');
+    if(popup) {
+        popup.classList.add('visible');
+        renderCartPopup(); // Сразу обновляем список товаров
+    }
+}
+
+// Скрыть корзину
+function hideCart() {
+    const popup = document.getElementById('cart-popup');
+    if(popup) popup.classList.remove('visible');
+}
+
+// ОЧИСТКА КОРЗИНЫ
+function clearCart(event) {
+    if (event) event.stopPropagation(); // Чтобы окно не закрылось сразу
+    
+    console.log("Нажата очистка");
+    
+    // 1. Очищаем массив в памяти
+    cart = [];
+    // 2. Очищаем в хранилище браузера
+    localStorage.removeItem('kaif_cart');
+    
+    // 3. Обновляем всё на экране
+    updateCounterDisplay(); 
+    renderCartPopup();
+}
+
+// Обновление списка товаров внутри всплывающего окна
+function renderCartPopup() {
+    const list = document.getElementById('cart-items-list');
+    const emptyMsg = document.getElementById('cart-empty-msg');
+    const countText = document.getElementById('cart-items-count');
+    
+    const currentCart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
+    
+    if (countText) countText.innerText = `${currentCart.length} ТОВАРОВ`;
+
+    if (currentCart.length === 0) {
+        if (list) list.innerHTML = '';
+        if (emptyMsg) emptyMsg.style.display = 'block';
+    } else {
+        if (emptyMsg) emptyMsg.style.display = 'none';
+        if (list) {
+            list.innerHTML = currentCart.map(item => `
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; border-bottom:1px solid #111; padding-bottom:10px;">
+                    <img src="${item.img}" style="width:40px; height:40px; object-fit:contain;">
+                    <div style="flex-grow:1;">
+                        <div style="color:#fff; font-size:13px;">${item.name}</div>
+                        <div style="color:#e6b130; font-size:12px;">${item.price} ₽</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+}
+
+// Не забудь вызвать это при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    updateCounterDisplay();
+});
 // --- 2. ОТРИСОВКА КАТАЛОГА (С ДОБАВЛЕНИЕМ КЛАССОВ) ---
 function renderCatalog(items) {
     const grid = document.getElementById('catalog-grid');
@@ -276,9 +395,7 @@ function showToast(message) {
     }, 2000);
 }
 
-function toggleMenu() {
-    // Код для бургера
-}
+
 
 // 1. ДАННЫЕ О ТОВАРАХ (МЕНЯЕМ ИХ ЗДЕСЬ)
 // Важно: Пути к фото в img/ должны совпадать!
