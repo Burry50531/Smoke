@@ -17,7 +17,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* Фоновая сетка */
         .bg-grid {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px);
@@ -36,7 +35,6 @@
         .hero h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 900; line-height: 0.85; text-transform: uppercase; margin-bottom: 20px; }
         .hero p { color: #777; font-size: 13px; max-width: 450px; font-weight: 500; }
 
-        /* СЕТ-БАР (Бегущая строка) */
         .marquee-container {
             width: 100vw; margin-left: calc(-50vw + 50%);
             background: #0a0a0a; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a;
@@ -55,7 +53,6 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* СТЕКЛЯННАЯ АКЦИЯ */
         .promo-glass {
             background: rgba(230, 177, 48, 0.03);
             border: 1px solid rgba(230, 177, 48, 0.2);
@@ -68,7 +65,6 @@
         .promo-title { font-size: 38px; font-weight: 950; color: #fff; text-transform: uppercase; font-style: italic; letter-spacing: -1px; line-height: 1; }
         .promo-desc { color: var(--gold); font-size: 12px; font-weight: 700; text-transform: uppercase; margin-top: 10px; opacity: 0.9; }
         
-        /* 200 ZL В ВЕРХНЕМ ПРАВОМ УГЛУ */
         .big-sum { 
             position: absolute; right: 20px; top: 10px; 
             font-size: 80px; font-weight: 950; 
@@ -81,36 +77,32 @@
         .block-head { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
         .block-head span { font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); }
 
-        /* INPOST */
         .delivery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .del-item { background: #080808; border: 1px solid #1a1a1a; padding: 25px; border-radius: 12px; }
-        .del-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        
+        /* ФИКС ЦЕНЫ: чтобы не было столбика */
+        .del-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 10px; }
         .del-header h4 { font-size: 14px; font-weight: 800; color: #fff; text-transform: uppercase; }
-        .del-header b { color: var(--gold); font-size: 18px; font-weight: 900; }
+        .del-header b { color: var(--gold); font-size: 18px; font-weight: 900; white-space: nowrap; } /* white-space не дает переносить валюту */
         
         .check-list { list-style: none; }
         .check-list li { font-size: 11px; color: #666; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; font-weight: 700; text-transform: uppercase; }
         .check-list li::before { content: '✔'; color: var(--gold); }
 
-        /* БЫСТРАЯ ДОСТАВКА (4 ПУНКТА) */
-.fast-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .fast-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
         .fast-point { border: 1px solid #1a1a1a; background: #050505; padding: 12px; border-radius: 8px; font-size: 10px; font-weight: 800; color: #ffffff; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
 
-        /* УСЛОВИЯ ОТПРАВКИ (ОБЫЧНЫЕ ЧЕРНЫЕ) */
         .cond-item { background: #080808; border: 1px solid #1a1a1a; padding: 25px; border-radius: 12px; }
         .cond-item b { color: #fff; display: block; margin-bottom: 5px; font-size: 14px; font-weight: 900; text-transform: uppercase; }
         .cond-item span { font-size: 10px; color: #555; font-weight: 800; text-transform: uppercase; }
-
-        /* ГРАФИК */
-        .work-row { display: flex; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid #1a1a1a; font-size: 12px; font-weight: 800; text-transform: uppercase; }
-        .work-row span { color: #555; }
-        .work-row b { color: var(--gold); }
 
         footer { text-align: center; padding: 60px 0; color: #222; font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
 
         @media (max-width: 600px) {
             .delivery-grid, .fast-grid { grid-template-columns: 1fr; }
             .big-sum { font-size: 60px; }
+            /* Уменьшаем шрифт цены на мобилках, если она вдруг не влезает */
+            .del-header b { font-size: 16px; } 
         }
     </style>
 </head>
@@ -200,8 +192,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <footer>© 2026 KAIF SMOKE • ПОЛЬША • ДОСТАВКА ПО ВСЕЙ СТРАНЕ</footer>
     </div>

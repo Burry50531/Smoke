@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Способы оплаты | KAIF SMOKE</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -14,8 +14,24 @@
             --text-gray: #555;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        /* Убираем любой скролл по горизонтали на корню */
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        body { 
+            background-color: var(--bg); 
+            color: #fff; 
+            font-family: 'Inter', sans-serif; 
+        }
 
         .bg-grid {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -23,7 +39,13 @@
             background-size: 45px 45px; z-index: -1;
         }
 
-        .wrapper { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .wrapper { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 40px 20px; 
+            position: relative;
+            overflow-x: hidden; /* Дополнительная защита внутри обертки */
+        }
         
         header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
         .logo { font-weight: 900; font-size: 16px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
@@ -33,44 +55,44 @@
         .hero-sub { color: var(--gold); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
         .hero-sub::before { content: ''; width: 30px; height: 2px; background: var(--gold); display: inline-block; }
         .hero h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 950; line-height: 0.85; text-transform: uppercase; font-style: italic; }
-        .hero-bg-text { position: absolute; top: -20px; left: -10px; font-size: 120px; font-weight: 950; color: rgba(255,255,255,0.03); z-index: -1; text-transform: uppercase; font-style: italic; }
+        
+        /* Прозрачный текст на фоне - уменьшил, чтобы не вылезал */
+        .hero-bg-text { 
+            position: absolute; top: -20px; left: -10px; 
+            font-size: 100px; font-weight: 950; 
+            color: rgba(255,255,255,0.03); z-index: -1; 
+            text-transform: uppercase; font-style: italic; 
+            white-space: nowrap;
+        }
+        
         .hero p { color: #555; font-size: 13px; max-width: 480px; font-weight: 600; margin-top: 20px; }
 
+        /* Бегущая строка: исправлен вылет за края */
         .marquee-container {
-            width: 100vw; margin-left: calc(-50vw + 50%);
+            width: 100vw; 
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
             background: #0a0a0a; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a;
             padding: 15px 0; overflow: hidden; margin-bottom: 40px;
         }
-        .marquee-content { display: flex; white-space: nowrap; animation: scroll 30s linear infinite; }
+        .marquee-content { display: flex; white-space: nowrap; animation: scroll 30s linear infinite; width: max-content; }
         .marquee-item { display: flex; align-items: center; gap: 10px; color: var(--gold); font-size: 11px; font-weight: 900; text-transform: uppercase; margin-right: 60px; font-style: italic; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* Блок Безопасно (ЗАМОК В ПРАВОМ ВЕРХНЕМ УГЛУ) */
         .promo-glass {
             background: rgba(230, 177, 48, 0.03);
             border: 1px solid rgba(230, 177, 48, 0.2);
             backdrop-filter: blur(10px);
-            border-radius: 16px; 
-            padding: 40px; 
-            margin-bottom: 30px;
-            position: relative; 
-            overflow: hidden;
+            border-radius: 16px; padding: 40px; margin-bottom: 30px;
+            position: relative; overflow: hidden;
         }
         .badge-yellow { background: var(--gold); color: #000; padding: 4px 10px; border-radius: 4px; font-weight: 900; font-size: 10px; text-transform: uppercase; margin-bottom: 15px; display: inline-block; }
         .promo-title { font-size: 32px; font-weight: 900; color: var(--gold); text-transform: uppercase; font-style: italic; line-height: 1; position: relative; z-index: 2; }
         .promo-desc { color: #666; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-top: 10px; max-width: 400px; position: relative; z-index: 2; }
-        
-        /* Фикс замка: Правый верхний угол */
-        .big-sum { 
-            position: absolute; 
-            right: -5px; 
-            top: -10px; 
-            font-size: 100px; 
-            opacity: 0.15; 
-            z-index: 1;
-            transform: rotate(15deg); /* Небольшой наклон для стиля */
-            pointer-events: none;
-        }
+        .big-sum { position: absolute; right: -5px; top: -10px; font-size: 100px; opacity: 0.15; z-index: 1; transform: rotate(15deg); pointer-events: none; }
 
         .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 25px; }
         .block-head { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
@@ -79,22 +101,7 @@
         .pay-list { display: flex; flex-direction: column; gap: 12px; }
         .pay-card { background: #0c0c0c; border: 1px solid #1a1a1a; padding: 20px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
         .pay-info { display: flex; align-items: center; gap: 20px; flex: 1; }
-        
-        .pay-box { 
-            width: 70px; 
-            height: 70px; 
-            background: #151515; 
-            border-radius: 12px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-weight: 900; 
-            font-size: 16px; 
-            color: #fff; 
-            border: 1px solid #222;
-            flex-shrink: 0;
-        }
-        
+        .pay-box { width: 70px; height: 70px; background: #151515; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; color: #fff; border: 1px solid #222; flex-shrink: 0; }
         .pay-det h4 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
         .pay-det p { font-size: 11px; color: #444; font-weight: 700; text-transform: uppercase; max-width: 400px; line-height: 1.4; }
         .pay-tag { font-size: 9px; font-weight: 900; color: #555; border: 1px solid #222; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; letter-spacing: 1px; }
@@ -105,12 +112,22 @@
         .step-content b { display: block; font-size: 14px; font-weight: 900; text-transform: uppercase; color: #fff; margin-bottom: 4px; }
         .step-content p { font-size: 11px; color: #555; font-weight: 700; text-transform: uppercase; }
 
-        .notice-box { border: 1px solid rgba(230,177,48,0.1); background: rgba(230,177,48,0.02); padding: 30px; border-radius: 12px; }
+        /* БЛОК ОБРАТИТЕ ВНИМАНИЕ: ОДНИМ ТЕКСТОМ С РИСОЧКАМИ */
+        .notice-box { border: 1px solid rgba(230,177,48,0.1); background: rgba(230,177,48,0.02); padding: 30px; border-radius: 16px; }
         .notice-title { color: var(--gold); font-size: 12px; font-weight: 950; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-        .notice-list { list-style: none; }
-        .notice-list li { font-size: 11px; color: #777; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; display: flex; gap: 10px; }
-        .notice-list li::before { content: '—'; color: var(--gold); }
-        .notice-list b { color: var(--gold); }
+        .notice-content { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            font-size: 11px; 
+            color: #777; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            line-height: 1.5;
+        }
+        .notice-content span { display: block; }
+        .notice-content span::before { content: '— '; color: var(--gold); font-weight: 900; }
+        .notice-content b { color: var(--gold); font-weight: 900; }
 
         footer { text-align: center; padding: 60px 0; color: #222; font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
 
@@ -118,6 +135,8 @@
             .pay-card { flex-direction: column; align-items: flex-start; gap: 15px; }
             .pay-tag { align-self: flex-start; }
             .big-sum { font-size: 80px; top: -5px; right: -5px; }
+            .hero h1 { font-size: 45px; }
+            .hero-bg-text { font-size: 70px; }
         }
     </style>
 </head>
@@ -252,13 +271,13 @@
 
         <div class="notice-box">
             <div class="notice-title">ℹ️ Обратите внимание</div>
-            <ul class="notice-list">
-                <li>Оплата при получении доступна только для <b>InPost</b> посылок по Польше</li>
-                <li>Все платежи защищены и проходят через безопасные каналы</li>
-                <li>После оформления заказа вы получите инструкции по оплате в <b>Telegram</b></li>
-                <li>Криптовалютные платежи обрабатываются в течение <b>10-30 минут</b></li>
-                <li>При вопросах по оплате — пишите в <b>Telegram</b>, отвечаем быстро</li>
-            </ul>
+            <div class="notice-content">
+                <span>Оплата при получении доступна только для заказов через <b>InPost</b></span>
+                <span>Все платежи защищены и проходят через безопасные каналы</span>
+                <span>После оформления вы получите инструкции по оплате в <b>Telegram</b></span>
+                <span>Обработка крипто-платежей занимает от <b>10-30 минут</b></span>
+                <span>Если у вас есть вопросы по оплате — пишите нам в <b>Telegram</b></span>
+            </div>
         </div>
 
         <footer>© 2026 KAIF SMOKE • ПОЛЬША • БЕЗОПАСНАЯ ОПЛАТА</footer>
