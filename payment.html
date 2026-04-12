@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Способы оплаты | KAIF SMOKE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #e6b130;
+            --bg: #000000;
+            --card-bg: #111111;
+            --border: #1a1a1a;
+            --text-gray: #555;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        .bg-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px);
+            background-size: 45px 45px; z-index: -1;
+        }
+
+        .wrapper { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
+        .logo { font-weight: 900; font-size: 16px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+        .nav-back { color: var(--text-gray); text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+
+        .hero { position: relative; margin-bottom: 40px; }
+        .hero-sub { color: var(--gold); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .hero-sub::before { content: ''; width: 30px; height: 2px; background: var(--gold); display: inline-block; }
+        .hero h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 950; line-height: 0.85; text-transform: uppercase; font-style: italic; }
+        .hero-bg-text { position: absolute; top: -20px; left: -10px; font-size: 120px; font-weight: 950; color: rgba(255,255,255,0.03); z-index: -1; text-transform: uppercase; font-style: italic; }
+        .hero p { color: #555; font-size: 13px; max-width: 480px; font-weight: 600; margin-top: 20px; }
+
+        .marquee-container {
+            width: 100vw; margin-left: calc(-50vw + 50%);
+            background: #0a0a0a; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a;
+            padding: 15px 0; overflow: hidden; margin-bottom: 40px;
+        }
+        .marquee-content { display: flex; white-space: nowrap; animation: scroll 30s linear infinite; }
+        .marquee-item { display: flex; align-items: center; gap: 10px; color: var(--gold); font-size: 11px; font-weight: 900; text-transform: uppercase; margin-right: 60px; font-style: italic; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Блок Безопасно (ЗАМОК В ПРАВОМ ВЕРХНЕМ УГЛУ) */
+        .promo-glass {
+            background: rgba(230, 177, 48, 0.03);
+            border: 1px solid rgba(230, 177, 48, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 16px; 
+            padding: 40px; 
+            margin-bottom: 30px;
+            position: relative; 
+            overflow: hidden;
+        }
+        .badge-yellow { background: var(--gold); color: #000; padding: 4px 10px; border-radius: 4px; font-weight: 900; font-size: 10px; text-transform: uppercase; margin-bottom: 15px; display: inline-block; }
+        .promo-title { font-size: 32px; font-weight: 900; color: var(--gold); text-transform: uppercase; font-style: italic; line-height: 1; position: relative; z-index: 2; }
+        .promo-desc { color: #666; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-top: 10px; max-width: 400px; position: relative; z-index: 2; }
+        
+        /* Фикс замка: Правый верхний угол */
+        .big-sum { 
+            position: absolute; 
+            right: -5px; 
+            top: -10px; 
+            font-size: 100px; 
+            opacity: 0.15; 
+            z-index: 1;
+            transform: rotate(15deg); /* Небольшой наклон для стиля */
+            pointer-events: none;
+        }
+
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 25px; }
+        .block-head { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .block-head h2 { font-size: 18px; font-weight: 900; font-style: italic; color: var(--gold); text-transform: uppercase; }
+
+        .pay-list { display: flex; flex-direction: column; gap: 12px; }
+        .pay-card { background: #0c0c0c; border: 1px solid #1a1a1a; padding: 20px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .pay-info { display: flex; align-items: center; gap: 20px; flex: 1; }
+        
+        .pay-box { 
+            width: 70px; 
+            height: 70px; 
+            background: #151515; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 900; 
+            font-size: 16px; 
+            color: #fff; 
+            border: 1px solid #222;
+            flex-shrink: 0;
+        }
+        
+        .pay-det h4 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+        .pay-det p { font-size: 11px; color: #444; font-weight: 700; text-transform: uppercase; max-width: 400px; line-height: 1.4; }
+        .pay-tag { font-size: 9px; font-weight: 900; color: #555; border: 1px solid #222; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .step-item { display: flex; align-items: center; gap: 25px; padding: 20px 0; border-bottom: 1px solid #1a1a1a; }
+        .step-item:last-child { border: none; }
+        .step-num { font-size: 24px; font-weight: 900; color: var(--gold); opacity: 0.3; font-style: italic; min-width: 30px; }
+        .step-content b { display: block; font-size: 14px; font-weight: 900; text-transform: uppercase; color: #fff; margin-bottom: 4px; }
+        .step-content p { font-size: 11px; color: #555; font-weight: 700; text-transform: uppercase; }
+
+        .notice-box { border: 1px solid rgba(230,177,48,0.1); background: rgba(230,177,48,0.02); padding: 30px; border-radius: 12px; }
+        .notice-title { color: var(--gold); font-size: 12px; font-weight: 950; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .notice-list { list-style: none; }
+        .notice-list li { font-size: 11px; color: #777; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; display: flex; gap: 10px; }
+        .notice-list li::before { content: '—'; color: var(--gold); }
+        .notice-list b { color: var(--gold); }
+
+        footer { text-align: center; padding: 60px 0; color: #222; font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+
+        @media (max-width: 600px) {
+            .pay-card { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .pay-tag { align-self: flex-start; }
+            .big-sum { font-size: 80px; top: -5px; right: -5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+
+    <div class="wrapper">
+        <header>
+            <div class="logo">KAIF SMOKE</div>
+            <a href="index.html" class="nav-back">← НА ГЛАВНУЮ</a>
+        </header>
+
+        <section class="hero">
+            <div class="hero-bg-text">ОПЛАТА</div>
+            <div class="hero-sub">ПОЛЬША • БЕЗОПАСНАЯ ОПЛАТА</div>
+            <h1>СПОСОБЫ<br><span style="color: var(--gold);">ОПЛАТЫ</span></h1>
+            <p>Принимаем несколько способов оплаты. Все платежи защищены и проходят через безопасные каналы. Инструкции по оплате приходят в Telegram.</p>
+        </section>
+
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <div class="marquee-item">✦ БЕЗОПАСНАЯ ОПЛАТА</div>
+                <div class="marquee-item">✦ BLIK</div>
+                <div class="marquee-item">✦ USDT TRC20</div>
+                <div class="marquee-item">✦ KAIFSMOKE</div>
+                <div class="marquee-item">✦ КАРТА ПОЛЬША</div>
+                <div class="marquee-item">✦ КАРТА УКРАИНА</div>
+                <div class="marquee-item">✦ БЕЗОПАСНАЯ ОПЛАТА</div>
+                <div class="marquee-item">✦ BLIK</div>
+                <div class="marquee-item">✦ USDT TRC20</div>
+            </div>
+        </div>
+
+        <div class="promo-glass">
+            <div class="badge-yellow">🔐 БЕЗОПАСНО</div>
+            <div class="promo-title">ЗАЩИЩЁННЫЕ<br>ПЛАТЕЖИ</div>
+            <div class="promo-desc">Все платежи проходят через надёжные каналы. Инструкции по оплате вы получаете лично в Telegram после оформления заказа.</div>
+            <div class="big-sum">🔒</div>
+        </div>
+
+        <div class="card">
+            <div class="block-head">
+                <span style="font-size: 20px;">💳</span>
+                <h2>Способы оплаты</h2>
+            </div>
+            <div class="pay-list">
+                <div class="pay-card">
+                    <div class="pay-info">
+                        <div class="pay-box">BLIK</div>
+                        <div class="pay-det">
+                            <h4>BLIK</h4>
+                            <p>Быстрая оплата через польский банкинг-приложение. Введите 6-значный код и подтвердите в приложении.</p>
+                        </div>
+                    </div>
+                    <div class="pay-tag">ПОЛЬША</div>
+                </div>
+
+                <div class="pay-card">
+                    <div class="pay-info">
+                        <div class="pay-box">MONO</div>
+                        <div class="pay-det">
+                            <h4>Украинский банк</h4>
+                            <p>Перевод с украинской карты. Реквизиты карты для перевода будут отправлены в Telegram.</p>
+                        </div>
+                    </div>
+                    <div class="pay-tag">ПЕРЕВОД</div>
+                </div>
+
+                <div class="pay-card">
+                    <div class="pay-info">
+                        <div class="pay-box">📦</div>
+                        <div class="pay-det">
+                            <h4>Оплата при получении</h4>
+                            <p>Оплата наличными при получении в почтомате InPost. Доступно только для посылок по Польше через InPost.</p>
+                        </div>
+                    </div>
+                    <div class="pay-tag">INPOST</div>
+                </div>
+
+                <div class="pay-card">
+                    <div class="pay-info">
+                        <div class="pay-box" style="color: #26a17b;">USDT</div>
+                        <div class="pay-det">
+                            <h4>USDT (TRC20)</h4>
+                            <p>Оплата криптовалютой USDT в сети Tron (TRC20). Обработка платежа занимает 10-30 минут после подтверждения транзакции.</p>
+                        </div>
+                    </div>
+                    <div class="pay-tag">КРИПТО</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="block-head">
+                <span style="font-size: 20px;">⚡</span>
+                <h2>Как оплатить заказ</h2>
+            </div>
+            
+            <div class="step-item">
+                <div class="step-num">01</div>
+                <div class="step-content">
+                    <b>Оформите заказ</b>
+                    <p>Выберите товары и укажите способ доставки в нашем каталоге или напрямую в Telegram.</p>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-num">02</div>
+                <div class="step-content">
+                    <b>Получите инструкцию в Telegram</b>
+                    <p>После оформления заказа мы пришлём реквизиты или инструкции по оплате напрямую в Telegram.</p>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-num">03</div>
+                <div class="step-content">
+                    <b>Произведите оплату</b>
+                    <p>Оплатите удобным способом — BLIK, перевод, наличными или крипто.</p>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-num">04</div>
+                <div class="step-content">
+                    <b>Подтвердите и ждите доставку</b>
+                    <p>После подтверждения оплаты мы передаём посылку в службу доставки и отправляем номер отслеживания.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="notice-box">
+            <div class="notice-title">ℹ️ Обратите внимание</div>
+            <ul class="notice-list">
+                <li>Оплата при получении доступна только для <b>InPost</b> посылок по Польше</li>
+                <li>Все платежи защищены и проходят через безопасные каналы</li>
+                <li>После оформления заказа вы получите инструкции по оплате в <b>Telegram</b></li>
+                <li>Криптовалютные платежи обрабатываются в течение <b>10-30 минут</b></li>
+                <li>При вопросах по оплате — пишите в <b>Telegram</b>, отвечаем быстро</li>
+            </ul>
+        </div>
+
+        <footer>© 2026 KAIF SMOKE • ПОЛЬША • БЕЗОПАСНАЯ ОПЛАТА</footer>
+    </div>
+
+</body>
+</html>
