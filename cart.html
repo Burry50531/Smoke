@@ -3,98 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Корзина | KAIF SMOKE</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Ваша Корзина | KAIF SMOKE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* Специфические стили для страницы корзины */
-        .cart-page-container { padding: 120px 20px 60px; max-width: 800px; margin: 0 auto; }
-        .cart-title { font-size: 40px; font-weight: 900; margin-bottom: 30px; border-left: 5px solid #e6b130; padding-left: 15px; }
-        .cart-item { 
-            display: flex; align-items: center; background: #111; 
-            padding: 15px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #222;
+        :root {
+            --gold: #e6b130;
+            --bg: #000000;
+            --card-bg: #111111;
+            --border: #1a1a1a;
+            --text-gray: #555;
         }
-        .cart-item img { width: 70px; height: 70px; object-fit: contain; margin-right: 20px; }
-        .cart-item-info { flex-grow: 1; }
-        .cart-item-name { font-weight: 700; font-size: 18px; margin-bottom: 5px; }
-        .cart-item-price { color: #e6b130; font-weight: 900; }
-        .remove-btn { background: #ff4444; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 5px; font-weight: bold; }
-        .cart-total { margin-top: 30px; text-align: right; font-size: 24px; font-weight: 900; border-top: 2px solid #222; padding-top: 20px; }
-        .order-btn { 
-            display: block; width: 100%; background: #e6b130; color: #000; text-align: center; 
-            padding: 20px; margin-top: 20px; text-decoration: none; font-weight: 900; font-size: 20px; border-radius: 5px;
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* Фоновая сетка как на скринах */
+        .bg-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px);
+            background-size: 45px 45px; z-index: -1;
         }
-        .empty-msg { text-align: center; padding: 50px; color: #666; font-size: 20px; }
+
+        .wrapper { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        
+        /* Header */
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-img { width: 35px; height: 35px; object-fit: contain; }
+        .logo-text { font-weight: 800; font-size: 18px; letter-spacing: 1px; }
+        .nav-back { color: var(--text-gray); text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+
+        /* Заголовок */
+        .cart-header { margin-bottom: 40px; }
+        .cart-header h1 { font-size: 56px; font-weight: 900; line-height: 0.9; text-transform: uppercase; border-left: 5px solid var(--gold); padding-left: 20px; }
+        .item-count-top { color: var(--text-gray); font-size: 10px; font-weight: 800; text-transform: uppercase; margin-top: 10px; text-align: right; }
+
+        /* Список товаров */
+        .cart-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .cart-item { display: flex; align-items: center; background: var(--card-bg); padding: 20px; gap: 20px; }
+        .cart-item img { width: 60px; height: 60px; object-fit: contain; background: #000; border-radius: 8px; padding: 5px; }
+        .item-info { flex: 1; }
+        .item-name { font-weight: 800; font-size: 14px; text-transform: uppercase; margin-bottom: 5px; }
+        .item-price { color: var(--gold); font-weight: 900; font-size: 16px; }
+
+        /* Управление количеством */
+        .qty-control { display: flex; align-items: center; background: #080808; border-radius: 6px; border: 1px solid #222; overflow: hidden; }
+        .qty-btn { background: transparent; color: #fff; border: none; width: 35px; height: 35px; cursor: pointer; font-size: 18px; transition: 0.2s; }
+        .qty-btn:hover { background: #1a1a1a; }
+        .qty-num { width: 30px; text-align: center; font-weight: 800; font-size: 14px; }
+
+        .remove-x { color: var(--text-gray); background: transparent; border: 1px solid #222; width: 35px; height: 35px; border-radius: 6px; cursor: pointer; margin-left: 10px; }
+
+        /* Итоговый блок */
+        .summary-block { margin-top: 40px; border-top: 1px solid #222; padding-top: 20px; }
+        .summary-line { display: flex; justify-content: space-between; font-weight: 700; font-size: 12px; color: var(--text-gray); text-transform: uppercase; margin-bottom: 15px; }
+        .summary-line b { color: #fff; }
+        .summary-line b.green { color: #4caf50; }
+        
+        .total-line { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+        .total-line span { font-size: 24px; font-weight: 900; text-transform: uppercase; }
+        .total-line b { font-size: 38px; color: var(--gold); font-weight: 900; }
+
+        /* Кнопки */
+        .btn-checkout { 
+            display: block; width: 100%; background: var(--gold); color: #000; text-align: center; 
+            padding: 22px; margin-top: 30px; text-decoration: none; font-weight: 900; font-size: 16px; 
+            border-radius: 4px; clip-path: polygon(0 0, 100% 0, 100% 70%, 95% 100%, 0 100%);
+            text-transform: uppercase;
+        }
+        .btn-continue { 
+            display: block; width: 100%; text-align: center; color: #fff; text-decoration: none; 
+            padding: 15px; margin-top: 10px; font-weight: 700; font-size: 11px; text-transform: uppercase;
+            border: 1px solid #1a1a1a; border-radius: 4px;
+        }
+
+        /* Футер желтый */
+        .yellow-footer { background: var(--gold); padding: 40px 20px; display: flex; justify-content: space-around; margin-top: 80px; }
+        .f-item { text-align: center; color: #000; }
+        .f-item h2 { font-size: 36px; font-weight: 900; margin-bottom: 5px; }
+        .f-item p { font-size: 9px; font-weight: 800; text-transform: uppercase; color: rgba(0,0,0,0.6); }
+
+        .empty-cart { text-align: center; padding: 100px 0; color: var(--text-gray); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-<header class="header">
-    <div class="header-left">
-        <a href="index.html" style="text-decoration: none; color: white; display: flex; align-items: center; gap: 10px;">
-            <img src="images/IMG_2073.PNG" class="main-logo-img">
-            <span class="logo-text">KAIF SMOKE</span>
-        </a>
-    </div>
-    <a href="index.html" class="nav-item">← На главную</a>
-</header>
+<div class="bg-grid"></div>
 
-<div class="cart-page-container">
-    <h1 class="cart-title">ВАША КОРЗИНА</h1>
-    
-    <div id="cart-items-list">
+<div class="wrapper">
+    <header>
+        <div class="logo-area">
+            <img src="images/IMG_2073.PNG" class="logo-img">
+            <span class="logo-text">KAIF SMOKE</span>
+        </div>
+        <a href="index.html" class="nav-back">← НА ГЛАВНУЮ</a>
+    </header>
+
+    <div class="cart-header">
+        <h1>КОРЗИНА</h1>
+        <div class="item-count-top" id="top-counter">0 ТОВАРА</div>
+    </div>
+
+    <div id="cart-content">
         </div>
 
-    <div id="cart-summary" style="display: none;">
-        <div class="cart-total">ИТОГО: <span id="total-price">0</span> zł</div>
-        <a href="checkout.html" class="checkout-btn">Оформить заказ</a>
+    <div id="summary-area" style="display: none;">
+        <div class="summary-block">
+            <div class="summary-line"><span>ТОВАРОВ</span><b id="subtotal-count">0 ШТ.</b></div>
+            
+            <div class="total-line">
+                <span>ИТОГО</span>
+                <b id="total-sum">0 ZL</b>
+            </div>
+        </div>
+
+        <a href="checkout.html" class="btn-checkout"> ОФОРМИТЬ ЗАКАЗ </a>
+        <a href="catalog.html" class="btn-continue">← ПРОДОЛЖИТЬ ПОКУПКИ</a>
     </div>
 </div>
 
+<div class="yellow-footer">
+    <div class="f-item"><h2>100+</h2><p>ТОВАРОВ В КАТАЛОГЕ</p></div>
+    <div class="f-item"><h2>1-2</h2><p>ДНЯ ДОСТАВКА</p></div>
+    <div class="f-item"><h2>100%</h2><p>ОРИГИНАЛЬНАЯ ПРОДУКЦИЯ</p></div>
+</div>
+
 <script>
-    // Скрипт специально для страницы корзины
     function renderCart() {
-        const cartList = document.getElementById('cart-items-list');
-        const summary = document.getElementById('cart-summary');
-        const totalSpan = document.getElementById('total-price');
+        const container = document.getElementById('cart-content');
+        const summary = document.getElementById('summary-area');
+        const totalSum = document.getElementById('total-sum');
+        const subtotalCount = document.getElementById('subtotal-count');
+        const topCounter = document.getElementById('top-counter');
         
-        // Получаем данные из LocalStorage
         let cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
 
         if (cart.length === 0) {
-            cartList.innerHTML = '<div class="empty-msg">Ваша корзина пуста...</div>';
+            container.innerHTML = '<div class="empty-cart">ВАША КОРЗИНА ПУСТА...</div>';
             summary.style.display = 'none';
+            topCounter.innerText = '0 ТОВАРОВ';
             return;
         }
 
         summary.style.display = 'block';
-        cartList.innerHTML = '';
+        let html = '<div class="cart-list">';
         let total = 0;
+        let count = 0;
 
         cart.forEach((item, index) => {
-            total += parseFloat(item.price);
-            cartList.innerHTML += `
+            // Если в объекте нет поля quantity (количество), ставим 1
+            if(!item.qty) item.qty = 1;
+            
+            const priceNum = parseInt(item.price);
+            total += priceNum * item.qty;
+            count += item.qty;
+
+            html += `
                 <div class="cart-item">
-                    <img src="${item.img}" alt="">
-                    <div class="cart-item-info">
-                        <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">${item.price} zł</div>
+                    <img src="${item.img || item.image}" onerror="this.src='logo.png'">
+                    <div class="item-info">
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-price">${priceNum} zł</div>
                     </div>
-                    <button class="remove-btn" onclick="removeFromCart(${index})">Удалить</button>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+                        <div class="qty-num">${item.qty}</div>
+                        <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                    </div>
+                    <button class="remove-x" onclick="removeItem(${index})">✕</button>
                 </div>
             `;
         });
 
-        totalSpan.innerText = total;
+        html += '</div>';
+        container.innerHTML = html;
+        
+        totalSum.innerText = total + " ZL";
+        subtotalCount.innerText = count + " ШТ.";
+        topCounter.innerText = count + " ТОВАРА";
     }
 
-    function removeFromCart(index) {
+    function changeQty(index, delta) {
         let cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
-        cart.splice(index, 1); // Удаляем один элемент по индексу
-        localStorage.setItem('kaif_cart', JSON.stringify(cart));
-        renderCart(); // Перерисовываем список
+        if(!cart[index].qty) cart[index].qty = 1;
+        
+        cart[index].qty += delta;
+        
+        if (cart[index].qty < 1) {
+            removeItem(index);
+        } else {
+            localStorage.setItem('kaif_cart', JSON.stringify(cart));
+            renderCart();
+        }
     }
 
-    // Запускаем отрисовку при загрузке страницы
+    function removeItem(index) {
+        let cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
+        cart.splice(index, 1);
+        localStorage.setItem('kaif_cart', JSON.stringify(cart));
+        renderCart();
+    }
+
     document.addEventListener('DOMContentLoaded', renderCart);
 </script>
 
