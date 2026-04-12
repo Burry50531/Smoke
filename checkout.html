@@ -54,8 +54,6 @@
         input, textarea { background: #080808; border: 1px solid #1a1a1a; padding: 14px; color: #fff; border-radius: 6px; font-family: inherit; font-size: 13px; width: 100%; }
         input:focus, textarea:focus { border-color: var(--gold); outline: none; }
 
-        textarea#comment { min-height: 120px; resize: none; width: 100%; }
-
         .option-item { border: 1px solid var(--border); padding: 18px; border-radius: 10px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
         .option-item.active { border-color: var(--gold); background: #0a0905; }
         .dot { width: 18px; height: 18px; border: 2px solid #333; border-radius: 50%; position: relative; }
@@ -64,7 +62,6 @@
         .opt-info b { display: block; text-transform: uppercase; margin-bottom: 2px; }
         .opt-info span { color: var(--text-gray); font-size: 11px; }
         .price-text { font-weight: 800; font-size: 14px; }
-        .price-text.green { color: var(--green); }
 
         .pay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .pay-card { border: 1px solid var(--border); padding: 25px 10px; border-radius: 10px; text-align: center; cursor: pointer; position: relative; transition: 0.3s; }
@@ -74,6 +71,9 @@
         .pay-card b { display: block; font-size: 11px; text-transform: uppercase; margin-bottom: 4px; }
         .pay-card small { font-size: 8px; color: var(--text-gray); text-transform: uppercase; }
         .badge-soon { position: absolute; top: 8px; right: 8px; background: #c62828; color: #fff; font-size: 7px; padding: 2px 5px; border-radius: 3px; font-weight: 900; }
+
+        .pay-instruction { background: #0d0d0d; border: 1px solid #1a1a1a; padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 11px; color: #999; line-height: 1.5; }
+        .pay-instruction b { color: var(--gold); }
 
         .sidebar { width: 340px; position: sticky; top: 20px; }
         .order-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 25px; }
@@ -87,9 +87,6 @@
         .promo-flex { display: flex; gap: 8px; }
         .promo-flex input { padding: 10px; font-size: 11px; text-transform: uppercase; }
         .promo-btn { background: #222; border: none; color: #fff; padding: 0 15px; border-radius: 6px; font-weight: 800; font-size: 10px; cursor: pointer; white-space: nowrap; }
-        .promo-status { font-size: 9px; font-weight: 800; margin-top: 8px; text-transform: uppercase; display: none; }
-        .promo-status.err { color: var(--red); display: block; }
-        .promo-status.ok { color: var(--green); display: block; }
 
         .sum-line { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-gray); margin-bottom: 12px; font-weight: 700; text-transform: uppercase; }
         .sum-line b { color: #fff; }
@@ -97,12 +94,39 @@
         .total-line { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid #222; }
         .total-line b { font-size: 32px; color: var(--gold); font-weight: 900; }
 
-        .btn-order { width: 100%; background: var(--gold); color: #000; border: none; padding: 22px; font-weight: 900; font-size: 14px; margin-top: 20px; cursor: pointer; border-radius: 6px; clip-path: polygon(0 0, 100% 0, 100% 70%, 93% 100%, 0 100%); }
+        .btn-order { width: 100%; background: var(--gold); color: #000; border: none; padding: 22px; font-weight: 900; font-size: 14px; margin-top: 20px; cursor: pointer; border-radius: 6px; clip-path: polygon(0 0, 100% 0, 100% 70%, 93% 100%, 0 100%); text-transform: uppercase; }
+        
+        .btn-back-cart { display: block; width: 100%; text-align: center; color: #fff; text-decoration: none; padding: 15px; margin-top: 10px; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid #1a1a1a; border-radius: 4px; }
+
+        .legal-notice { font-size: 9px; color: var(--text-gray); text-align: center; margin-top: 15px; line-height: 1.4; text-transform: uppercase; font-weight: 700; }
+        .legal-notice b { color: #888; }
 
         #addr-details { display: none; margin-top: 15px; flex-direction: column; gap: 15px; }
-        .map-link { font-size: 10px; color: var(--gold); text-decoration: none; font-weight: 800; text-transform: uppercase; display: inline-block; margin-top: 5px; }
 
-        @media (max-width: 768px) { .container { flex-direction: column; } .sidebar { width: 100%; } .input-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .container { flex-direction: column; } .sidebar { width: 100%; } }
+
+    /* Стиль для активной галочки */
+    #age-confirm:checked + #custom-check {
+        background: var(--gold);
+        border-color: var(--gold);
+    }
+    #age-confirm:checked + #custom-check::after {
+        content: '✓';
+        color: #000;
+        font-size: 14px;
+        font-weight: 900;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Эффект при наведении на включенную кнопку */
+    .btn-order:not([disabled]):hover {
+        background: #f0bc3a;
+        transform: translateY(-2px);
+    }
+
     </style>
 </head>
 <body>
@@ -122,8 +146,8 @@
                 <div class="card">
                     <div class="card-header"><div class="step">1</div><h3>Контактные данные</h3></div>
                     <div class="input-grid">
-                        <div class="field"><label>ИМЯ (ONLY LATIN) *</label><input type="text" id="name" placeholder="Ivan" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"></div>
-                        <div class="field"><label>ФАМИЛИЯ (ONLY LATIN) *</label><input type="text" id="surname" placeholder="Ivanov" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"></div>
+                        <div class="field"><label>ИМЯ (англ) *</label><input type="text" id="name" placeholder="Имя англ" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"></div>
+                        <div class="field"><label>ФАМИЛИЯ (англ) *</label><input type="text" id="surname" placeholder="Фамилия англ" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"></div>
                     </div>
                     <div class="input-grid">
                         <div class="field"><label>ТЕЛЕФОН *</label><input type="text" id="phone" placeholder="+48 000 000 000"></div>
@@ -147,13 +171,12 @@
                     <div class="option-item" onclick="updateDel(this, 0, 'warsaw')">
                         <div class="dot"></div>
                         <div class="opt-info"><b>🏙️ КУРЬЕР ПО ВАРШАВЕ</b><span>Экспресс-доставка по городу • в день заказа</span></div>
-                        <div class="price-text green">БЕСПЛАТНО</div>
+                        <div class="price-text" style="color:var(--green)">БЕСПЛАТНО</div>
                     </div>
                     
                     <div class="field" id="addr-paczkomat" style="margin-top: 25px;">
                         <label>НОМЕР ПОСТОМАТА *</label>
                         <input type="text" id="paczkomat_id" placeholder="WAW123A">
-                        <a href="https://inpost.pl/znajdz-paczkomat" target="_blank" class="map-link">📍 НАЙТИ ПОСТОМАТ НА КАРТЕ</a>
                     </div>
 
                     <div id="addr-details">
@@ -180,8 +203,12 @@
                         </div>
                         <div class="pay-card disabled">
                             <div class="badge-soon">СКОРО</div>
-                            <span class="icon">💵</span><b>ПРИ ПОЛУЧЕНИИ</b><small>КУРЬЕРУ / ПОСТОМАТ</small>
+                            <span class="icon">💵</span><b>ПРИ ПОЛУЧЕНИИ</b><small>ВАШ НОМЕР ТЕЛЕФОНА</small>
                         </div>
+                    </div>
+
+                    <div class="pay-instruction">
+                        После нажатия кнопки заказа вы будете перенаправлены в <b>Telegram</b> к нашему менеджеру для получения реквизитов на оплату <b>выбранным способом</b>.
                     </div>
                 </div>
 
@@ -194,141 +221,222 @@
                 </div>
             </div>
 
-            <aside class="sidebar">
-                <div class="order-box">
-                    <h4 id="order-info">ВАШ ЗАКАЗ <span>0 ТОВАРОВ</span></h4>
-                    <div id="mini-list" style="max-height: 200px; overflow-y: auto; margin-bottom: 20px;"></div>
-                    
-                    <div class="sum-line"><span>ТОВАРЫ</span><b id="sub-val">0,00 ZL</b></div>
-                    <div class="sum-line" id="promo-line" style="display: none; color: var(--green);"><span>СКИДКА 10%</span><b id="promo-val">-0,00 ZL</b></div>
-                    <div class="sum-line"><span>ДОСТАВКА</span><b id="del-val">12,00 ZL</b></div>
-                    <div class="sum-line"><span>ОПЛАТА</span><b id="pay-val" style="color: var(--gold);">BLIK</b></div>
-                    
-                    <div class="promo-wrap">
-                        <div class="promo-flex">
-                            <input type="text" id="promo-input" placeholder="ПРОМОКОД">
-                            <button class="promo-btn" onclick="applyPromo()">ПРИМЕНИТЬ</button>
-                        </div>
-                        <div id="promo-status" class="promo-status"></div>
-                    </div>
+<aside class="sidebar">
+    <div class="order-box">
+        <h4 id="order-info">ВАШ ЗАКАЗ <span>0 ТОВАРОВ</span></h4>
+        <div id="mini-list" style="max-height: 200px; overflow-y: auto; margin-bottom: 20px;"></div>
+        
+        <div class="sum-line"><span>ТОВАРЫ</span><b id="sub-val">0,00 ZL</b></div>
+        <div class="sum-line" id="promo-line" style="display: none; color: var(--green);"><span>СКИДКА 10%</span><b id="promo-val">-0,00 ZL</b></div>
+        <div class="sum-line"><span>ДОСТАВКА</span><b id="del-val">12,00 ZL</b></div>
+        <div class="sum-line"><span>ОПЛАТА</span><b id="pay-val" style="color: var(--gold);">BLIK</b></div>
+        
+        <div class="promo-wrap">
+            <div class="promo-flex">
+                <input type="text" id="promo-input" placeholder="ПРОМОКОД">
+                <button class="promo-btn" onclick="applyPromo()">ПРИМЕНИТЬ</button>
+            </div>
+            <div id="promo-status" style="font-size: 9px; margin-top: 8px; display: none;"></div>
+        </div>
 
-                    <div class="total-line"><span>ИТОГО</span><b id="total-val">0,00 ZL</b></div>
-                </div>
-                <button class="btn-order" onclick="sendToTG()">✈️ ОФОРМИТЬ ЗАКАЗ</button>
-            </aside>
+        <div class="total-line"><span>ИТОГО</span><b id="total-val">0,00 ZL</b></div>
+    </div>
+    
+<div style="margin-top: 20px; background: #111; border: 1px solid #1a1a1a; padding: 18px; border-radius: 8px;">
+    <label style="display: flex; align-items: center; gap: 15px; cursor: pointer; user-select: none;">
+        <div style="position: relative; min-width: 24px; height: 24px;">
+            <input type="checkbox" id="age-confirm" onchange="toggleOrderBtn()" style="position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;">
+            <div id="custom-check" style="width: 24px; height: 24px; border: 2px solid #333; border-radius: 6px; background: #000; transition: all 0.2s; display: flex; align-items: center; justify-content: center;">
+                <svg id="check-icon" viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: none; stroke: #000; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; display: none;">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+        </div>
+        <span style="font-size: 10px; color: #888; text-transform: uppercase; font-weight: 700; line-height: 1.4;">
+            Я подтверждаю, что мне исполнилось <b style="color: #fff;">18 лет</b>, и я принимаю <b style="color: var(--gold);">условия использования</b> магазина.
+        </span>
+    </label>
+</div>
+
+<button class="btn-order" id="submit-order-btn" onclick="sendToTG()" disabled style="opacity: 0.3; cursor: not-allowed; filter: grayscale(1); transition: 0.3s;">
+    ✈️ ОФОРМИТЬ ЗАКАЗ
+</button>
+    
+
+    
+    <a href="cart.html" class="btn-back-cart">← ВЕРНУТЬСЯ В КОРЗИНУ</a>
+
+    <div class="legal-notice" style="margin-top: 15px; color: #333;">
+        KAIF SMOKE © 2026 • ALL RIGHTS RESERVED
+    </div>
+</aside>
         </div>
     </div>
 
-    <script>
-        let dPrice = 12; let dName = "INPOST PACZKOMAT"; let pName = "BLIK";
-        let discount = 0;
-        let appliedPromo = "Нет";
+<script>
+    let dPrice = 12; 
+    let dName = "INPOST PACZKOMAT"; 
+    let pName = "BLIK";
+    let discount = 0;
+    let appliedPromo = "Нет"; // Добавили переменную для промокода
 
-        // Функция для формата с запятыми вместо точек
-        function formatNum(num) {
-            return num.toLocaleString('en-US', { 
-                minimumFractionDigits: 2, 
-                maximumFractionDigits: 2 
-            }).replace(/\./g, ','); // Меняем точку на запятую
+    function formatNum(num) {
+        return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/\./g, ',');
+    }
+
+    function refreshUI() {
+        const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
+        const list = document.getElementById('mini-list');
+        let sum = 0;
+        list.innerHTML = '';
+
+        cart.forEach(item => {
+            let itemP = parseFloat(item.price) || 0;
+            sum += (itemP * (item.qty || 1));
+            list.innerHTML += `<div class="mini-item"><img src="${item.img || 'logo.png'}"><div style="flex:1;">${item.name} (x${item.qty || 1})<br><b>${formatNum(itemP)} ZL</b></div></div>`;
+        });
+
+        let discVal = sum * discount;
+        if(discount > 0) {
+            document.getElementById('promo-line').style.display = 'flex';
+            document.getElementById('promo-val').innerText = `-${formatNum(discVal)} ZL`;
+        } else {
+            document.getElementById('promo-line').style.display = 'none';
         }
 
-        function refreshUI() {
-            const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
-            const list = document.getElementById('mini-list');
-            let sum = 0;
-            list.innerHTML = '';
+        document.getElementById('order-info').querySelector('span').innerText = `${cart.length} ТОВАРОВ`;
+        document.getElementById('sub-val').innerText = formatNum(sum) + " ZL";
+        document.getElementById('del-val').innerText = dPrice === 0 ? "FREE" : formatNum(dPrice) + " ZL";
+        document.getElementById('pay-val').innerText = pName;
+        
+        let final = (sum - discVal) + dPrice;
+        document.getElementById('total-val').innerText = formatNum(final) + " ZL";
+    }
 
-            cart.forEach(item => {
-                let itemP = parseFloat(item.price) || 0;
-                sum += itemP;
-                list.innerHTML += `<div class="mini-item"><img src="${item.img || 'logo.png'}"><div style="flex:1;">${item.name}<br><b>${formatNum(itemP)} ZL</b></div></div>`;
-            });
+    function applyPromo() {
+        const code = document.getElementById('promo-input').value.trim().toUpperCase();
+        const status = document.getElementById('promo-status');
+        status.style.display = 'block';
+        if(code === 'HELLO') {
+            discount = 0.10;
+            appliedPromo = code; // Сохраняем имя промокода
+            status.innerText = "ПРОМОКОД ПРИМЕНЕН: -10%";
+            status.style.color = "var(--green)";
+        } else {
+            discount = 0;
+            appliedPromo = "Нет";
+            status.innerText = "ПРОМОКОД НЕ НАЙДЕН";
+            status.style.color = "var(--red)";
+        }
+        refreshUI();
+    }
 
-            let discVal = sum * discount;
-            if(discount > 0) {
-                document.getElementById('promo-line').style.display = 'flex';
-                document.getElementById('promo-val').innerText = `-${formatNum(discVal)} ZL`;
-            } else {
-                document.getElementById('promo-line').style.display = 'none';
-            }
+    function updateDel(el, price, type) {
+        document.querySelectorAll('.option-item').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+        dPrice = price;
+        dName = el.querySelector('b').innerText;
 
-            document.getElementById('order-info').querySelector('span').innerText = `${cart.length} ТОВАРОВ`;
-            document.getElementById('sub-val').innerText = formatNum(sum) + " ZL";
-            document.getElementById('del-val').innerText = dPrice === 0 ? "FREE" : formatNum(dPrice) + " ZL";
-            document.getElementById('pay-val').innerText = pName;
-            
-            let final = (sum - discVal) + dPrice;
-            document.getElementById('total-val').innerText = formatNum(final) + " ZL";
+        if(type === 'paczkomat') {
+            document.getElementById('addr-paczkomat').style.display = 'block';
+            document.getElementById('addr-details').style.display = 'none';
+        } else {
+            document.getElementById('addr-paczkomat').style.display = 'none';
+            document.getElementById('addr-details').style.display = 'flex';
+            if(type === 'warsaw') document.getElementById('c_city').value = "Warszawa";
+        }
+        refreshUI();
+    }
+
+    function updatePay(el, name) {
+        if(el.classList.contains('disabled')) return;
+        document.querySelectorAll('.pay-card').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+        pName = name;
+        refreshUI();
+    }
+
+    function sendToTG() {
+        const n = document.getElementById('name').value;
+        const s = document.getElementById('surname').value;
+        const p = document.getElementById('phone').value;
+        const e = document.getElementById('email').value;
+        const tg = document.getElementById('tg_nick').value || "Не указан";
+        const comm = document.getElementById('comment').value || "Нет";
+        
+        if(!n || !s || !p || !e) { 
+            alert("Пожалуйста, заполните контактные данные!"); 
+            return; 
         }
 
-        function applyPromo() {
-            const code = document.getElementById('promo-input').value.trim().toUpperCase();
-            const status = document.getElementById('promo-status');
-            if(code === 'HELLO') {
-                discount = 0.10;
-                appliedPromo = code;
-                status.innerText = "ПРОМОКОД ПРИМЕНЕН: -10%";
-                status.className = "promo-status ok";
-            } else {
-                discount = 0;
-                appliedPromo = "Нет";
-                status.innerText = "ПРОМОКОД НЕ НАЙДЕН";
-                status.className = "promo-status err";
-            }
-            refreshUI();
+        let addr = "";
+        if(document.getElementById('addr-paczkomat').style.display !== 'none') {
+            const pId = document.getElementById('paczkomat_id').value;
+            if(!pId) { alert("Укажите номер постомата!"); return; }
+            addr = "Постомат InPost: " + pId;
+        } else {
+            const city = document.getElementById('c_city').value;
+            const street = document.getElementById('c_street').value;
+            const home = document.getElementById('c_home').value;
+            const zip = document.getElementById('c_zip').value;
+            if(!city || !street || !home) { alert("Заполните адрес доставки!"); return; }
+            addr = `${zip}, г. ${city}, ул. ${street}, д. ${home}`;
         }
 
-        function updateDel(el, price, type) {
-            document.querySelectorAll('.option-item').forEach(i => i.classList.remove('active'));
-            el.classList.add('active');
-            dPrice = price;
-            dName = el.querySelector('b').innerText;
+        const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
+        if(cart.length === 0) { alert("Корзина пуста!"); return; }
+        
+        const goods = cart.map((i, idx) => {
+            const itemPrice = parseFloat(i.price) || 0;
+            return `${idx + 1}. ${i.name} x${i.qty || 1} (${formatNum(itemPrice)} ZL)`;
+        }).join('\n');
 
-            if(type === 'paczkomat') {
-                document.getElementById('addr-paczkomat').style.display = 'block';
-                document.getElementById('addr-details').style.display = 'none';
-            } else {
-                document.getElementById('addr-paczkomat').style.display = 'none';
-                document.getElementById('addr-details').style.display = 'flex';
-                if(type === 'warsaw') document.getElementById('c_city').value = "Warszawa";
-            }
-            refreshUI();
+        const text = `🚀 НОВЫЙ ЗАКАЗ\n` +
+                     `--------------------------\n` +
+                     `👤 Клиент: ${n} ${s}\n` +
+                     `📞 Тел: ${p}\n` +
+                     `📧 Email: ${e}\n` +
+                     `📱 TG: ${tg}\n` +
+                     `--------------------------\n` +
+                     `🛒 ТОВАРЫ:\n${goods}\n` +
+                     `--------------------------\n` +
+                     `🚚 Доставка: ${dName}\n` +
+                     `📍 Адрес: ${addr}\n` +
+                     `💳 Оплата: ${pName}\n` +
+                     `🏷️ Промокод: ${appliedPromo}\n` +
+                     `💬 Коммент: ${comm}\n` +
+                     `--------------------------\n` +
+                     `💰 ИТОГО: ${document.getElementById('total-val').innerText}`;
+
+        window.location.href = `https://t.me/managerelfbarow?text=${encodeURIComponent(text)}`;
+    }
+
+    function toggleOrderBtn() {
+        const checkbox = document.getElementById('age-confirm');
+        const customCheck = document.getElementById('custom-check');
+        const checkIcon = document.getElementById('check-icon');
+        const btn = document.getElementById('submit-order-btn');
+        
+        if (checkbox && checkbox.checked) {
+            customCheck.style.background = "var(--gold)";
+            customCheck.style.borderColor = "var(--gold)";
+            checkIcon.style.display = "block";
+            btn.disabled = false;
+            btn.style.opacity = "1";
+            btn.style.cursor = "pointer";
+            btn.style.filter = "none";
+        } else if (checkbox) {
+            customCheck.style.background = "#000";
+            customCheck.style.borderColor = "#333";
+            checkIcon.style.display = "none";
+            btn.disabled = true;
+            btn.style.opacity = "0.3";
+            btn.style.cursor = "not-allowed";
+            btn.style.filter = "grayscale(1)";
         }
+    }
 
-        function updatePay(el, name) {
-            if(el.classList.contains('disabled')) return; // Чтобы нельзя было нажать "Скоро"
-            document.querySelectorAll('.pay-card').forEach(i => i.classList.remove('active'));
-            el.classList.add('active');
-            pName = name;
-            refreshUI();
-        }
-
-        function sendToTG() {
-            const n = document.getElementById('name').value;
-            const s = document.getElementById('surname').value;
-            const p = document.getElementById('phone').value;
-            const e = document.getElementById('email').value;
-            const tg = document.getElementById('tg_nick').value || "Не указан";
-            const comm = document.getElementById('comment').value || "Нет";
-            
-            let addr = "";
-            if(document.getElementById('addr-paczkomat').style.display !== 'none') {
-                addr = "Постомат: " + document.getElementById('paczkomat_id').value;
-            } else {
-                addr = `Адрес: г.${document.getElementById('c_city').value}, ул.${document.getElementById('c_street').value}, д.${document.getElementById('c_home').value}, инд.${document.getElementById('c_zip').value}`;
-            }
-
-            const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
-            const goods = cart.map((i, idx) => `${idx+1}. ${i.name} (${i.price}ZL)`).join('\n');
-
-            if(!n || !s || !p || !e || !addr) { alert("Заполните все данные!"); return; }
-
-            const text = `🚀 НОВЫЙ ЗАКАЗ\n--------------------------\n👤 Клиент: ${n} ${s}\n📞 Тел: ${p}\n📧 Email: ${e}\n📱 TG: ${tg}\n--------------------------\n🛒 ТОВАРЫ:\n${goods}\n--------------------------\n🚚 Доставка: ${dName}\n📍 ${addr}\n💳 Оплата: ${pName}\n🏷️ Промокод: ${appliedPromo}\n💬 Коммент: ${comm}\n--------------------------\n💰 ИТОГО: ${document.getElementById('total-val').innerText}`;
-
-            window.location.href = `https://t.me/managerelfbarow?text=${encodeURIComponent(text)}`;
-        }
-
-        window.onload = refreshUI;
-    </script>
+    window.onload = refreshUI;
+</script>
 </body>
 </html>
