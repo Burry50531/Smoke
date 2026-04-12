@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доставка и Оплата | KAIF SMOKE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #e6b130;
+            --bg: #000000;
+            --card-bg: #111111;
+            --border: #1a1a1a;
+            --text-gray: #555;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* Фоновая сетка */
+        .bg-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px);
+            background-size: 45px 45px; z-index: -1;
+        }
+
+        .wrapper { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
+        .logo { font-weight: 900; font-size: 18px; color: var(--gold); text-transform: uppercase; }
+        .nav-back { color: var(--text-gray); text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+
+        .hero { position: relative; margin-bottom: 40px; }
+        .hero-sub { color: var(--gold); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .hero-sub::before { content: ''; width: 30px; height: 2px; background: var(--gold); display: inline-block; }
+        .hero h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 900; line-height: 0.85; text-transform: uppercase; margin-bottom: 20px; }
+        .hero p { color: #777; font-size: 13px; max-width: 450px; font-weight: 500; }
+
+        /* СЕТ-БАР (Бегущая строка) */
+        .marquee-container {
+            width: 100vw; margin-left: calc(-50vw + 50%);
+            background: #0a0a0a; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a;
+            padding: 15px 0; overflow: hidden; margin-bottom: 40px;
+        }
+        .marquee-content {
+            display: flex; white-space: nowrap; animation: scroll 25s linear infinite;
+        }
+        .marquee-item {
+            display: flex; align-items: center; gap: 10px; color: var(--gold);
+            font-size: 11px; font-weight: 900; text-transform: uppercase; margin-right: 60px;
+            font-style: italic; opacity: 0.8; letter-spacing: 1px;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* СТЕКЛЯННАЯ АКЦИЯ */
+        .promo-glass {
+            background: rgba(230, 177, 48, 0.03);
+            border: 1px solid rgba(230, 177, 48, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 16px; padding: 45px 35px; margin-bottom: 30px;
+            position: relative; overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .badge-yellow { background: var(--gold); color: #000; padding: 4px 12px; border-radius: 4px; font-weight: 900; font-size: 10px; text-transform: uppercase; display: inline-block; margin-bottom: 15px; }
+        .promo-title { font-size: 38px; font-weight: 950; color: #fff; text-transform: uppercase; font-style: italic; letter-spacing: -1px; line-height: 1; }
+        .promo-desc { color: var(--gold); font-size: 12px; font-weight: 700; text-transform: uppercase; margin-top: 10px; opacity: 0.9; }
+        
+        /* 200 ZL В ВЕРХНЕМ ПРАВОМ УГЛУ */
+        .big-sum { 
+            position: absolute; right: 20px; top: 10px; 
+            font-size: 80px; font-weight: 950; 
+            color: rgba(230, 177, 48, 0.08); 
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 25px; margin-bottom: 25px; }
+        .block-head { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .block-head span { font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); }
+
+        /* INPOST */
+        .delivery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .del-item { background: #080808; border: 1px solid #1a1a1a; padding: 25px; border-radius: 12px; }
+        .del-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .del-header h4 { font-size: 14px; font-weight: 800; color: #fff; text-transform: uppercase; }
+        .del-header b { color: var(--gold); font-size: 18px; font-weight: 900; }
+        
+        .check-list { list-style: none; }
+        .check-list li { font-size: 11px; color: #666; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; font-weight: 700; text-transform: uppercase; }
+        .check-list li::before { content: '✔'; color: var(--gold); }
+
+        /* БЫСТРАЯ ДОСТАВКА (4 ПУНКТА) */
+        .fast-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .fast-point { border: 1px solid #1a1a1a; background: #050505; padding: 12px; border-radius: 8px; font-size: 10px; font-weight: 800; color: var(--gold); text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+
+        /* УСЛОВИЯ ОТПРАВКИ (ОБЫЧНЫЕ ЧЕРНЫЕ) */
+        .cond-item { background: #080808; border: 1px solid #1a1a1a; padding: 25px; border-radius: 12px; }
+        .cond-item b { color: #fff; display: block; margin-bottom: 5px; font-size: 14px; font-weight: 900; text-transform: uppercase; }
+        .cond-item span { font-size: 10px; color: #555; font-weight: 800; text-transform: uppercase; }
+
+        /* ГРАФИК */
+        .work-row { display: flex; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid #1a1a1a; font-size: 12px; font-weight: 800; text-transform: uppercase; }
+        .work-row span { color: #555; }
+        .work-row b { color: var(--gold); }
+
+        footer { text-align: center; padding: 60px 0; color: #222; font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+
+        @media (max-width: 600px) {
+            .delivery-grid, .fast-grid { grid-template-columns: 1fr; }
+            .big-sum { font-size: 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+
+    <div class="wrapper">
+        <header>
+            <div class="logo">KAIF SMOKE</div>
+            <a href="index.html" class="nav-back">← НА ГЛАВНУЮ</a>
+        </header>
+
+        <section class="hero">
+            <div class="hero-sub">ПОЛЬША • БЫСТРАЯ ДОСТАВКА</div>
+            <h1>ДОСТАВКА<br>И ОПЛАТА</h1>
+            <p>Работаем с надёжными курьерскими службами Польши. Отправка в день заказа при оформлении до 16:30.</p>
+        </section>
+
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <div class="marquee-item">✦ БЫСТРАЯ ОТПРАВКА</div>
+                <div class="marquee-item">✦ ТОЛЬКО ПО ПОЛЬШЕ</div>
+                <div class="marquee-item">✦ KAIFSMOKE</div>
+                <div class="marquee-item">✦ INPOST ПОЧТОМАТ</div>
+                <div class="marquee-item">✦ INPOST КУРЬЕР</div>
+                <div class="marquee-item">✦ UBER ДОСТАВКА</div>
+                <div class="marquee-item">✦ БЫСТРАЯ ОТПРАВКА</div>
+                <div class="marquee-item">✦ ТОЛЬКО ПО ПОЛЬШЕ</div>
+                <div class="marquee-item">✦ KAIFSMOKE</div>
+                <div class="marquee-item">✦ INPOST ПОЧТОМАТ</div>
+            </div>
+        </div>
+
+        <div class="promo-glass">
+            <div class="big-sum">200 ZL</div>
+            <div class="badge-yellow">🔥 АКЦИЯ</div>
+            <div class="promo-title">БЕСПЛАТНАЯ<br>ДОСТАВКА</div>
+            <div class="promo-desc">При заказе от 200 zł — доставка бесплатно по всей Польше</div>
+        </div>
+
+        <div class="card">
+            <div class="block-head"><span>📦 INPOST</span></div>
+            <div class="delivery-grid">
+                <div class="del-item">
+                    <div class="del-header"><h4>InPost Почтомат</h4><b>20 ZŁ</b></div>
+                    <ul class="check-list">
+                        <li>Доставка за 1-3 дня</li>
+                        <li>Отслеживание посылки</li>
+                        <li>5000+ точек в Польше</li>
+                    </ul>
+                </div>
+                <div class="del-item">
+                    <div class="del-header"><h4>InPost Курьер</h4><b>25 ZŁ</b></div>
+                    <ul class="check-list">
+                        <li>Доставка прямо на дом</li>
+                        <li>Удобный выбор времени</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="block-head"><span>🚖 БЫСТРАЯ ДОСТАВКА</span></div>
+            <div class="del-item" style="border-color: rgba(230,177,48,0.15);">
+                <div class="del-header"><h4>Uber / Такси — По Варшаве</h4><b>25 ZŁ</b></div>
+                <p style="font-size: 10px; color: #555; font-weight: 800; text-transform: uppercase;">Срочная курьерская доставка на такси</p>
+                <div class="fast-grid">
+                    <div class="fast-point">✔ Доставка 1–3 часа</div>
+                    <div class="fast-point">✔ Только по Варшаве</div>
+                    <div class="fast-point">✔ Отправка по такси</div>
+                    <div class="fast-point">✔ Срочная доставка</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="block-head"><span>⚡ УСЛОВИЯ ОТПРАВКИ</span></div>
+            <div class="delivery-grid">
+                <div class="cond-item">
+                    <b>ЗАКАЗЫ ДО 16:30</b>
+                    <span>Отправка в день заказа</span>
+                </div>
+                <div class="cond-item">
+                    <b>ЗАКАЗЫ ПОСЛЕ 16:30</b>
+                    <span>Отправка на след. день</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="block-head"><span>🕒 ГРАФИК РАБОТЫ</span></div>
+            <div class="work-row"><span>Понедельник — Пятница</span><b>12:00 – 20:00</b></div>
+            <div class="work-row"><span>Суббота</span><b>12:00 – 17:00</b></div>
+            <div class="work-row"><span>Воскресенье</span><b style="color: #222;">ВЫХОДНОЙ</b></div>
+        </div>
+
+        <footer>© 2026 KAIF SMOKE • ПОЛЬША • ДОСТАВКА ПО ВСЕЙ СТРАНЕ</footer>
+    </div>
+
+</body>
+</html>
