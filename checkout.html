@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа | KAIF SMOKE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #e1b02e;
+            --bg: #000000;
+            --card-bg: #111111;
+            --border: #1a1a1a;
+            --text-gray: #555;
+            --green: #4caf50;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        .bg-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px);
+            background-size: 45px 45px; z-index: -1;
+        }
+
+        .wrapper { max-width: 1150px; margin: 0 auto; padding: 40px 20px; }
+        header { display: flex; justify-content: space-between; margin-bottom: 40px; }
+        .logo { font-weight: 800; font-size: 18px; letter-spacing: 2px; }
+
+        .main-title {
+            font-size: clamp(40px, 8vw, 56px); font-weight: 900; line-height: 0.9;
+            text-transform: uppercase; border-left: 5px solid var(--gold);
+            padding-left: 20px; margin-bottom: 50px;
+        }
+
+        .container { display: flex; gap: 30px; align-items: flex-start; }
+        .main-content { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 30px; }
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid #1a1a1a; padding-bottom: 15px; }
+        .step { background: var(--gold); color: #000; width: 24px; height: 24px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 12px; }
+        .card-header h3 { font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Поля ввода */
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .field { display: flex; flex-direction: column; gap: 8px; }
+        .field label { font-size: 9px; color: var(--text-gray); font-weight: 800; text-transform: uppercase; }
+        input, textarea { background: #080808; border: 1px solid #1a1a1a; padding: 14px; color: #fff; border-radius: 6px; font-family: inherit; font-size: 13px; }
+        input:focus { border-color: var(--gold); outline: none; }
+
+        /* Доставка */
+        .option-item { border: 1px solid var(--border); padding: 18px; border-radius: 10px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
+        .option-item.active { border-color: var(--gold); background: #0a0905; }
+        .dot { width: 18px; height: 18px; border: 2px solid #333; border-radius: 50%; position: relative; }
+        .active .dot::after { content: ''; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .opt-info { flex: 1; font-size: 13px; }
+        .opt-info b { display: block; text-transform: uppercase; margin-bottom: 2px; }
+        .opt-info span { color: var(--text-gray); font-size: 11px; }
+        .price-text { font-weight: 800; font-size: 14px; }
+        .price-text.green { color: var(--green); }
+
+        /* Оплата */
+        .pay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .pay-card { border: 1px solid var(--border); padding: 25px 10px; border-radius: 10px; text-align: center; cursor: pointer; position: relative; transition: 0.3s; }
+        .pay-card.active { border-color: var(--gold); background: #0a0905; }
+        .pay-card.disabled { opacity: 0.4; cursor: not-allowed; background: #111; }
+        .pay-card .icon { font-size: 24px; display: block; margin-bottom: 10px; }
+        .pay-card b { display: block; font-size: 11px; text-transform: uppercase; margin-bottom: 4px; }
+        .pay-card small { font-size: 8px; color: var(--text-gray); text-transform: uppercase; }
+        .badge-soon { position: absolute; top: 8px; right: 8px; background: #c62828; color: #fff; font-size: 7px; padding: 2px 5px; border-radius: 3px; font-weight: 900; }
+
+        .pay-instruction { background: #0d0d0d; border: 1px solid #1a1a1a; padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 11px; color: #999; line-height: 1.5; }
+        .pay-instruction b { color: var(--gold); }
+
+        /* Чек (Справа) */
+        .sidebar { width: 340px; position: sticky; top: 20px; }
+        .order-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 25px; }
+        .order-box h4 { font-size: 18px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
+        .order-box h4 span { color: var(--text-gray); font-size: 10px; text-transform: uppercase; }
+
+        .mini-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 12px; }
+        .mini-item img { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; background: #000; }
+        .mini-item-info { flex: 1; }
+        .mini-item-info b { color: var(--gold); display: block; margin-top: 2px; }
+
+        .sum-line { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-gray); margin-bottom: 12px; font-weight: 700; text-transform: uppercase; }
+        .sum-line b { color: #fff; }
+        .sum-line b.green { color: var(--green); }
+        .sum-line b.gold { color: var(--gold); }
+
+        .total-line { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid #222; }
+        .total-line span { font-size: 18px; font-weight: 900; }
+        .total-line b { font-size: 32px; color: var(--gold); font-weight: 900; }
+
+        .btn-order { width: 100%; background: var(--gold); color: #000; border: none; padding: 22px; font-weight: 900; font-size: 14px; margin-top: 20px; cursor: pointer; border-radius: 6px; clip-path: polygon(0 0, 100% 0, 100% 70%, 93% 100%, 0 100%); }
+        .btn-back { width: 100%; background: transparent; color: #fff; border: 1px solid #1a1a1a; padding: 15px; font-weight: 800; font-size: 11px; margin-top: 10px; cursor: pointer; border-radius: 6px; text-transform: uppercase; }
+
+        .tg-note { border: 1px solid #221a05; background: #110e05; border-radius: 10px; padding: 15px; margin-top: 20px; text-align: center; }
+        .tg-note h5 { color: var(--gold); font-size: 11px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .tg-note p { font-size: 10px; color: #777; line-height: 1.4; }
+
+        footer { background: var(--gold); padding: 40px; display: flex; justify-content: space-around; margin-top: 60px; }
+        .f-item { text-align: center; color: #000; }
+        .f-item h2 { font-size: 42px; font-weight: 900; }
+        .f-item p { font-size: 10px; font-weight: 800; text-transform: uppercase; }
+        @media (max-width: 900px) { .container { flex-direction: column; } .sidebar { width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="wrapper">
+        <header><div class="logo">KAIF SMOKE</div></header>
+        <h1 class="main-title">ОФОРМЛЕНИЕ<br>ЗАКАЗА</h1>
+
+        <div class="container">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header"><div class="step">1</div><h3>Контактные данные</h3></div>
+                    <div class="input-grid">
+                        <div class="field"><label>ИМЯ (ONLY LATIN) *</label><input type="text" id="name" placeholder="Ivan" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"></div>
+                        <div class="field"><label>ФАМИЛИЯ (ONLY LATIN) *</label><input type="text" id="surname" placeholder="Ivanov" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"></div>
+                    </div>
+                    <div class="input-grid">
+                        <div class="field"><label>ТЕЛЕФОН *</label><input type="text" id="phone" placeholder="+48 000 000 000"></div>
+                        <div class="field"><label>EMAIL *</label><input type="email" id="email" placeholder="mail@example.com"></div>
+                    </div>
+                    <div class="field"><label>TELEGRAM (ДЛЯ УВЕДОМЛЕНИЙ)</label><input type="text" id="tg_nick" placeholder="@username"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><div class="step">2</div><h3>Метод доставки</h3></div>
+                    <div class="option-item active" onclick="updateDel(this, 12, 'paczkomat')">
+                        <div class="dot"></div>
+                        <div class="opt-info"><b>📦 INPOST PACZKOMAT</b><span>Самовывоз из постомата • 1-2 рабочих дня</span></div>
+                        <div class="price-text">12 zł</div>
+                    </div>
+                    <div class="option-item" onclick="updateDel(this, 14, 'courier')">
+                        <div class="dot"></div>
+                        <div class="opt-info"><b>🚚 INPOST КУРЬЕР</b><span>Доставка на адрес • 1-2 рабочих дня</span></div>
+                        <div class="price-text">14 zł</div>
+                    </div>
+                    <div class="option-item" onclick="updateDel(this, 0, 'warsaw')">
+                        <div class="dot"></div>
+                        <div class="opt-info"><b>🏙️ КУРЬЕР ПО ВАРШАВЕ</b><span>Экспресс-доставка по городу • в день заказа</span></div>
+                        <div class="price-text green">БЕСПЛАТНО</div>
+                    </div>
+                    <div class="field" style="margin-top: 25px;">
+                        <label id="addr-label">НОМЕР ПОСТОМАТА *</label>
+                        <input type="text" id="address" placeholder="Например: WAW123A">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><div class="step">3</div><h3>Метод оплаты</h3></div>
+                    <div class="pay-grid">
+                        <div class="pay-card active" onclick="updatePay(this, 'BLIK')">
+                            <span class="icon">📱</span><b>BLIK</b><small>ЧЕРЕЗ TELEGRAM</small>
+                        </div>
+                        <div class="pay-card" onclick="updatePay(this, 'CRYPTO USDT')">
+                            <span class="icon">₿</span><b>CRYPTO</b><small>BSC (BEP-20)</small>
+                        </div>
+                        <div class="pay-card" onclick="updatePay(this, 'MONOBANK')">
+                            <span class="icon">🖤</span><b>MONOBANK</b><small>ПЕРЕВОД НА КАРТУ</small>
+                        </div>
+                        <div class="pay-card disabled">
+                            <div class="badge-soon">СКОРО</div>
+                            <span class="icon">💵</span><b>ПРИ ПОЛУЧЕНИИ</b><small>КУРЬЕРУ / ПОСТОМАТ</small>
+                        </div>
+                    </div>
+                    <div class="pay-instruction">
+                        💳 После оформления заказа мы пришлём вам <b>номер телефона</b> для перевода BLIK через Telegram. Перевод необходимо выполнить в течение <b>15 минут</b>.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><div class="step">4</div><h3>Комментарий к заказу</h3></div>
+                    <textarea id="comment" placeholder="Напишите здесь ваши пожелания..."></textarea>
+                </div>
+            </div>
+
+            <aside class="sidebar">
+                <div class="order-box">
+                    <h4 id="order-info">ВАШ ЗАКАЗ <span>0 ТОВАРОВ</span></h4>
+                    <div id="mini-list" style="max-height: 200px; overflow-y: auto; margin-bottom: 20px;"></div>
+                    <div class="sum-line"><span>ТОВАРЫ</span><b id="sub-val">0 ZL</b></div>
+                    <div class="sum-line"><span>ДОСТАВКА</span><b id="del-val">12 ZL</b></div>
+                    <div class="sum-line"><span>ОПЛАТА</span><b id="pay-val" class="gold">BLIK</b></div>
+                    <div class="total-line"><span>ИТОГО</span><b id="total-val">0 ZL</b></div>
+                </div>
+                <button class="btn-order" onclick="sendToTG()">✈️ ОФОРМИТЬ ЗАКАЗ</button>
+                <button class="btn-back" onclick="location.href='index.html'">← ВЕРНУТЬСЯ В КОРЗИНУ</button>
+                <div class="tg-note">
+                    <h5>Заказ через Telegram</h5>
+                    <p>Наш менеджер свяжется с вами сразу после оформления для подтверждения и отправки реквизитов.</p>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <footer>
+        <div class="f-item"><h2>500+</h2><p>ТОВАРОВ</p></div>
+        <div class="f-item"><h2>1–2</h2><p>ДНЯ ДОСТАВКА</p></div>
+        <div class="f-item"><h2>100%</h2><p>ОРИГИНАЛ</p></div>
+    </footer>
+
+    <script>
+        let dPrice = 12; let dName = "INPOST PACZKOMAT"; let pName = "BLIK";
+
+        function refreshUI() {
+            const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
+            const list = document.getElementById('mini-list');
+            let sum = 0;
+            list.innerHTML = '';
+
+            cart.forEach(item => {
+                sum += parseFloat(item.price);
+                list.innerHTML += `
+                    <div class="mini-item">
+                        <img src="${item.image}">
+                        <div class="mini-item-info">${item.name}<b>${item.price} ZL</b></div>
+                    </div>`;
+            });
+
+            document.getElementById('order-info').querySelector('span').innerText = `${cart.length} ТОВАРОВ`;
+            document.getElementById('sub-val').innerText = sum + " ZL";
+            document.getElementById('del-val').innerText = dPrice === 0 ? "БЕСПЛАТНО" : dPrice + " ZL";
+            document.getElementById('del-val').className = dPrice === 0 ? "green" : "";
+            document.getElementById('pay-val').innerText = pName;
+            document.getElementById('total-val').innerText = (sum + dPrice) + " ZL";
+        }
+
+        function updateDel(el, price, type) {
+            document.querySelectorAll('.option-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+            dPrice = price;
+            dName = el.querySelector('b').innerText;
+            const label = document.getElementById('addr-label');
+            const input = document.getElementById('address');
+            if(type === 'paczkomat') {
+                label.innerText = "НОМЕР ПОСТОМАТА *";
+                input.placeholder = "WAW123A";
+            } else {
+                label.innerText = "АДРЕС ДОСТАВКИ *";
+                input.placeholder = "Город, улица, дом";
+            }
+            refreshUI();
+        }
+
+        function updatePay(el, name) {
+            if(el.classList.contains('disabled')) return;
+            document.querySelectorAll('.pay-card').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+            pName = name;
+            refreshUI();
+        }
+
+        function sendToTG() {
+            const n = document.getElementById('name').value;
+            const s = document.getElementById('surname').value;
+            const p = document.getElementById('phone').value;
+            const e = document.getElementById('email').value;
+            const a = document.getElementById('address').value;
+            const tg = document.getElementById('tg_nick').value || "Не указан";
+            const comm = document.getElementById('comment').value || "Нет";
+
+            if(!n || !s || !p || !e || !a) {
+                alert("Заполните все обязательные поля!"); return;
+            }
+
+            const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
+            if(cart.length === 0) { alert("Корзина пуста!"); return; }
+
+            const goods = cart.map((i, idx) => `${idx+1}. ${i.name} (${i.price}ZL)`).join('\n');
+            const total = document.getElementById('total-val').innerText;
+
+            const text = `🚀 НОВЫЙ ЗАКАЗ\n` +
+                         `--------------------------\n` +
+                         `👤 Клиент: ${n} ${s}\n` +
+                         `📞 Тел: ${p}\n` +
+                         `📧 Email: ${e}\n` +
+                         `📱 TG: ${tg}\n` +
+                         `--------------------------\n` +
+                         `🛒 ТОВАРЫ:\n${goods}\n` +
+                         `--------------------------\n` +
+                         `🚚 Доставка: ${dName}\n` +
+                         `📍 Адрес: ${a}\n` +
+                         `💳 Оплата: ${pName}\n` +
+                         `💬 Коммент: ${comm}\n` +
+                         `--------------------------\n` +
+                         `💰 ИТОГО: ${total}`;
+
+            window.location.href = `https://t.me/managerelfbarow?text=${encodeURIComponent(text)}`;
+        }
+
+        window.onload = refreshUI;
+    </script>
+</body>
+</html>
