@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Оформление заказа | KAIF SMOKE</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -13,10 +13,12 @@
             --border: #1a1a1a;
             --text-gray: #555;
             --green: #4caf50;
+            --red: #ff4444;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        html, body { overflow-x: hidden; width: 100%; }
+        body { background-color: var(--bg); color: #fff; font-family: 'Inter', sans-serif; }
 
         .bg-grid {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -26,13 +28,7 @@
 
         .wrapper { max-width: 1150px; margin: 0 auto; padding: 40px 20px; }
         
-        /* ИСПРАВЛЕННЫЙ HEADER */
-        header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            margin-bottom: 40px; 
-        }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
         .header-left { display: flex; align-items: center; gap: 15px; }
         .logo-img { width: 45px; height: 45px; object-fit: contain; }
         .logo { font-weight: 800; font-size: 20px; letter-spacing: 2px; text-transform: uppercase; }
@@ -52,17 +48,14 @@
         .step { background: var(--gold); color: #000; width: 24px; height: 24px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 12px; }
         .card-header h3 { font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Поля ввода */
         .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
         .field { display: flex; flex-direction: column; gap: 8px; }
         .field label { font-size: 9px; color: var(--text-gray); font-weight: 800; text-transform: uppercase; }
         input, textarea { background: #080808; border: 1px solid #1a1a1a; padding: 14px; color: #fff; border-radius: 6px; font-family: inherit; font-size: 13px; width: 100%; }
         input:focus, textarea:focus { border-color: var(--gold); outline: none; }
 
-        /* ИСПРАВЛЕННЫЙ КОММЕНТАРИЙ (ВЫТЯНУТ) */
         textarea#comment { min-height: 120px; resize: none; width: 100%; }
 
-        /* Доставка */
         .option-item { border: 1px solid var(--border); padding: 18px; border-radius: 10px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
         .option-item.active { border-color: var(--gold); background: #0a0905; }
         .dot { width: 18px; height: 18px; border: 2px solid #333; border-radius: 50%; position: relative; }
@@ -73,7 +66,6 @@
         .price-text { font-weight: 800; font-size: 14px; }
         .price-text.green { color: var(--green); }
 
-        /* Оплата */
         .pay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .pay-card { border: 1px solid var(--border); padding: 25px 10px; border-radius: 10px; text-align: center; cursor: pointer; position: relative; transition: 0.3s; }
         .pay-card.active { border-color: var(--gold); background: #0a0905; }
@@ -86,7 +78,6 @@
         .pay-instruction { background: #0d0d0d; border: 1px solid #1a1a1a; padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 11px; color: #999; line-height: 1.5; }
         .pay-instruction b { color: var(--gold); }
 
-        /* Чек (Справа) */
         .sidebar { width: 340px; position: sticky; top: 20px; }
         .order-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 25px; }
         .order-box h4 { font-size: 18px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
@@ -94,30 +85,33 @@
 
         .mini-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 12px; }
         .mini-item img { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; background: #000; }
-        .mini-item-info { flex: 1; }
-        .mini-item-info b { color: var(--gold); display: block; margin-top: 2px; }
+        
+        /* КНОПКА ПРИМЕНИТЬ */
+        .promo-wrap { margin-top: 20px; padding-top: 20px; border-top: 1px solid #222; }
+        .promo-flex { display: flex; gap: 8px; }
+        .promo-flex input { padding: 10px; font-size: 11px; text-transform: uppercase; }
+        .promo-btn { background: #222; border: none; color: #fff; padding: 0 15px; border-radius: 6px; font-weight: 800; font-size: 10px; cursor: pointer; white-space: nowrap; transition: 0.2s; }
+        .promo-btn:hover { background: #333; }
+        .promo-status { font-size: 9px; font-weight: 800; margin-top: 8px; text-transform: uppercase; display: none; }
+        .promo-status.err { color: var(--red); display: block; }
+        .promo-status.ok { color: var(--green); display: block; }
 
         .sum-line { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-gray); margin-bottom: 12px; font-weight: 700; text-transform: uppercase; }
         .sum-line b { color: #fff; }
-        .sum-line b.green { color: var(--green); }
-        .sum-line b.gold { color: var(--gold); }
 
         .total-line { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid #222; }
-        .total-line span { font-size: 18px; font-weight: 900; }
         .total-line b { font-size: 32px; color: var(--gold); font-weight: 900; }
 
         .btn-order { width: 100%; background: var(--gold); color: #000; border: none; padding: 22px; font-weight: 900; font-size: 14px; margin-top: 20px; cursor: pointer; border-radius: 6px; clip-path: polygon(0 0, 100% 0, 100% 70%, 93% 100%, 0 100%); }
         .btn-back { width: 100%; background: transparent; color: #fff; border: 1px solid #1a1a1a; padding: 15px; font-weight: 800; font-size: 11px; margin-top: 10px; cursor: pointer; border-radius: 6px; text-transform: uppercase; }
 
-        .tg-note { border: 1px solid #221a05; background: #110e05; border-radius: 10px; padding: 15px; margin-top: 20px; text-align: center; }
-        .tg-note h5 { color: var(--gold); font-size: 11px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .tg-note p { font-size: 10px; color: #777; line-height: 1.4; }
+        #addr-courier { display: none; margin-top: 15px; flex-direction: column; gap: 15px; }
+        .map-link { font-size: 10px; color: var(--gold); text-decoration: none; font-weight: 800; text-transform: uppercase; display: inline-block; margin-top: 5px; }
 
         footer { background: var(--gold); padding: 40px; display: flex; justify-content: space-around; margin-top: 60px; }
         .f-item { text-align: center; color: #000; }
         .f-item h2 { font-size: 42px; font-weight: 900; }
-        .f-item p { font-size: 10px; font-weight: 800; text-transform: uppercase; }
-        @media (max-width: 768px) { .container { flex-direction: column; } .sidebar { width: 100%; } }
+        @media (max-width: 768px) { .container { flex-direction: column; } .sidebar { width: 100%; } .input-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -137,8 +131,8 @@
                 <div class="card">
                     <div class="card-header"><div class="step">1</div><h3>Контактные данные</h3></div>
                     <div class="input-grid">
-                        <div class="field"><label>ИМЯ (ONLY LATIN) *</label><input type="text" id="name" placeholder="Ivan" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"></div>
-                        <div class="field"><label>ФАМИЛИЯ (ONLY LATIN) *</label><input type="text" id="surname" placeholder="Ivanov" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"></div>
+                        <div class="field"><label>ИМЯ (Англ) *</label><input type="text" id="name" placeholder="Имя англ" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"></div>
+                        <div class="field"><label>ФАМИЛИЯ (Англ) *</label><input type="text" id="surname" placeholder="Фамилия англ" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"></div>
                     </div>
                     <div class="input-grid">
                         <div class="field"><label>ТЕЛЕФОН *</label><input type="text" id="phone" placeholder="+48 000 000 000"></div>
@@ -164,9 +158,20 @@
                         <div class="opt-info"><b>🏙️ КУРЬЕР ПО ВАРШАВЕ</b><span>Экспресс-доставка по городу • в день заказа</span></div>
                         <div class="price-text green">БЕСПЛАТНО</div>
                     </div>
-                    <div class="field" style="margin-top: 25px;">
-                        <label id="addr-label">НОМЕР ПОСТОМАТА *</label>
-                        <input type="text" id="address" placeholder="Например: WAW123A">
+                    
+                    <div class="field" id="addr-paczkomat" style="margin-top: 25px;">
+                        <label>НОМЕР ПОЧКОМАТА *</label>
+                        <input type="text" id="paczkomat_id" placeholder="WAW123A">
+                        <a href="https://inpost.pl/znajdz-paczkomat" target="_blank" class="map-link">📍 НАЙТИ ПОЧКОМАТ НА КАРТЕ</a>
+                    </div>
+
+                    <div id="addr-courier">
+                        <div class="field"><label>ГОРОД *</label><input type="text" id="c_city" placeholder="Warszawa"></div>
+                        <div class="field"><label>УЛИЦА *</label><input type="text" id="c_street" placeholder="Zlota"></div>
+                        <div class="input-grid">
+                            <div class="field"><label>ДОМ / КВ. *</label><input type="text" id="c_home" placeholder="12/4"></div>
+                            <div class="field"><label>ИНДЕКС *</label><input type="text" id="c_zip" placeholder="00-001"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -205,17 +210,24 @@
                 <div class="order-box">
                     <h4 id="order-info">ВАШ ЗАКАЗ <span>0 ТОВАРОВ</span></h4>
                     <div id="mini-list" style="max-height: 200px; overflow-y: auto; margin-bottom: 20px;"></div>
+                    
                     <div class="sum-line"><span>ТОВАРЫ</span><b id="sub-val">0 ZL</b></div>
+                    <div class="sum-line" id="promo-line" style="display: none; color: var(--green);"><span>СКИДКА 10%</span><b id="promo-val">-0 ZL</b></div>
                     <div class="sum-line"><span>ДОСТАВКА</span><b id="del-val">12 ZL</b></div>
-                    <div class="sum-line"><span>ОПЛАТА</span><b id="pay-val" class="gold">BLIK</b></div>
+                    <div class="sum-line"><span>ОПЛАТА</span><b id="pay-val" style="color: var(--gold);">BLIK</b></div>
+                    
+                    <div class="promo-wrap">
+                        <div class="promo-flex">
+                            <input type="text" id="promo-input" placeholder="ПРОМОКОД">
+                            <button class="promo-btn" onclick="applyPromo()">ПРИМЕНИТЬ</button>
+                        </div>
+                        <div id="promo-status" class="promo-status"></div>
+                    </div>
+
                     <div class="total-line"><span>ИТОГО</span><b id="total-val">0 ZL</b></div>
                 </div>
                 <button class="btn-order" onclick="sendToTG()">✈️ ОФОРМИТЬ ЗАКАЗ</button>
                 <button class="btn-back" onclick="location.href='cart.html'">← ВЕРНУТЬСЯ В КОРЗИНУ</button>
-                <div class="tg-note">
-                    <h5>Заказ через Telegram</h5>
-                    <p>Наш менеджер свяжется с вами сразу после оформления для подтверждения и отправки реквизитов.</p>
-                </div>
             </aside>
         </div>
     </div>
@@ -228,37 +240,56 @@
 
     <script>
         let dPrice = 12; let dName = "INPOST PACZKOMAT"; let pName = "BLIK";
+        let discount = 0;
+        let appliedPromo = "Нет";
 
- function refreshUI() {
-            // Читаем корзину
+        function refreshUI() {
             const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
             const list = document.getElementById('mini-list');
             let sum = 0;
             list.innerHTML = '';
 
             cart.forEach(item => {
-                const p = parseFloat(item.price) || 0;
-                sum += p;
-                
-                // ВНИМАНИЕ: Здесь используем item.img (как в твоей функции addToCart)
-                const imageSrc = item.img || 'logo.png';
-
+                sum += parseFloat(item.price) || 0;
                 list.innerHTML += `
                     <div class="mini-item">
-                        <img src="${imageSrc}" onerror="this.src='logo.png'">
-                        <div class="mini-item-info">
-                            ${item.name}
-                            <b>${p} ZL</b>
-                        </div>
+                        <img src="${item.img || 'logo.png'}">
+                        <div style="flex:1;">${item.name}<br><b>${item.price} ZL</b></div>
                     </div>`;
             });
 
+            let discVal = sum * discount;
+            if(discount > 0) {
+                document.getElementById('promo-line').style.display = 'flex';
+                document.getElementById('promo-val').innerText = `-${discVal.toFixed(1)} ZL`;
+            } else {
+                document.getElementById('promo-line').style.display = 'none';
+            }
+
             document.getElementById('order-info').querySelector('span').innerText = `${cart.length} ТОВАРОВ`;
             document.getElementById('sub-val').innerText = sum + " ZL";
-            document.getElementById('del-val').innerText = dPrice === 0 ? "БЕСПЛАТНО" : dPrice + " ZL";
-            document.getElementById('del-val').className = dPrice === 0 ? "green" : "";
+            document.getElementById('del-val').innerText = dPrice === 0 ? "FREE" : dPrice + " ZL";
             document.getElementById('pay-val').innerText = pName;
-            document.getElementById('total-val').innerText = (sum + dPrice) + " ZL";
+            
+            let final = (sum - discVal) + dPrice;
+            document.getElementById('total-val').innerText = final.toFixed(1) + " ZL";
+        }
+
+        function applyPromo() {
+            const code = document.getElementById('promo-input').value.trim().toUpperCase();
+            const status = document.getElementById('promo-status');
+            if(code === 'HELLO') {
+                discount = 0.10;
+                appliedPromo = code;
+                status.innerText = "ПРОМОКОД ПРИМЕНЕН: -10%";
+                status.className = "promo-status ok";
+            } else {
+                discount = 0;
+                appliedPromo = "Нет";
+                status.innerText = "ПРОМОКОД НЕ НАЙДЕН";
+                status.className = "promo-status err";
+            }
+            refreshUI();
         }
 
         function updateDel(el, price, type) {
@@ -266,15 +297,10 @@
             el.classList.add('active');
             dPrice = price;
             dName = el.querySelector('b').innerText;
-            const label = document.getElementById('addr-label');
-            const input = document.getElementById('address');
-            if(type === 'paczkomat') {
-                label.innerText = "НОМЕР ПОСТОМАТА *";
-                input.placeholder = "WAW123A";
-            } else {
-                label.innerText = "АДРЕС ДОСТАВКИ *";
-                input.placeholder = "Город, улица, дом";
-            }
+
+            document.getElementById('addr-paczkomat').style.display = (type === 'paczkomat') ? 'block' : 'none';
+            document.getElementById('addr-courier').style.display = (type === 'courier') ? 'flex' : 'none';
+            
             refreshUI();
         }
 
@@ -290,20 +316,24 @@
             const n = document.getElementById('name').value;
             const s = document.getElementById('surname').value;
             const p = document.getElementById('phone').value;
-            const e = document.getElementById('email').value;
-            const a = document.getElementById('address').value;
+            const e = document.getElementById('email').value; // EMAIL вернулся
             const tg = document.getElementById('tg_nick').value || "Не указан";
-            const comm = document.getElementById('comment').value || "Нет";
-
-            if(!n || !s || !p || !e || !a) {
-                alert("Заполните все обязательные поля!"); return;
+            const comm = document.getElementById('comment').value || "Нет"; // COMMENT вернулся
+            
+            let addr = "";
+            if(document.getElementById('addr-paczkomat').style.display !== 'none') {
+                addr = "Постомат: " + document.getElementById('paczkomat_id').value;
+            } else {
+                addr = `Курьер: ${document.getElementById('c_city').value}, ${document.getElementById('c_street').value}, ${document.getElementById('c_home').value}, ${document.getElementById('c_zip').value}`;
             }
 
             const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
             if(cart.length === 0) { alert("Корзина пуста!"); return; }
-
+            
+            // Список товаров
             const goods = cart.map((i, idx) => `${idx+1}. ${i.name} (${i.price}ZL)`).join('\n');
-            const total = document.getElementById('total-val').innerText;
+
+            if(!n || !s || !p || !e || !addr) { alert("Заполните все обязательные поля!"); return; }
 
             const text = `🚀 НОВЫЙ ЗАКАЗ\n` +
                          `--------------------------\n` +
@@ -315,11 +345,12 @@
                          `🛒 ТОВАРЫ:\n${goods}\n` +
                          `--------------------------\n` +
                          `🚚 Доставка: ${dName}\n` +
-                         `📍 Адрес: ${a}\n` +
+                         `📍 Адрес: ${addr}\n` +
                          `💳 Оплата: ${pName}\n` +
+                         `🏷️ Промокод: ${appliedPromo}\n` +
                          `💬 Коммент: ${comm}\n` +
                          `--------------------------\n` +
-                         `💰 ИТОГО: ${total}`;
+                         `💰 ИТОГО: ${document.getElementById('total-val').innerText}`;
 
             window.location.href = `https://t.me/managerelfbarow?text=${encodeURIComponent(text)}`;
         }
