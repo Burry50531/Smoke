@@ -339,27 +339,40 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCounterDisplay();
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 function addToCart(name, price, img) {
-    console.log("Добавляю в корзину:", name, price); // Для проверки в консоли
+console.log("Добавляю в корзину:", name, price); // Для проверки в консоли
 
-    // 1. Очищаем цену (делаем из "1500 ₽" просто 1500)
-    const cleanPrice = parseInt(price.toString().replace(/[^\d]/g, '')) || 0;
+// 1. Очищаем цену (делаем из "1500 ₽" просто 1500)
+const cleanPrice = parseInt(price.toString().replace(/[^\d]/g, '')) || 0;
 
-    // 2. Добавляем в массив
-    cart.push({
-        name: name,
-        price: cleanPrice,
-        img: img
-    });
+// 2. Добавляем в массив
+cart.push({
+name: name,
+price: cleanPrice,
+img: img
+});
 
-    // 3. Сохраняем в память браузера
-    localStorage.setItem('kaif_cart', JSON.stringify(cart));
+// 3. Сохраняем в память браузера
+localStorage.setItem('kaif_cart', JSON.stringify(cart));
 
-    // 4. Обновляем цифру на кнопке корзины
-    updateCounterDisplay();
+// 4. Обновляем цифру на кнопке корзины
+updateCounterDisplay();
 
-    // 5. Показываем уведомление
-    showToast(`Товар "${name}" добавлен!`);
+// 5. Показываем уведомление
+showToast(`Товар "${name}" добавлен!`);
 }
 
 function updateCounterDisplay() {

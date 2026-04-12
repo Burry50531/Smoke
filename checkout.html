@@ -25,8 +25,18 @@
         }
 
         .wrapper { max-width: 1150px; margin: 0 auto; padding: 40px 20px; }
-        header { display: flex; justify-content: space-between; margin-bottom: 40px; }
-        .logo { font-weight: 800; font-size: 18px; letter-spacing: 2px; }
+        
+        /* ИСПРАВЛЕННЫЙ HEADER */
+        header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 40px; 
+        }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .logo-img { width: 45px; height: 45px; object-fit: contain; }
+        .logo { font-weight: 800; font-size: 20px; letter-spacing: 2px; text-transform: uppercase; }
+        .back-link { color: var(--text-gray); text-decoration: none; font-weight: 700; font-size: 13px; text-transform: uppercase; }
 
         .main-title {
             font-size: clamp(40px, 8vw, 56px); font-weight: 900; line-height: 0.9;
@@ -46,8 +56,11 @@
         .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
         .field { display: flex; flex-direction: column; gap: 8px; }
         .field label { font-size: 9px; color: var(--text-gray); font-weight: 800; text-transform: uppercase; }
-        input, textarea { background: #080808; border: 1px solid #1a1a1a; padding: 14px; color: #fff; border-radius: 6px; font-family: inherit; font-size: 13px; }
-        input:focus { border-color: var(--gold); outline: none; }
+        input, textarea { background: #080808; border: 1px solid #1a1a1a; padding: 14px; color: #fff; border-radius: 6px; font-family: inherit; font-size: 13px; width: 100%; }
+        input:focus, textarea:focus { border-color: var(--gold); outline: none; }
+
+        /* ИСПРАВЛЕННЫЙ КОММЕНТАРИЙ (ВЫТЯНУТ) */
+        textarea#comment { min-height: 120px; resize: none; width: 100%; }
 
         /* Доставка */
         .option-item { border: 1px solid var(--border); padding: 18px; border-radius: 10px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
@@ -104,13 +117,19 @@
         .f-item { text-align: center; color: #000; }
         .f-item h2 { font-size: 42px; font-weight: 900; }
         .f-item p { font-size: 10px; font-weight: 800; text-transform: uppercase; }
-        @media (max-width: 900px) { .container { flex-direction: column; } .sidebar { width: 100%; } }
+        @media (max-width: 768px) { .container { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
 </head>
 <body>
     <div class="bg-grid"></div>
     <div class="wrapper">
-        <header><div class="logo">KAIF SMOKE</div></header>
+        <header>
+            <div class="header-left">
+                <img src="images/IMG_2073.PNG" alt="" class="logo-img"> <div class="logo">KAIF SMOKE</div>
+            </div>
+            <a href="cart.html" class="back-link">← КОРЗИНА</a>
+        </header>
+
         <h1 class="main-title">ОФОРМЛЕНИЕ<br>ЗАКАЗА</h1>
 
         <div class="container">
@@ -175,7 +194,10 @@
 
                 <div class="card">
                     <div class="card-header"><div class="step">4</div><h3>Комментарий к заказу</h3></div>
-                    <textarea id="comment" placeholder="Напишите здесь ваши пожелания..."></textarea>
+                    <div class="field">
+                        <label>ВАШИ ПОЖЕЛАНИЯ</label>
+                        <textarea id="comment" placeholder="Напишите здесь ваши пожелания..."></textarea>
+                    </div>
                 </div>
             </div>
 
@@ -189,7 +211,7 @@
                     <div class="total-line"><span>ИТОГО</span><b id="total-val">0 ZL</b></div>
                 </div>
                 <button class="btn-order" onclick="sendToTG()">✈️ ОФОРМИТЬ ЗАКАЗ</button>
-                <button class="btn-back" onclick="location.href='index.html'">← ВЕРНУТЬСЯ В КОРЗИНУ</button>
+                <button class="btn-back" onclick="location.href='cart.html'">← ВЕРНУТЬСЯ В КОРЗИНУ</button>
                 <div class="tg-note">
                     <h5>Заказ через Telegram</h5>
                     <p>Наш менеджер свяжется с вами сразу после оформления для подтверждения и отправки реквизитов.</p>
@@ -199,7 +221,7 @@
     </div>
 
     <footer>
-        <div class="f-item"><h2>500+</h2><p>ТОВАРОВ</p></div>
+        <div class="f-item"><h2>100+</h2><p>ТОВАРОВ</p></div>
         <div class="f-item"><h2>1–2</h2><p>ДНЯ ДОСТАВКА</p></div>
         <div class="f-item"><h2>100%</h2><p>ОРИГИНАЛ</p></div>
     </footer>
@@ -207,18 +229,27 @@
     <script>
         let dPrice = 12; let dName = "INPOST PACZKOMAT"; let pName = "BLIK";
 
-        function refreshUI() {
+ function refreshUI() {
+            // Читаем корзину
             const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
             const list = document.getElementById('mini-list');
             let sum = 0;
             list.innerHTML = '';
 
             cart.forEach(item => {
-                sum += parseFloat(item.price);
+                const p = parseFloat(item.price) || 0;
+                sum += p;
+                
+                // ВНИМАНИЕ: Здесь используем item.img (как в твоей функции addToCart)
+                const imageSrc = item.img || 'logo.png';
+
                 list.innerHTML += `
                     <div class="mini-item">
-                        <img src="${item.image}">
-                        <div class="mini-item-info">${item.name}<b>${item.price} ZL</b></div>
+                        <img src="${imageSrc}" onerror="this.src='logo.png'">
+                        <div class="mini-item-info">
+                            ${item.name}
+                            <b>${p} ZL</b>
+                        </div>
                     </div>`;
             });
 
