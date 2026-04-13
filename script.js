@@ -1,98 +1,98 @@
 
 const products = [
-    // --- ELF BAR RAYA D3 25000 5% ---
-    { name: "Apple Peach", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/APPLE PEACH.png" },
-    { name: "Blackberry Cranberry", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/BLACBERRYCRANBERRY.png" },
-    { name: "Blackberry Pomegranate Cherry", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/BLACBERRY POMEGRANATE CHERRY.png" },
-    { name: "Strawberry Raspberry Cherry", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/strawberru raspberry cherry.png" },
-    { name: "Strawberry Watermelon", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/strawberry watermelon.png" },
-    { name: "Blue Razz Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/BLUERAZE ICE.png" },
-    { name: "Grape Mint", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/GRAPE MINT.png" },
-    { name: "Lemon Lime Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/LEMON LIME ICE.png" },
-    { name: "Pineapple Mango Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/pineapple mango ice.png" },
-    { name: "Strawberry Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/strawberry ice.png" },
-    { name: "Grape Cherry", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/GRAPE CHERRY.png" },
-    { name: "Watermelon Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/strawberry watermelon.png" },
-    { name: "Strawberry Grape", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/STRAWBERRY GRAPE.png" },
-    { name: "Alpine Mint", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/ALPINE MINT.png" },
-    { name: "Grape Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/GRAPE ICE.png" },
-    { name: "Double Apple", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/DOUBLE APPLE.png" },
-    { name: "Kiwi Pineapple ice", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/kiwi pineapple ice.png" },
-    { name: "Peach Berry", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 11_18_15.png" },
-    { name: "Blueberry Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/BLUEBERRY ICE.png" },
-    { name: "Kiwi Passion Fruit Guava", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/KIWI PASSION FRUIT GUAVA.png" },
-    { name: "Peach Mango Watermelon", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/mango peach watermelon.png" },
-    { name: "Blueberry Raspberry", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/BLUEBERRY RASPBERRY.png" },
-    { name: "Watermelon Lemon", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/watermelon lemon.png" },
-    { name: "Peach Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/peach ice.png" },
-    { name: "VIMTO", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/VMT.png" },
-    { name: "Watermelon Bubble Gum", brand: "Elf Bar Raya D3", category: "disposable", price: "25000", count: "5%", img: "images/watermelom buble gum.png" },
+    // --- ELF BAR RAYA D3 100 zł 5% ---
+    { name: "Apple Peach", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/APPLE PEACH.png" },
+    { name: "Blackberry Cranberry", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/BLACBERRYCRANBERRY.png" },
+    { name: "Blackberry Pomegranate Cherry", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/BLACBERRY POMEGRANATE CHERRY.png" },
+    { name: "Strawberry Raspberry Cherry", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/strawberru raspberry cherry.png" },
+    { name: "Strawberry Watermelon", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/strawberry watermelon.png" },
+    { name: "Blue Razz Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/BLUERAZE ICE.png" },
+    { name: "Grape Mint", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/GRAPE MINT.png" },
+    { name: "Lemon Lime Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/LEMON LIME ICE.png" },
+    { name: "Pineapple Mango Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/pineapple mango ice.png" },
+    { name: "Strawberry Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/strawberry ice.png" },
+    { name: "Grape Cherry", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/GRAPE CHERRY.png" },
+    { name: "Watermelon Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/strawberry watermelon.png" },
+    { name: "Strawberry Grape", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/STRAWBERRY GRAPE.png" },
+    { name: "Alpine Mint", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/ALPINE MINT.png" },
+    { name: "Grape Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/GRAPE ICE.png" },
+    { name: "Double Apple", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/DOUBLE APPLE.png" },
+    { name: "Kiwi Pineapple ice", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/kiwi pineapple ice.png" },
+    { name: "Peach Berry", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 11_18_15.png" },
+    { name: "Blueberry Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/BLUEBERRY ICE.png" },
+    { name: "Kiwi Passion Fruit Guava", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/KIWI PASSION FRUIT GUAVA.png" },
+    { name: "Peach Mango Watermelon", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/mango peach watermelon.png" },
+    { name: "Blueberry Raspberry", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/BLUEBERRY RASPBERRY.png" },
+    { name: "Watermelon Lemon", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/watermelon lemon.png" },
+    { name: "Peach Ice", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/peach ice.png" },
+    { name: "VIMTO", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/VMT.png" },
+    { name: "Watermelon Bubble Gum", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/watermelom buble gum.png" },
 
-    // --- ELF BAR TRIO 40000 5% NEW ---
-    { name: "Cool Menthol", brand: "Elf Bar Trio", category: "disposable", price: "40000", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 06_58_45.png" },
-    { name: "La Grape", brand: "Elf Bar Trio", category: "disposable", price: "40000", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 07_00_29.png" },
-    { name: "Pomegranate Blast", brand: "Elf Bar Trio", category: "disposable", price: "40000", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 07_01_50.png" },
-    { name: "Sour Strawberry Dragonfruit", brand: "Elf Bar Trio", category: "disposable", price: "40000", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 07_35_47.png" },
-    { name: "Sakura Grape", brand: "Elf Bar Trio", category: "disposable", price: "40000", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 07_00_29.png" },
-    { name: "Peach Twist", brand: "Elf Bar Trio", category: "disposable", price: "40000", count: "5%", img: "images/09aa7d03-8e36-4039-bf39-8238ccaebd5f.png" },
-    { name: "Sour Apple Ice", brand: "Elf Bar Trio", category: "disposable", price: "40000", count: "5%", img: "images/ff73da41-6d8c-43e6-ab27-fe0989bae0ce.png" },
-    { name: "Raspberry Watermelon", brand: "Elf Bar Trio", category: "disposable", price: "40000", count: "5%", img: "images/d1620535-3809-4d95-b0db-5cac5a3eda01.png" },
-    { name: "Pineapple Lime", brand: "Elf Bar Trio", category: "disposable", price: "40000", count: "5%", img: "images/833ce5ea-885a-47a5-baf4-c3bed0d78bd5.png" },
-    { name: "Strawberry Orange Lime", brand: "Elf Bar Trio", category: "disposable", price: "40000", count: "5%", img: "images/1248e4ce-afa0-4bd9-9001-4bff0b1331da.png" },
+    // --- ELF BAR TRIO 120 zł 5% NEW ---
+    { name: "Cool Menthol", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 06_58_45.png" },
+    { name: "La Grape", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 07_00_29.png" },
+    { name: "Pomegranate Blast", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 07_01_50.png" },
+    { name: "Sour Strawberry Dragonfruit", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 07_35_47.png" },
+    { name: "Sakura Grape", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 07_00_29.png" },
+    { name: "Peach Twist", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/09aa7d03-8e36-4039-bf39-8238ccaebd5f.png" },
+    { name: "Sour Apple Ice", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/ff73da41-6d8c-43e6-ab27-fe0989bae0ce.png" },
+    { name: "Raspberry Watermelon", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/d1620535-3809-4d95-b0db-5cac5a3eda01.png" },
+    { name: "Pineapple Lime", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/833ce5ea-885a-47a5-baf4-c3bed0d78bd5.png" },
+    { name: "Strawberry Orange Lime", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/1248e4ce-afa0-4bd9-9001-4bff0b1331da.png" },
 
     // --- ELFLIQ 30 ML (50MG) ---
-    { name: "Watermelon Cherry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000070bc7243a5c621a8002736b5.png" },
-    { name: "Strawberry Cherry Lemon", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000000eac7243b0fe1f1173ef01ca.png" },
-    { name: "Strawberry Banana", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000039f07243a6b2128cb0ba3bbb.png" },
-    { name: "Pink Lemonade Soda", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000006f287243b29140d1b114ee99.png" },
-    { name: "Green Grape Rose", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000022f47243904c348b025b1a4e.png" },
-    { name: "Cherry Lemon Peach", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000007a347246bca76eb8bcdc9d2a.png" },
-    { name: "Blueberry Raspberry Pomegranate", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000b23072438eb5dc06feca395e.png" },
-    { name: "Blue Razz Ice", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000f7bc7246b6dd3b4eae832a74.png" },
-    { name: "Pineapple Colada", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000348c7246b59b0684f714ed37.png" },
-    { name: "Jasmine Raspberry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000a9d87243b1e4a9635c455a8d.png" },
-    { name: "Grape Cherry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000f6587243bdff5116194e50ea.png" },
-    { name: "Double Apple", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000408872438738fb1464da858f.png" },
-    { name: "Cool Mint", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000ecfc720a804c80a40dc00cf3.png" },
-    { name: "Blueberry Rose Mint", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000fab0724382a1b9fa969fcafc.png" },
-    { name: "Apple Pear", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000005df4720ab17604e5bee73ccd.png" },
-    { name: "Cherry Cola", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000009c0c720ab6942a924df3ff70.png" },
-    { name: "Peach Ice", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000a5a0724682ab399552ddc846.png" },
-    { name: "Strawberry Kiwi", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000035147246ba4615b0c4b1f082.png" },
-    { name: "Blackcurrant Aniseed", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000007a14720aac0e112586f79740.png" },
-    { name: "Pina Colada", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000008ab07246841ec68d4caefba6.png" },
-    { name: "Rhubarb Snow", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000074e0720aa1aa1c1e21c82494.png" },
-    { name: "Strawberry Raspberry Cherry Ice", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000a6047243b32ccf643eaad08c.png" },
-    { name: "Blackberry Lemon", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000001e87246a3cb996075fe2783.png" },
-    { name: "ELF Jack", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000063087246a213c891cba657ff.png" },
-    { name: "Blue Razz Lemonade", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000d8b47246a181f0aca80d07f4.png" },
-    { name: "Blueberry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000008c07243b0104279ef258550.png" },
-    { name: "Blueberry Sour Raspberry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000003ae8720a95897345eb1547c8.png" },
-    { name: "Cherry", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000422872468bd1391b1c3ba3ef.png" },
-    { name: "Elfbull Ice", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000009fb87243b7e5722b9e992b55.png" },
-    { name: "Grape", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000d8947246aac89926eca679ee.png" },
-    { name: "Pink Lemonade", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000098d8724685af4eb58c37e53e.png" },
-    { name: "Spearmint", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000002ec072438e3487582908a69b.png" },
-    { name: "Watermelon", brand: "ELFLIQ", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000008c80720ab3efedf228401e62.png" },
+    { name: "Watermelon Cherry", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000070bc7243a5c621a8002736b5.png" },
+    { name: "Strawberry Cherry Lemon", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000000eac7243b0fe1f1173ef01ca.png" },
+    { name: "Strawberry Banana", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000039f07243a6b2128cb0ba3bbb.png" },
+    { name: "Pink Lemonade Soda", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000006f287243b29140d1b114ee99.png" },
+    { name: "Green Grape Rose", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000022f47243904c348b025b1a4e.png" },
+    { name: "Cherry Lemon Peach", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000007a347246bca76eb8bcdc9d2a.png" },
+    { name: "Blueberry Raspberry Pomegranate", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000b23072438eb5dc06feca395e.png" },
+    { name: "Blue Razz Ice", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000f7bc7246b6dd3b4eae832a74.png" },
+    { name: "Pineapple Colada", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000348c7246b59b0684f714ed37.png" },
+    { name: "Jasmine Raspberry", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000a9d87243b1e4a9635c455a8d.png" },
+    { name: "Grape Cherry", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000f6587243bdff5116194e50ea.png" },
+    { name: "Double Apple", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000408872438738fb1464da858f.png" },
+    { name: "Cool Mint", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000ecfc720a804c80a40dc00cf3.png" },
+    { name: "Blueberry Rose Mint", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000fab0724382a1b9fa969fcafc.png" },
+    { name: "Apple Pear", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000005df4720ab17604e5bee73ccd.png" },
+    { name: "Cherry Cola", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000009c0c720ab6942a924df3ff70.png" },
+    { name: "Peach Ice", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000a5a0724682ab399552ddc846.png" },
+    { name: "Strawberry Kiwi", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000035147246ba4615b0c4b1f082.png" },
+    { name: "Blackcurrant Aniseed", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000007a14720aac0e112586f79740.png" },
+    { name: "Pina Colada", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000008ab07246841ec68d4caefba6.png" },
+    { name: "Rhubarb Snow", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000074e0720aa1aa1c1e21c82494.png" },
+    { name: "Strawberry Raspberry Cherry Ice", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000a6047243b32ccf643eaad08c.png" },
+    { name: "Blackberry Lemon", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000001e87246a3cb996075fe2783.png" },
+    { name: "ELF Jack", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000063087246a213c891cba657ff.png" },
+    { name: "Blue Razz Lemonade", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000d8b47246a181f0aca80d07f4.png" },
+    { name: "Blueberry", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000008c07243b0104279ef258550.png" },
+    { name: "Blueberry Sour Raspberry", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000003ae8720a95897345eb1547c8.png" },
+    { name: "Cherry", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000422872468bd1391b1c3ba3ef.png" },
+    { name: "Elfbull Ice", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000009fb87243b7e5722b9e992b55.png" },
+    { name: "Grape", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000d8947246aac89926eca679ee.png" },
+    { name: "Pink Lemonade", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000098d8724685af4eb58c37e53e.png" },
+    { name: "Spearmint", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000002ec072438e3487582908a69b.png" },
+    { name: "Watermelon", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000008c80720ab3efedf228401e62.png" },
 
     // --- VOZOL PRIME 30 ML (50MG) NEW ---
-    { name: "Watermelon Ice", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000461c720a8297ac05719128ac.png" },
-    { name: "Blue Razz Lemon", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000002e64720a8f970843ef6e439e.png" },
-    { name: "Kiwi Passion Fruit Guava", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000eae0724392dcb5e16ce788b7.png" },
-    { name: "Mint Ice", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000091387243a52bd40a7aa5d4d0.png" },
-    { name: "Purple Candy", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000035d472438206eae6dbc08fa3.png" },
-    { name: "Lavafire", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/IMG_20260412_223015_436.png" },
-    { name: "Berry", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000f9d072468f5b0cdd7282629c.png" },
-    { name: "Pineapple Passion Fruit Lime", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000725472439b9cc727c71fe32d.png" },
-    { name: "Peach Ice", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000661c720abc1510def943bcd6.png" },
-    { name: "Perfume Lemon", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000006594724390192094f95d22b9.png" },
-    { name: "Blueberry Watermelon", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/a5e04c3e-ff33-4aba-afe9-ef051cd0964a.png" },
-    { name: "Pomegranate Lemonade", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000096f8720a92268bdeaa9137c7.png" },
-    { name: "Berry Peach", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_00000000ec7872469b3ad3613d1030d7.png" },
-    { name: "Cherry Cola", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000007eec7243b07656ee684265b0.png" },
-    { name: "Love 777", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_0000000060547243aaa3422e5d07e3c6.png" },
-    { name: "Strawberry Watermelon", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000000c9472438ecde17493b1aae0.png" },
-    { name: "Grape Ice", brand: "VOZOL PRIME", category: "liquid", price: "30ml", count: "50mg", img: "images/file_000000003ff472439cf2a06d4f1341bd.png" }
+    { name: "Watermelon Ice", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000461c720a8297ac05719128ac.png" },
+    { name: "Blue Razz Lemon", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000002e64720a8f970843ef6e439e.png" },
+    { name: "Kiwi Passion Fruit Guava", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000eae0724392dcb5e16ce788b7.png" },
+    { name: "Mint Ice", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000091387243a52bd40a7aa5d4d0.png" },
+    { name: "Purple Candy", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000035d472438206eae6dbc08fa3.png" },
+    { name: "Lavafire", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/IMG_20260412_223015_436.png" },
+    { name: "Berry", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000f9d072468f5b0cdd7282629c.png" },
+    { name: "Pineapple Passion Fruit Lime", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000725472439b9cc727c71fe32d.png" },
+    { name: "Peach Ice", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000661c720abc1510def943bcd6.png" },
+    { name: "Perfume Lemon", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000006594724390192094f95d22b9.png" },
+    { name: "Blueberry Watermelon", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/a5e04c3e-ff33-4aba-afe9-ef051cd0964a.png" },
+    { name: "Pomegranate Lemonade", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000096f8720a92268bdeaa9137c7.png" },
+    { name: "Berry Peach", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000ec7872469b3ad3613d1030d7.png" },
+    { name: "Cherry Cola", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000007eec7243b07656ee684265b0.png" },
+    { name: "Love 777", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_0000000060547243aaa3422e5d07e3c6.png" },
+    { name: "Strawberry Watermelon", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000000c9472438ecde17493b1aae0.png" },
+    { name: "Grape Ice", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000003ff472439cf2a06d4f1341bd.png" }
 ];
 
 
@@ -395,7 +395,7 @@ const productData = [
     {
         title: "CHASER For Pods",
         price: "55.00",
-        description: "Premium Blueberry Mint Liquid (30ml, 50mg nicotine). Сладкая черника с холодком.",
+        description: "Premium Blueberry Mint Liquid (55 zł, 50mg nicotine). Сладкая черника с холодком.",
         image: "img/prod1.png" // Фото Blueberry
     },
     {
@@ -631,7 +631,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// --- ИСПРАВЛЕННАЯ ОТРИСОВКА КАТАЛОГА ---
+function renderCatalog(items) {
+    const grid = document.getElementById('catalog-grid');
+    if (!grid) return;
 
+    if (items.length === 0) {
+        grid.innerHTML = `<p id="no-products" style="grid-column: 1/5; text-align:center; padding:50px; color:#666;">Товары не найдены</p>`;
+        return;
+    }
+
+    // УБРАЛ СИМВОЛ "₽", так как валюта уже есть в p.price
+    grid.innerHTML = items.map(p => `
+        <div class="card ${p.category}">
+            <div class="card-img-container">
+                <img src="${p.img}" alt="${p.name}">
+            </div>
+            <div class="card-info">
+                <div class="card-title">${p.name}</div>
+                <div class="card-price-row">
+                    <div class="card-price">${p.price}</div> 
+                    <button class="add-btn" onclick="addToCart('${p.name}', '${p.price}', '${p.img}')">+</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
 
 (function () {
   /* ──────────────────────────────────────────
