@@ -35,19 +35,52 @@
         .hero h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 900; line-height: 0.85; text-transform: uppercase; margin-bottom: 20px; }
         .hero p { color: #777; font-size: 13px; max-width: 450px; font-weight: 500; }
 
+        /* ИСПРАВЛЕННАЯ ПОЛОСКА: ЭФФЕКТ "В КРАЯ" НА МОБИЛКАХ */
         .marquee-container {
-            width: 100vw; margin-left: calc(-50vw + 50%);
-            background: #0a0a0a; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a;
-            padding: 15px 0; overflow: hidden; margin-bottom: 40px;
+            position: relative;
+            background: #0a0a0a; 
+            border-top: 1px solid #1a1a1a; 
+            border-bottom: 1px solid #1a1a1a;
+            padding: 15px 0; 
+            overflow: hidden; 
+            margin-bottom: 40px;
+            
+            /* Магия растягивания на весь экран смартфона */
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            left: 0;
         }
+
+        /* На компьютерах делаем её аккуратной и в рамках контента */
+        @media (min-width: 940px) {
+            .marquee-container {
+                width: 100%;
+                margin-left: 0;
+                border-radius: 12px;
+                border: 1px solid #1a1a1a;
+            }
+        }
+
         .marquee-content {
-            display: flex; white-space: nowrap; animation: scroll 25s linear infinite;
+            display: flex; 
+            white-space: nowrap; 
+            animation: scroll 25s linear infinite;
         }
+
         .marquee-item {
-            display: flex; align-items: center; gap: 10px; color: var(--gold);
-            font-size: 11px; font-weight: 900; text-transform: uppercase; margin-right: 60px;
-            font-style: italic; opacity: 0.8; letter-spacing: 1px;
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            color: var(--gold);
+            font-size: 11px; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            margin-right: 60px;
+            font-style: italic; 
+            opacity: 0.8; 
+            letter-spacing: 1px;
         }
+
         @keyframes scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -80,10 +113,9 @@
         .delivery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .del-item { background: #080808; border: 1px solid #1a1a1a; padding: 25px; border-radius: 12px; }
         
-        /* ФИКС ЦЕНЫ: чтобы не было столбика */
         .del-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 10px; }
         .del-header h4 { font-size: 14px; font-weight: 800; color: #fff; text-transform: uppercase; }
-        .del-header b { color: var(--gold); font-size: 18px; font-weight: 900; white-space: nowrap; } /* white-space не дает переносить валюту */
+        .del-header b { color: var(--gold); font-size: 18px; font-weight: 900; white-space: nowrap; } 
         
         .check-list { list-style: none; }
         .check-list li { font-size: 11px; color: #666; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; font-weight: 700; text-transform: uppercase; }
@@ -101,7 +133,6 @@
         @media (max-width: 600px) {
             .delivery-grid, .fast-grid { grid-template-columns: 1fr; }
             .big-sum { font-size: 60px; }
-            /* Уменьшаем шрифт цены на мобилках, если она вдруг не влезает */
             .del-header b { font-size: 16px; } 
         }
     </style>
@@ -119,7 +150,7 @@
         <section class="hero">
             <div class="hero-sub">ПОЛЬША • БЫСТРАЯ ДОСТАВКА</div>
             <h1>ДОСТАВКА</h1>
-            <p>Работаем с надёжными курьерскими службами Польши. Отправка в день заказа при оформлении до 16:30.</p>
+            <p>Работаем с надёжными курьерскими службами Польши. Отправка в день заказа при оформлении до 20:00.</p>
         </section>
 
         <div class="marquee-container">

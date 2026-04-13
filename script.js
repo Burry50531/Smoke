@@ -1119,3 +1119,33 @@ function interceptButtons() {
   }
 
 })();
+
+
+function smoothMobileFilter() {
+    const filter = document.querySelector('.filter');
+
+    if (window.innerWidth <= 768 && filter) {
+        let current = 0;
+        let target = 0;
+
+        filter.style.position = 'relative';
+
+        window.addEventListener('scroll', () => {
+            target = window.scrollY;
+        });
+
+        function animate() {
+            // ПЛАВНОЕ ДОГОНЯНИЕ
+            current += (target - current) * 0.07;
+
+            filter.style.transform = `translateY(${current}px)`;
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    }
+}
+
+window.addEventListener('load', smoothMobileFilter);
+window.addEventListener('resize', smoothMobileFilter);

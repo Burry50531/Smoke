@@ -48,11 +48,19 @@
         .step { background: var(--gold); color: #000; width: 24px; height: 24px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 12px; }
         .card-header h3 { font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
 
-        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-        .field { display: flex; flex-direction: column; gap: 8px; }
+        .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
         .field label { font-size: 9px; color: var(--text-gray); font-weight: 800; text-transform: uppercase; }
-        input, textarea { background: #080808; border: 1px solid #1a1a1a; padding: 14px; color: #fff; border-radius: 6px; font-family: inherit; font-size: 13px; width: 100%; }
+        input, textarea { background: #080808; border: 1px solid #1a1a1a; padding: 14px; color: #fff; border-radius: 6px; font-family: inherit; font-size: 13px; width: 100%; transition: 0.2s; }
         input:focus, textarea:focus { border-color: var(--gold); outline: none; }
+
+        input.error-input { border-color: var(--red) !important; background: #1a0505; }
+        .error-msg { color: var(--red); font-size: 8px; font-weight: 800; text-transform: uppercase; margin-top: 4px; display: none; }
+
+        .btn-find-paczkomat {
+            display: inline-flex; align-items: center; gap: 8px; color: var(--gold); 
+            text-decoration: none; font-size: 11px; font-weight: 800; text-transform: uppercase; 
+            margin-top: 5px; transition: 0.2s;
+        }
 
         .option-item { border: 1px solid var(--border); padding: 18px; border-radius: 10px; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
         .option-item.active { border-color: var(--gold); background: #0a0905; }
@@ -94,39 +102,31 @@
         .total-line { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid #222; }
         .total-line b { font-size: 32px; color: var(--gold); font-weight: 900; }
 
-        .btn-order { width: 100%; background: var(--gold); color: #000; border: none; padding: 22px; font-weight: 900; font-size: 14px; margin-top: 20px; cursor: pointer; border-radius: 6px; clip-path: polygon(0 0, 100% 0, 100% 70%, 93% 100%, 0 100%); text-transform: uppercase; }
-        
+        .btn-order { width: 100%; background: var(--gold); color: #000; border: none; padding: 22px; font-weight: 900; font-size: 14px; margin-top: 20px; cursor: pointer; border-radius: 6px; clip-path: polygon(0 0, 100% 0, 100% 70%, 93% 100%, 0 100%); text-transform: uppercase; transition: 0.3s; }
         .btn-back-cart { display: block; width: 100%; text-align: center; color: #fff; text-decoration: none; padding: 15px; margin-top: 10px; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid #1a1a1a; border-radius: 4px; }
 
         .legal-notice { font-size: 9px; color: var(--text-gray); text-align: center; margin-top: 15px; line-height: 1.4; text-transform: uppercase; font-weight: 700; }
-        .legal-notice b { color: #888; }
 
-        #addr-details { display: none; margin-top: 15px; flex-direction: column; gap: 15px; }
+        #addr-details { display: none; flex-direction: column; gap: 5px; margin-top: 20px; }
 
         @media (max-width: 768px) { .container { flex-direction: column; } .sidebar { width: 100%; } }
 
-    /* Стиль для активной галочки */
-    #age-confirm:checked + #custom-check {
-        background: var(--gold);
-        border-color: var(--gold);
-    }
-    #age-confirm:checked + #custom-check::after {
-        content: '✓';
-        color: #000;
-        font-size: 14px;
-        font-weight: 900;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    /* Эффект при наведении на включенную кнопку */
-    .btn-order:not([disabled]):hover {
-        background: #f0bc3a;
-        transform: translateY(-2px);
-    }
-
+        /* СТИЛЬ ГАЛОЧКИ - ТЕПЕРЬ ОНА БУДЕТ ВИДИМА ВСЕГДА ПРИ КЛИКЕ */
+        .custom-checkbox-box {
+            width: 24px; height: 24px; border: 2px solid #333; border-radius: 6px;
+            background: #000; display: flex; align-items: center; justify-content: center;
+            transition: 0.2s;
+        }
+        .custom-checkbox-box.checked {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+        .custom-checkbox-box svg {
+            width: 16px; height: 16px; fill: none; stroke: #000;
+            stroke-width: 4; stroke-linecap: round; stroke-linejoin: round;
+            display: none;
+        }
+        .custom-checkbox-box.checked svg { display: block; }
     </style>
 </head>
 <body>
@@ -145,15 +145,30 @@
             <div class="main-content">
                 <div class="card">
                     <div class="card-header"><div class="step">1</div><h3>Контактные данные</h3></div>
-                    <div class="input-grid">
-                        <div class="field"><label>ИМЯ (англ) *</label><input type="text" id="name" placeholder="Имя англ" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"></div>
-                        <div class="field"><label>ФАМИЛИЯ (англ) *</label><input type="text" id="surname" placeholder="Фамилия англ" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '')"></div>
+                    <div class="field">
+                        <label>ИМЯ (англ) *</label>
+                        <input type="text" id="name" placeholder="Name" oninput="clearError(this); this.value = this.value.replace(/[^a-zA-Z]/g, '')">
+                        <div class="error-msg" id="error-name">Введите имя на английском</div>
                     </div>
-                    <div class="input-grid">
-                        <div class="field"><label>ТЕЛЕФОН *</label><input type="text" id="phone" placeholder="+48 000 000 000"></div>
-                        <div class="field"><label>EMAIL *</label><input type="email" id="email" placeholder="mail@example.com"></div>
+                    <div class="field">
+                        <label>ФАМИЛИЯ (англ) *</label>
+                        <input type="text" id="surname" placeholder="Surname" oninput="clearError(this); this.value = this.value.replace(/[^a-zA-Z]/g, '')">
+                        <div class="error-msg" id="error-surname">Введите фамилию на английском</div>
                     </div>
-                    <div class="field"><label>TELEGRAM (ДЛЯ УВЕДОМЛЕНИЙ)</label><input type="text" id="tg_nick" placeholder="@username"></div>
+                    <div class="field">
+                        <label>ТЕЛЕФОН *</label>
+                        <input type="text" id="phone" placeholder="+48 000 000 000" oninput="clearError(this)">
+                        <div class="error-msg" id="error-phone">Введите номер телефона</div>
+                    </div>
+                    <div class="field">
+                        <label>EMAIL *</label>
+                        <input type="email" id="email" placeholder="mail@example.com" oninput="clearError(this)">
+                        <div class="error-msg" id="error-email">Введите корректный Email (с @)</div>
+                    </div>
+                    <div class="field">
+                        <label>TELEGRAM (ДЛЯ УВЕДОМЛЕНИЙ)</label>
+                        <input type="text" id="tg_nick" placeholder="@username">
+                    </div>
                 </div>
 
                 <div class="card">
@@ -176,15 +191,17 @@
                     
                     <div class="field" id="addr-paczkomat" style="margin-top: 25px;">
                         <label>НОМЕР ПОСТОМАТА *</label>
-                        <input type="text" id="paczkomat_id" placeholder="WAW123A">
+                        <input type="text" id="paczkomat_id" placeholder="WAW123A" oninput="clearError(this)">
+                        <div class="error-msg" id="error-paczkomat_id">Укажите номер паштомата</div>
+                        <a href="https://inpost.pl/znajdz-paczkomat" target="_blank" class="btn-find-paczkomat">🔍 Найти паштомат на карте</a>
                     </div>
 
                     <div id="addr-details">
-                        <div class="field"><label>ГОРОД *</label><input type="text" id="c_city" placeholder="Warszawa"></div>
-                        <div class="field"><label>УЛИЦА *</label><input type="text" id="c_street" placeholder="Zlota"></div>
-                        <div class="input-grid">
-                            <div class="field"><label>ДОМ / КВ. *</label><input type="text" id="c_home" placeholder="12/4"></div>
-                            <div class="field"><label>ИНДЕКС *</label><input type="text" id="c_zip" placeholder="00-001"></div>
+                        <div class="field"><label>ГОРОД *</label><input type="text" id="c_city" placeholder="Warszawa" oninput="clearError(this)"><div class="error-msg" id="error-c_city">Введите город</div></div>
+                        <div class="field"><label>УЛИЦА *</label><input type="text" id="c_street" placeholder="Zlota" oninput="clearError(this)"><div class="error-msg" id="error-c_street">Введите улицу</div></div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="field"><label>ДОМ / КВ. *</label><input type="text" id="c_home" placeholder="12/4" oninput="clearError(this)"><div class="error-msg" id="error-c_home">Дом</div></div>
+                            <div class="field"><label>ИНДЕКС *</label><input type="text" id="c_zip" placeholder="00-001" oninput="clearError(this)"><div class="error-msg" id="error-c_zip">Индекс</div></div>
                         </div>
                     </div>
                 </div>
@@ -206,10 +223,7 @@
                             <span class="icon">💵</span><b>ПРИ ПОЛУЧЕНИИ</b><small>ВАШ НОМЕР ТЕЛЕФОНА</small>
                         </div>
                     </div>
-
-                    <div class="pay-instruction">
-                        После нажатия кнопки заказа вы будете перенаправлены в <b>Telegram</b> к нашему менеджеру для получения реквизитов на оплату <b>выбранным способом</b>.
-                    </div>
+                    <div class="pay-instruction">После нажатия кнопки заказа вы будете перенаправлены в <b>Telegram</b> к нашему менеджеру для оплаты.</div>
                 </div>
 
                 <div class="card">
@@ -221,232 +235,182 @@
                 </div>
             </div>
 
-<aside class="sidebar">
-    <div class="order-box">
-        <h4 id="order-info">ВАШ ЗАКАЗ <span>0 ТОВАРОВ</span></h4>
-        <div id="mini-list" style="max-height: 200px; overflow-y: auto; margin-bottom: 20px;"></div>
-        
-        <div class="sum-line"><span>ТОВАРЫ</span><b id="sub-val">0,00 ZL</b></div>
-        <div class="sum-line" id="promo-line" style="display: none; color: var(--green);"><span>СКИДКА 10%</span><b id="promo-val">-0,00 ZL</b></div>
-        <div class="sum-line"><span>ДОСТАВКА</span><b id="del-val">12,00 ZL</b></div>
-        <div class="sum-line"><span>ОПЛАТА</span><b id="pay-val" style="color: var(--gold);">BLIK</b></div>
-        
-        <div class="promo-wrap">
-            <div class="promo-flex">
-                <input type="text" id="promo-input" placeholder="ПРОМОКОД">
-                <button class="promo-btn" onclick="applyPromo()">ПРИМЕНИТЬ</button>
-            </div>
-            <div id="promo-status" style="font-size: 9px; margin-top: 8px; display: none;"></div>
-        </div>
+            <aside class="sidebar">
+                <div class="order-box">
+                    <h4 id="order-info">ВАШ ЗАКАЗ <span>0 ТОВАРОВ</span></h4>
+                    <div id="mini-list" style="max-height: 200px; overflow-y: auto; margin-bottom: 20px;"></div>
+                    <div class="sum-line"><span>ТОВАРЫ</span><b id="sub-val">0,00 ZL</b></div>
+                    <div class="sum-line" id="promo-line" style="display: none; color: var(--green);"><span>СКИДКА 10%</span><b id="promo-val">-0,00 ZL</b></div>
+                    <div class="sum-line"><span>ДОСТАВКА</span><b id="del-val">12,00 ZL</b></div>
+                    <div class="sum-line"><span>ОПЛАТА</span><b id="pay-val">BLIK</b></div>
+                    <div class="promo-wrap">
+                        <div class="promo-flex">
+                            <input type="text" id="promo-input" placeholder="ПРОМОКОД">
+                            <button class="promo-btn" onclick="applyPromo()">ПРИМЕНИТЬ</button>
+                        </div>
+                        <div id="promo-status" style="font-size: 9px; margin-top: 8px; display: none;"></div>
+                    </div>
+                    <div class="total-line"><span>ИТОГО</span><b id="total-val">0,00 ZL</b></div>
+                </div>
+                
+                <div style="margin-top: 20px; background: #111; border: 1px solid #1a1a1a; padding: 18px; border-radius: 8px;">
+                    <label style="display: flex; align-items: center; gap: 15px; cursor: pointer;" onclick="handleAgeToggle()">
+                        <div style="position: relative; min-width: 24px; height: 24px;">
+                            <input type="checkbox" id="age-confirm" style="display: none;">
+                            <div id="custom-check-box" class="custom-checkbox-box">
+                                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                        </div>
+                        <span style="font-size: 10px; color: #888; text-transform: uppercase; font-weight: 700; line-height: 1.4;">
+                            Я подтверждаю, что мне исполнилось <b style="color: #fff;">18 лет</b>, и я принимаю <b style="color: var(--gold);">условия использования</b> магазина.
+                        </span>
+                    </label>
+                </div>
 
-        <div class="total-line"><span>ИТОГО</span><b id="total-val">0,00 ZL</b></div>
-    </div>
-    
-<div style="margin-top: 20px; background: #111; border: 1px solid #1a1a1a; padding: 18px; border-radius: 8px;">
-    <label style="display: flex; align-items: center; gap: 15px; cursor: pointer; user-select: none;">
-        <div style="position: relative; min-width: 24px; height: 24px;">
-            <input type="checkbox" id="age-confirm" onchange="toggleOrderBtn()" style="position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;">
-            <div id="custom-check" style="width: 24px; height: 24px; border: 2px solid #333; border-radius: 6px; background: #000; transition: all 0.2s; display: flex; align-items: center; justify-content: center;">
-                <svg id="check-icon" viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: none; stroke: #000; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; display: none;">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-            </div>
-        </div>
-        <span style="font-size: 10px; color: #888; text-transform: uppercase; font-weight: 700; line-height: 1.4;">
-            Я подтверждаю, что мне исполнилось <b style="color: #fff;">18 лет</b>, и я принимаю <b style="color: var(--gold);">условия использования</b> магазина.
-        </span>
-    </label>
-</div>
-
-<button class="btn-order" id="submit-order-btn" onclick="sendToTG()" disabled style="opacity: 0.3; cursor: not-allowed; filter: grayscale(1); transition: 0.3s;">
-    ✈️ ОФОРМИТЬ ЗАКАЗ
-</button>
-    
-
-    
-    <a href="cart.html" class="btn-back-cart">← ВЕРНУТЬСЯ В КОРЗИНУ</a>
-
-    <div class="legal-notice" style="margin-top: 15px; color: #333;">
-        KAIF SMOKE © 2026 • ALL RIGHTS RESERVED
-    </div>
-</aside>
+                <button class="btn-order" id="submit-order-btn" onclick="sendToTG()" disabled style="opacity: 0.3; cursor: not-allowed; filter: grayscale(1);">✈️ ОФОРМИТЬ ЗАКАЗ</button>
+                <a href="cart.html" class="btn-back-cart">← ВЕРНУТЬСЯ В КОРЗИНУ</a>
+                <div class="legal-notice">KAIF SMOKE © 2026 • ALL RIGHTS RESERVED</div>
+            </aside>
         </div>
     </div>
 
 <script>
-    let dPrice = 12; 
-    let dName = "INPOST PACZKOMAT"; 
-    let pName = "BLIK";
-    let discount = 0;
-    let appliedPromo = "Нет";
+    let dPrice = 12; let dName = "INPOST PACZKOMAT"; let pName = "BLIK"; let discount = 0; let appliedPromo = "Нет";
 
-    function formatNum(num) {
-        return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/\./g, ',');
+    function formatNum(num) { return num.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace(/\./g, ','); }
+
+    function clearError(input) {
+        input.classList.remove('error-input');
+        const msg = document.getElementById('error-' + input.id);
+        if (msg) msg.style.display = 'none';
+    }
+
+    // ЛОГИКА ГАЛОЧКИ 18+
+    function handleAgeToggle() {
+        const checkbox = document.getElementById('age-confirm');
+        const visualBox = document.getElementById('custom-check-box');
+        const btn = document.getElementById('submit-order-btn');
+        
+        checkbox.checked = !checkbox.checked; // Меняем статус
+        
+        if (checkbox.checked) {
+            visualBox.classList.add('checked');
+            btn.disabled = false;
+            btn.style.opacity = "1";
+            btn.style.filter = "none";
+            btn.style.cursor = "pointer";
+        } else {
+            visualBox.classList.remove('checked');
+            btn.disabled = true;
+            btn.style.opacity = "0.3";
+            btn.style.filter = "grayscale(1)";
+            btn.style.cursor = "not-allowed";
+        }
+    }
+
+    function validateForm() {
+        let isValid = true;
+        const required = ['name', 'surname', 'phone', 'email'];
+        required.forEach(id => {
+            const input = document.getElementById(id);
+            if (!input.value.trim() || (id === 'email' && !input.value.includes('@'))) {
+                input.classList.add('error-input');
+                document.getElementById('error-' + id).style.display = 'block';
+                isValid = false;
+            }
+        });
+
+        if (document.getElementById('addr-paczkomat').style.display !== 'none') {
+            const pId = document.getElementById('paczkomat_id');
+            if (!pId.value.trim()) { pId.classList.add('error-input'); document.getElementById('error-paczkomat_id').style.display = 'block'; isValid = false; }
+        } else {
+            ['c_city', 'c_street', 'c_home', 'c_zip'].forEach(id => {
+                const input = document.getElementById(id);
+                if (!input.value.trim()) { input.classList.add('error-input'); document.getElementById('error-' + id).style.display = 'block'; isValid = false; }
+            });
+        }
+        return isValid;
     }
 
     function refreshUI() {
         const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
         const list = document.getElementById('mini-list');
-        const delValElement = document.getElementById('del-val'); // Элемент доставки в меню
-        let sum = 0;
-        list.innerHTML = '';
-
+        let sum = 0; list.innerHTML = '';
         cart.forEach(item => {
-            let itemP = parseFloat(item.price) || 0;
-            sum += (itemP * (item.qty || 1));
-            list.innerHTML += `<div class="mini-item"><img src="${item.img || 'logo.png'}"><div style="flex:1;">${item.name} (x${item.qty || 1})<br><b>${formatNum(itemP)} ZL</b></div></div>`;
+            let p = parseFloat(item.price) || 0;
+            sum += (p * item.qty);
+            list.innerHTML += `<div class="mini-item"><img src="${item.img}"><div style="flex:1;">${item.name} (x${item.qty})<br><b>${formatNum(p)} ZL</b></div></div>`;
         });
-
         let discVal = sum * discount;
-        if(discount > 0) {
-            document.getElementById('promo-line').style.display = 'flex';
-            document.getElementById('promo-val').innerText = `-${formatNum(discVal)} ZL`;
-        } else {
-            document.getElementById('promo-line').style.display = 'none';
-        }
-
-        document.getElementById('order-info').querySelector('span').innerText = `${cart.length} ТОВАРОВ`;
+        document.getElementById('promo-line').style.display = discount > 0 ? 'flex' : 'none';
+        document.getElementById('promo-val').innerText = `-${formatNum(discVal)} ZL`;
         document.getElementById('sub-val').innerText = formatNum(sum) + " ZL";
-
-        // ЛОГИКА ДОСТАВКИ: Если 0 (Варшава), то текст FREE и зеленый цвет
-        if (dPrice === 0) {
-            delValElement.innerText = "БЕСПЛАТНО";
-            delValElement.style.color = "var(--green)";
-        } else {
-            delValElement.innerText = formatNum(dPrice) + " ZL";
-            delValElement.style.color = "#fff"; // Обычный белый для платной
-        }
-
-        // ЛОГИКА ОПЛАТЫ: Всегда белый цвет
-        const payValElement = document.getElementById('pay-val');
-        payValElement.innerText = pName;
-        payValElement.style.color = "#fff"; 
-        
-        let final = (sum - discVal) + dPrice;
-        document.getElementById('total-val').innerText = formatNum(final) + " ZL";
+        document.getElementById('del-val').innerText = dPrice === 0 ? "БЕСПЛАТНО" : formatNum(dPrice) + " ZL";
+        document.getElementById('del-val').style.color = dPrice === 0 ? "var(--green)" : "#fff";
+        document.getElementById('pay-val').innerText = pName;
+        document.getElementById('order-info').querySelector('span').innerText = `${cart.length} ТОВАРОВ`;
+        document.getElementById('total-val').innerText = formatNum(sum - discVal + dPrice) + " ZL";
     }
 
     function applyPromo() {
         const code = document.getElementById('promo-input').value.trim().toUpperCase();
         const status = document.getElementById('promo-status');
         status.style.display = 'block';
-        if(code === 'HELLO') {
-            discount = 0.10;
-            appliedPromo = code;
-            status.innerText = "ПРОМОКОД ПРИМЕНЕН: -10%";
-            status.style.color = "var(--green)";
-        } else {
-            discount = 0;
-            appliedPromo = "Нет";
-            status.innerText = "ПРОМОКОД НЕ НАЙДЕН";
-            status.style.color = "var(--red)";
-        }
+        if(code === 'HELLO') { discount = 0.10; appliedPromo = code; status.innerText = "ПРОМОКОД ПРИМЕНЕН: -10%"; status.style.color = "var(--green)"; } 
+        else { discount = 0; appliedPromo = "Нет"; status.innerText = "ПРОМОКОД НЕ НАЙДЕН"; status.style.color = "var(--red)"; }
         refreshUI();
     }
 
     function updateDel(el, price, type) {
         document.querySelectorAll('.option-item').forEach(i => i.classList.remove('active'));
-        el.classList.add('active');
-        dPrice = price;
-        dName = el.querySelector('b').innerText;
-
-        if(type === 'paczkomat') {
-            document.getElementById('addr-paczkomat').style.display = 'block';
-            document.getElementById('addr-details').style.display = 'none';
-        } else {
-            document.getElementById('addr-paczkomat').style.display = 'none';
-            document.getElementById('addr-details').style.display = 'flex';
-            if(type === 'warsaw') document.getElementById('c_city').value = "Warszawa";
-        }
+        el.classList.add('active'); dPrice = price; dName = el.querySelector('b').innerText;
+        document.getElementById('addr-paczkomat').style.display = type === 'paczkomat' ? 'block' : 'none';
+        document.getElementById('addr-details').style.display = type === 'paczkomat' ? 'none' : 'flex';
+        if(type === 'warsaw') document.getElementById('c_city').value = "Warszawa";
         refreshUI();
     }
 
     function updatePay(el, name) {
         if(el.classList.contains('disabled')) return;
         document.querySelectorAll('.pay-card').forEach(i => i.classList.remove('active'));
-        el.classList.add('active');
-        pName = name;
-        refreshUI();
+        el.classList.add('active'); pName = name; refreshUI();
     }
 
     function sendToTG() {
-        const n = document.getElementById('name').value;
-        const s = document.getElementById('surname').value;
-        const p = document.getElementById('phone').value;
-        const e = document.getElementById('email').value;
-        const tg = document.getElementById('tg_nick').value || "Не указан";
-        const comm = document.getElementById('comment').value || "Нет";
-        
-        if(!n || !s || !p || !e) { 
-            alert("Пожалуйста, заполните контактные данные!"); 
-            return; 
-        }
-
-        let addr = "";
-        if(document.getElementById('addr-paczkomat').style.display !== 'none') {
-            const pId = document.getElementById('paczkomat_id').value;
-            if(!pId) { alert("Укажите номер постомата!"); return; }
-            addr = "Постомат InPost: " + pId;
-        } else {
-            const city = document.getElementById('c_city').value;
-            const street = document.getElementById('c_street').value;
-            const home = document.getElementById('c_home').value;
-            const zip = document.getElementById('c_zip').value;
-            if(!city || !street || !home) { alert("Заполните адрес доставки!"); return; }
-            addr = `${zip}, г. ${city}, ул. ${street}, д. ${home}`;
-        }
-
+        if (!validateForm()) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
         const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
-        if(cart.length === 0) { alert("Корзина пуста!"); return; }
+        const goods = cart.map((i, idx) => `${idx + 1}. ${i.name} x${i.qty}`).join('\n');
         
-        const goods = cart.map((i, idx) => {
-            const itemPrice = parseFloat(i.price) || 0;
-            return `${idx + 1}. ${i.name} x${i.qty || 1} (${formatNum(itemPrice)} ZL)`;
-        }).join('\n');
+        let n = document.getElementById('name').value;
+        let s = document.getElementById('surname').value;
+        let p = document.getElementById('phone').value;
+        let e = document.getElementById('email').value;
+        let tg = document.getElementById('tg_nick').value || '-';
+        let comm = document.getElementById('comment').value || '-';
 
-        const text = `🚀 НОВЫЙ ЗАКАЗ\n` +
-                     `--------------------------\n` +
-                     `👤 Клиент: ${n} ${s}\n` +
-                     `📞 Тел: ${p}\n` +
-                     `📧 Email: ${e}\n` +
-                     `📱 TG: ${tg}\n` +
-                     `--------------------------\n` +
-                     `🛒 ТОВАРЫ:\n${goods}\n` +
-                     `--------------------------\n` +
-                     `🚚 Доставка: ${dName}\n` +
-                     `📍 Адрес: ${addr}\n` +
-                     `💳 Оплата: ${pName}\n` +
-                     `🏷️ Промокод: ${appliedPromo}\n` +
-                     `💬 Коммент: ${comm}\n` +
-                     `--------------------------\n` +
-                     `💰 ИТОГО: ${document.getElementById('total-val').innerText}`;
+        let addr = document.getElementById('addr-paczkomat').style.display !== 'none' 
+            ? "InPost: " + document.getElementById('paczkomat_id').value 
+            : `${document.getElementById('c_zip').value}, г. ${document.getElementById('c_city').value}, ул. ${document.getElementById('c_street').value}, д. ${document.getElementById('c_home').value}`;
+
+        // ТВОЙ НОВЫЙ ФОРМАТ СООБЩЕНИЯ
+        const text = `🚀 НОВЫЙ ЗАКАЗ\n` + 
+        `--------------------------\n` + 
+        `👤 Клиент: ${n} ${s}\n` + 
+        `📞 Тел: ${p}\n` + 
+        `📧 Email: ${e}\n` + 
+        `📱 TG: ${tg}\n` + 
+        `--------------------------\n` + 
+        `🛒 ТОВАРЫ:\n${goods}\n` + 
+        `--------------------------\n` + 
+        `🚚 Доставка: ${dName}\n` + 
+        `📍 Адрес: ${addr}\n` + 
+        `💳 Оплата: ${pName}\n` + 
+        `🏷️ Промокод: ${appliedPromo}\n` + 
+        `💬 Коммент: ${comm}\n` + 
+        `--------------------------\n` + 
+        `💰 ИТОГО: ${document.getElementById('total-val').innerText}`;
 
         window.location.href = `https://t.me/managerelfbarow?text=${encodeURIComponent(text)}`;
-    }
-
-    function toggleOrderBtn() {
-        const checkbox = document.getElementById('age-confirm');
-        const customCheck = document.getElementById('custom-check');
-        const checkIcon = document.getElementById('check-icon');
-        const btn = document.getElementById('submit-order-btn');
-        
-        if (checkbox && checkbox.checked) {
-            customCheck.style.background = "var(--gold)";
-            customCheck.style.borderColor = "var(--gold)";
-            checkIcon.style.display = "block";
-            btn.disabled = false;
-            btn.style.opacity = "1";
-            btn.style.cursor = "pointer";
-            btn.style.filter = "none";
-        } else if (checkbox) {
-            customCheck.style.background = "#000";
-            customCheck.style.borderColor = "#333";
-            checkIcon.style.display = "none";
-            btn.disabled = true;
-            btn.style.opacity = "0.3";
-            btn.style.cursor = "not-allowed";
-            btn.style.filter = "grayscale(1)";
-        }
     }
 
     window.onload = refreshUI;

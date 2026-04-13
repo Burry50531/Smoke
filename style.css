@@ -1421,36 +1421,79 @@ display: block !important;
 }
 
 @media (max-width: 650px) {
+    /* --- КОРРЕКТИРОВКА: ЧУТЬ НИЖЕ И ЧУТЬ БОЛЬШЕ --- */
+    
+    .popular-header {
+        padding: 0 15px !important; 
+        text-align: left;
+        margin-bottom: 25px; /* Отступ всей шапки от товаров */
+    }
+
+    .accent-line {
+        font-size: 9px !important;
+        margin-bottom: 8px !important; /* Увеличили зазор, чтобы опустить текст ниже */
+        padding-left: 2px; 
+        justify-content: flex-start !important;
+        letter-spacing: 1px;
+        opacity: 0.7;
+    }
+
+    .header-main-row {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: flex-end !important;
+        width: 100%;
+    }
+
+    .giant-title {
+        /* Увеличил на "миле-добавочку" до 24px */
+        font-size: 24px !important; 
+        text-align: left !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 65%; 
+        line-height: 1.1;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    .view-all-btn {
+        font-size: 11px !important;
+        white-space: nowrap;
+        padding-bottom: 3px;
+        margin-right: 5px;
+    }
+
+    /* --- ТВОЙ ОРИГИНАЛЬНЫЙ КОД ТОВАРОВ (ОСТАЛЬНОЕ БЕЗ ИЗМЕНЕНИЙ) --- */
+
     .products-grid-8 {
-        grid-template-columns: repeat(2, 1fr) !important; /* Строго 2 в ряд */
+        grid-template-columns: repeat(2, 1fr) !important;
         border-left: none;
     }
 
     .popular-products {
-        padding: 40px 0; /* Меньше отступы секции */
+        padding: 40px 0;
     }
 
-    /* Карточка становится компактнее */
     .product-info {
-        padding: 15px !important; /* Уменьшаем внутренние отступы текста */
+        padding: 15px !important;
     }
 
-    /* ФОТО: исправляем высоту, чтобы не было дырок */
     .product-image-box {
-        height: auto !important; /* Сбрасываем фиксированную высоту */
-        aspect-ratio: 1 / 1 !important; /* Оставляем идеальный квадрат */
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important;
     }
 
-    /* ТЕКСТ: уменьшаем размеры, чтобы всё влезло */
     .prod-category {
         font-size: 9px !important;
         margin-bottom: 3px;
     }
 
     .prod-title {
-        font-size: 14px !important; /* Меньше заголовок */
+        font-size: 14px !important;
         line-height: 1.2;
-        min-height: 34px; /* Резервируем место под 2 строки, чтобы кнопки были в ряд */
+        min-height: 34px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -1458,18 +1501,17 @@ display: block !important;
     }
 
     .prod-desc {
-        font-size: 10px !important; /* Совсем мелкое описание */
+        font-size: 10px !important;
         margin: 5px 0 15px 0 !important;
-        display: none; /* ОПЦИОНАЛЬНО: на мобилках описание часто скрывают для красоты */
+        display: none;
     }
 
-    /* ЦЕНА И КНОПКА */
     .prod-price {
-        font-size: 18px !important; /* Чуть меньше цена */
+        font-size: 18px !important;
     }
 
     .add-to-cart-skew {
-        width: 34px !important; /* Уменьшаем кнопку */
+        width: 34px !important;
         height: 30px !important;
     }
 
@@ -1477,6 +1519,7 @@ display: block !important;
         font-size: 18px !important;
     }
 }
+
 .popular-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
@@ -1528,7 +1571,14 @@ body {
     width: 280px;
     flex-shrink: 0;
     padding-right: 30px;
-    border-right: 1px solid #1a1a1a; /* Тонкая линия разделения */
+    border-right: 1px solid #1a1a1a;
+    
+    /* МАГИЯ ЗДЕСЬ: */
+    position: sticky;   /* Делаем панель липкой */
+    top: 80px;          /* Отступ от верха экрана при скролле (подбери под высоту шапки) */
+    height: fit-content; /* Высота по контенту, чтобы sticky работал корректно */
+    max-height: calc(100vh - 100px); /* Чтобы если категорий станет слишком много, они не ушли за экран */
+    overflow-y: auto;   /* Если категорий станет слишком много, внутри меню появится свой скролл */
 }
 
 .filter-title {
@@ -1764,28 +1814,33 @@ body {
 }
 
 @media (max-width: 768px) {
-    /* 1. ГЛАВНЫЙ КОНТЕЙНЕР — БЕЗ ИЗМЕНЕНИЙ */
-    .catalog-layout {
-        display: flex !important;
-        flex-direction: row !important;
-        padding: 5px 2px !important;
-        gap: 4px !important;
-        width: 100% !important;
-    }
+.catalog-layout {
+display: flex !important;
+flex-direction: row !important;
+padding: 5px 2px !important;
+gap: 4px !important;
+width: 100% !important;
+}
 
-    /* ЛЕВАЯ ПАНЕЛЬ */
-    .filter {
-        width: 130px !important;
-        flex-shrink: 0 !important;
-        background: #000 !important;
-        padding: 10px 4px !important;
-        position: sticky !important;
-        top: 60px !important;
-        height: calc(100vh - 70px) !important;
-        z-index: 10 !important;
-        box-sizing: border-box !important;
-        overflow-y: auto !important;
-    }
+/* ЛЕВАЯ ПАНЕЛЬ */
+.filter {
+    width: 130px !important;
+    flex-shrink: 0 !important;
+    background: #000 !important;
+    padding: 10px 4px !important;
+
+    position: relative !important; /* ВАЖНО */
+    height: auto !important;       /* ВАЖНО */
+    overflow: visible !important;  /* ВАЖНО */
+    will-change: transform !important;
+    box-sizing: border-box !important;
+}
+
+
+
+
+
+
 
     /* --- ВСЕ КАТЕГОРИИ: ЖЕЛТЫЙ ФОН --- */
     .all-categories-btn {
@@ -2370,10 +2425,9 @@ padding-bottom: 0 !important;
     .catalog-layout { padding: 140px 30px; }
 }
 @media (max-width: 768px) {
-    .catalog-layout { flex-direction: column; }
-    .filter { width: 100%; position: relative; top: 0; }
-    .grid-5 { grid-template-columns: repeat(2, 1fr); }
-    .header { padding: 15px 30px; }
+    .features {
+        padding: 60px 20px;
+    }
 }
 
 
@@ -2510,52 +2564,3 @@ padding-bottom: 0 !important;
 
 
 
-/* Контейнер для уведомлений */
-#toast-container {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    pointer-events: none;
-}
-
-/* Стиль самого уведомления */
-.toast-message {
-    background: rgba(16, 16, 16, 0.95); /* Темный фон как на сайте */
-    color: #4caf50; /* Зеленый текст */
-    border: 1px solid #4caf50; /* Зеленая рамка */
-    padding: 12px 24px;
-    border-radius: 50px; /* Овальная форма */
-    font-size: 13px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(76, 175, 80, 0.2);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    
-    /* Анимация появления */
-    animation: slideUp 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-    transition: opacity 0.3s ease;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(100px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.toast-message.fade-out {
-    opacity: 0;
-}
