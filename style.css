@@ -1252,7 +1252,7 @@ body {
 /* --- ПОПУЛЯРНЫЕ ТОВАРЫ --- */
 .popular-products {
     padding: 80px 0;
-    background-color: #0b0a09; /* Глубокий темный фон всей секции */
+    background-color: #000000; /* Был #0b0a09, теперь идеально черный */
 }
 
 /* СЕТКА НА 4 КОЛОНКИ */
@@ -1263,16 +1263,14 @@ body {
     border-left: 1px solid #1a1a1a;
 }
 
-.popular-card {
-    background: #121212; /* Убедись, что фон карточки темно-серый */
+.popular-card, .product-card {
+    background: #000000 !important; /* Полностью черный фон карточки */
     position: relative;
     overflow: hidden;
-    /* transition: плавность для трансформации, тени и границы */
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
                 box-shadow 0.3s ease, 
                 border-bottom 0.3s ease;
-    border-bottom: 0px solid transparent; /* Заготовка под желтую полоску */
-    border-radius: 4px; /* Легкое скругление для красоты */
+    border-bottom: 0px solid transparent;
 }
 
 /* 2. Эффект при наведении курсора */
@@ -1467,20 +1465,26 @@ display: block !important;
 
     /* --- ТВОЙ ОРИГИНАЛЬНЫЙ КОД ТОВАРОВ (ОСТАЛЬНОЕ БЕЗ ИЗМЕНЕНИЙ) --- */
 
-    .products-grid-8 {
-        grid-template-columns: repeat(2, 1fr) !important;
-        border-left: none;
+.products-grid-8 {
+        background-color: #000000 !important; /* Фон самой сетки */
+        border-top: none !important;         /* Убираем серую линию сверху */
+        border-left: none !important;        /* Убираем серую линию слева */
+        grid-gap: 1px;                       /* Минимальный зазор, чтобы карточки не слипались, если нужно */
     }
 
-    .popular-products {
-        padding: 40px 0;
+.popular-products {
+        background-color: #000000 !important;
     }
-
+.popular-card, .product-card {
+        background-color: #000000 !important; 
+        border-bottom: 1px solid #1a1a1a; /* Тонкая серая линия снизу для разделения */
+    }
     .product-info {
         padding: 15px !important;
     }
 
-    .product-image-box {
+ .product-image-box {
+        background-color: #080808 !important; /* Почти черный графит */
         height: auto !important;
         aspect-ratio: 1 / 1 !important;
     }
@@ -1560,25 +1564,27 @@ body {
 
 .catalog-layout {
     display: flex;
-    gap: 0; /* Убираем отступ, чтобы разделить блоки линией */
-    padding: 100px 30px 40px;
-    max-width: 1600px;
-    margin: 0 auto;
+    gap: 0;
+    /* Увеличиваем отступ сверху под шапку, убираем боковые отступы */
+    padding: 100px 0 40px 0; 
+    /* УБИРАЕМ ОГРАНИЧЕНИЕ ПО ШИРИНЕ */
+    max-width: 100% !important; 
+    margin: 0;
+    width: 100%;
 }
 
-/* --- ЛЕВАЯ КОЛОНКА (ФИЛЬТРЫ) --- */
+/* Добавим небольшой отступ внутри фильтра и контента, чтобы текст не прилипал к краям экрана */
 .filter {
     width: 280px;
     flex-shrink: 0;
+    padding-left: 30px; /* Отступ от левого края экрана */
     padding-right: 30px;
     border-right: 1px solid #1a1a1a;
-    
-    /* МАГИЯ ЗДЕСЬ: */
-    position: sticky;   /* Делаем панель липкой */
-    top: 80px;          /* Отступ от верха экрана при скролле (подбери под высоту шапки) */
-    height: fit-content; /* Высота по контенту, чтобы sticky работал корректно */
-    max-height: calc(100vh - 100px); /* Чтобы если категорий станет слишком много, они не ушли за экран */
-    overflow-y: auto;   /* Если категорий станет слишком много, внутри меню появится свой скролл */
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
 }
 
 .filter-title {
@@ -1656,6 +1662,7 @@ body {
 }
 
 .brand-mini-btn {
+    /* Твои оригинальные стили */
     background: none;
     border: 1px solid #1a1a1a;
     color: #888;
@@ -1664,8 +1671,14 @@ body {
     font-weight: 700;
     cursor: pointer;
     text-transform: uppercase;
-    text-align: center;
     transition: 0.2s;
+
+    /* Добавки для центрирования текста (теперь будет ровно всегда) */
+    display: inline-flex !important; /* Важно для JS-фильтра */
+    align-items: center;             /* Центр по вертикали */
+    justify-content: center;          /* Центр по горизонтали */
+    text-align: center;
+    box-sizing: border-box;          /* Чтобы паддинги не раздували кнопку */
 }
 .brand-mini-btn {
     transition: all 0.3s ease;
@@ -1702,7 +1715,8 @@ body {
 /* --- ПРАВАЯ ЧАСТЬ (КАТАЛОГ) --- */
 .main-content {
     flex: 1;
-    padding-left: 20px;
+    padding-left: 10px;
+    padding-right: 10px; /* Отступ от правого края экрана */
 }
 
 .grid-4 {
@@ -1804,7 +1818,19 @@ body {
 .add-btn:hover {
     background: #fff;
 }
+/* Контейнер для фото и текста */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Расстояние между картинкой и текстом */
+}
 
+/* Настройки самой фотки */
+.header-logo-img {
+    height: 35px; /* Высота картинки под размер шапки */
+    width: auto;  /* Ширина подберется автоматически */
+    object-fit: contain;
+}
 
 /* --- АДАПТИВ --- */
 @media (max-width: 1200px) {
@@ -1821,7 +1847,12 @@ padding: 5px 2px !important;
 gap: 4px !important;
 width: 100% !important;
 }
-
+.header-logo-img {
+        height: 25px; /* Чуть меньше на телефонах */
+    }
+    .logo-container {
+        gap: 6px;
+    }
 /* ЛЕВАЯ ПАНЕЛЬ */
 .filter {
     width: 130px !important;

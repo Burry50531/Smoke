@@ -9,7 +9,10 @@
 <body>
 
 <header class="header">
-    <div class="logo">KAIF SMOKE</div>
+    <div class="logo-container">
+        <img src="images/IMG_2073.PNG" alt="Logo" class="header-logo-img">
+        <div class="logo">MADE PUFF</div>
+    </div>
     <nav>
         <a href="index.html">Главная</a>
         <a href="cart.html">Корзина <span id="cart-counter">0</span></a>
@@ -44,13 +47,26 @@
 <div class="filter-section brands-section">
     <h3 class="filter-title">— БРЕНДЫ</h3>
     
-    <div class="brand-grid-compact">
-        <button class="brand-mini-btn active" onclick="filterByBrand('all')">Все</button>
-        <button class="brand-mini-btn" onclick="filterByBrand('Elf Bar Raya D3')">ELF BAR Raya D3 100 zł 5%</button>
-        <button class="brand-mini-btn" onclick="filterByBrand('Elf Bar Trio')">ELF BAR Trio 120 zł 5%</button>
-        <button class="brand-mini-btn" onclick="filterByBrand('ELFLIQ')">ELFLIQ 30ml</button>
-        <button class="brand-mini-btn" onclick="filterByBrand('VOZOL PRIME')">Vozol Prime 30ml</button>
-    </div>
+<div class="brand-grid-compact">
+    <button class="brand-mini-btn active" onclick="filterByBrand('all')">Все</button>
+    
+    <button class="brand-mini-btn" onclick="filterByBrand('Elf Bar Raya D3')">
+        ELF BAR Raya D3
+    </button>
+
+    <button class="brand-mini-btn" onclick="filterByBrand('Elf Bar Trio')">
+        ELF BAR Trio
+    </button>
+    
+    <button class="brand-mini-btn" onclick="filterByBrand('ELFLIQ')">
+        ELFLIQ 30ml
+    </button>
+
+    <button class="brand-mini-btn" onclick="filterByBrand('VOZOL PRIME')">
+        Vozol Prime 30ml
+    </button>
+</div>
+
 </div>
   </aside>
 

@@ -271,47 +271,45 @@ function renderHome() {
 
 // --- 3. ФУНКЦИЯ ФИЛЬТРА (ИСПРАВЛЕННАЯ) ---
 function setFilter(categoryType) {
-    console.log("Фильтр по:", categoryType);
-    let filtered;
+console.log("Фильтр по:", categoryType);
+let filtered;
 
-    if (categoryType === 'all') {
-        filtered = products;
-    } else {
-        // Теперь p.category точно существует
-        filtered = products.filter(p => p.category === categoryType);
-    }
+if (categoryType === 'all') {
+filtered = products;
+} else {
+// Теперь p.category точно существует
+filtered = products.filter(p => p.category === categoryType);
+}
 
-    renderCatalog(filtered);
+renderCatalog(filtered);
 
-    // Подсветка кнопок
-    document.querySelectorAll('.filter-item').forEach(btn => {
-        btn.classList.remove('active');
-        if(btn.getAttribute('onclick') === `setFilter('${categoryType}')`) {
-            btn.classList.add('active');
-        }
-    });
+// Подсветка кнопок
+document.querySelectorAll('.filter-item').forEach(btn => {
+btn.classList.remove('active');
+if(btn.getAttribute('onclick') === `setFilter('${categoryType}')`) {
+btn.classList.add('active');
+}
+});
 }
 
 // Функция фильтрации по брендам (Elf Bar, Vozol и т.д.)
 function filterByBrand(brandName) {
-    if (brandName === 'all') {
-        renderCatalog(products);
-    } else {
-        const filtered = products.filter(p => p.brand === brandName);
-        renderCatalog(filtered);
-    }
-    
-    // Обновление активного класса для кнопок брендов
-    const buttons = document.querySelectorAll('.brand-mini-btn');
-    buttons.forEach(btn => {
-        if(btn.getAttribute('onclick') === `filterByBrand('${brandName}')`) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
-    });
-    
-    scrollToTop();
+if (brandName === 'all') {
+renderCatalog(products);
+} else {
+const filtered = products.filter(p => p.brand === brandName);
+renderCatalog(filtered);
+}
+// Обновление активного класса для кнопок брендов
+const buttons = document.querySelectorAll('.brand-mini-btn');
+buttons.forEach(btn => {
+if(btn.getAttribute('onclick') === `filterByBrand('${brandName}')`) {
+btn.classList.add('active');
+} else {
+btn.classList.remove('active');
+}
+});
+scrollToTop();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -492,42 +490,135 @@ function applyUrlFilter() {
     }
 }
 
-function setFilter(category) {
-    console.log("Запуск фильтра для мобилки:", category);
-    
-    // 1. Ищем ВСЕ карточки (и обычные, и те, что могут быть скрыты)
-    const cards = document.querySelectorAll('.card');
-    
-    if (cards.length === 0) {
-        console.error("Ошибка: Карточки товаров не найдены в DOM!");
-        return;
+// ==========================
+// ГЛОБАЛЬНОЕ СОСТОЯНИЕ
+// ==========================
+let currentCategory = 'all';
+let currentBrand = 'all';
+
+// ==========================
+// ОСНОВНАЯ ФИЛЬТРАЦИЯ
+// ==========================
+function applyFilters() {
+    let filtered = products;
+
+    if (currentCategory !== 'all') {
+        filtered = filtered.filter(p => p.category === currentCategory);
     }
 
-    cards.forEach(card => {
-        // Проверяем: либо 'all', либо наличие класса категории
-        // Мы используем classList.contains — это самый надежный метод
-        if (category === 'all' || card.classList.contains(category)) {
-            card.style.setProperty('display', 'flex', 'important');
-        } else {
-            card.style.setProperty('display', 'none', 'important');
+    if (currentBrand !== 'all') {
+        filtered = filtered.filter(p => 
+            p.brand.toLowerCase() === currentBrand.toLowerCase()
+        );
+    }
+
+    renderCatalog(filtered);
+}
+
+// ==========================
+// ФИЛЬТР ПО КАТЕГОРИИ
+// ==========================
+function setFilter(category) {
+    console.log("Категория:", category);
+    currentCategory = category;
+    currentBrand = 'all'; // Сброс бренда при смене категории
+
+    applyFilters();
+    updateActiveCategory(category);
+    updateActiveBrand('all');
+    updateBrandsVisibility();
+    
+    // Если на мобилке открыто меню — здесь можно добавить его закрытие
+}
+
+// ==========================
+// ФИЛЬТР ПО БРЕНДУ
+// ==========================
+function filterByBrand(brand) {
+    console.log("Бренд:", brand);
+    currentBrand = brand;
+
+    applyFilters();
+    updateActiveBrand(brand);
+    scrollToTop();
+}
+
+// ==========================
+// УЛУЧШЕННОЕ ОБНОВЛЕНИЕ КНОПОК (ПК + МОБ)
+// ==========================
+function updateActiveCategory(category) {
+    // Ищем все элементы фильтра (и в основном меню, и в мобильном)
+    document.querySelectorAll('.filter-item, .mobile-filter-item').forEach(btn => {
+        btn.classList.remove('active');
+        // Проверяем через includes, чтобы избежать ошибок с кавычками и пробелами
+        if (btn.getAttribute('onclick')?.includes(`'${category}'`)) {
+            btn.classList.add('active');
         }
     });
-
-    // 2. Меняем заголовок (только на мобилке, где есть dynamic-title)
-    const dynamicTitle = document.getElementById('dynamic-title');
-    if (dynamicTitle) {
-        // Берем текст из кнопки, которая вызвала функцию
-        // Ищем через [onclick*="..."], чтобы точно найти ту самую кнопку
-        const clickedBtn = document.querySelector(`[onclick*="setFilter('${category}')"]`);
-        if (clickedBtn) {
-            let text = clickedBtn.innerText.replace(/[0-9]/g, '').replace('///', '').trim();
-            dynamicTitle.innerText = text.toUpperCase();
-        }
-    }
-
-
-
 }
+
+function updateActiveBrand(brand) {
+    document.querySelectorAll('.brand-mini-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('onclick')?.includes(`'${brand}'`)) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+// ==========================
+// СКРЫТИЕ БРЕНДОВ (ИСПРАВЛЕНО)
+// ==========================
+function updateBrandsVisibility() {
+    const brandButtons = document.querySelectorAll('.brand-mini-btn');
+
+    brandButtons.forEach(btn => {
+        const onclickAttr = btn.getAttribute('onclick') || "";
+        const match = onclickAttr.match(/'([^']+)'/);
+        if (!match) return;
+
+        const brand = match[1];
+
+        if (brand === 'all') {
+            btn.style.display = 'flex'; // Используем flex, если кнопки на флексах
+            return;
+        }
+
+        const hasProducts = products.some(p => {
+            return (currentCategory === 'all' || p.category === currentCategory)
+                && p.brand.toLowerCase() === brand.toLowerCase();
+        });
+
+        // На мобилках display: none иногда перебивается, используем принудительно
+        if (hasProducts) {
+            btn.style.setProperty('display', 'flex', 'important');
+        } else {
+            btn.style.setProperty('display', 'none', 'important');
+        }
+    });
+}
+
+// ==========================
+// SCROLL UP (ИСПРАВЛЕНО ДЛЯ МОБИЛОК)
+// ==========================
+function scrollToTop() {
+    // На некоторых телефонах smooth не срабатывает, добавляем альтернативу
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// ==========================
+// ЗАГРУЗКА СТРАНИЦЫ
+// ==========================
+document.addEventListener('DOMContentLoaded', () => {
+    // Инициализация
+    if (document.getElementById('catalog-grid')) {
+        applyFilters(); // Сразу применяем фильтры (по умолчанию all)
+        updateBrandsVisibility();
+    }
+});
 
 
 
@@ -862,7 +953,7 @@ function renderCatalog(items) {
             <path d="M16 10a4 4 0 01-8 0"/>
           </svg>
         </span>
-        <span class="ks-cart-text" style="font-weight:600;font-size:14px;">Корзина</span>
+        <span class="ks-cart-text" style="font-weight:600;font-size:14px;"></span>
         <span class="ks-cart-badge">${count}</span>
       `;
 
@@ -1174,3 +1265,34 @@ function smoothMobileFilter() {
 
 window.addEventListener('load', smoothMobileFilter);
 window.addEventListener('resize', smoothMobileFilter);
+
+
+function upgradeCartLink() {
+    // Поиск всех ссылок на корзину (по href или тексту)
+    const links = Array.from(document.querySelectorAll('a[href]')).filter(a =>
+      a.href.includes('cart.html') || a.textContent.trim().toLowerCase().startsWith('корзина')
+    );
+
+    links.forEach(link => {
+      link.classList.add('ks-cart-link');
+
+      // Получаем текущее число из текста (например, из индикатора на скриншоте)
+      const text = link.textContent.trim();
+      const match = text.match(/\d+/);
+      const count = match ? parseInt(match[0]) : 0;
+
+      // ОСТАВЛЯЕМ ТОЛЬКО ИКОНКУ И БЕЙДЖ (Слово "Корзина" удалено)
+      link.innerHTML = `
+        <span class="ks-cart-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+        </span>
+        <span class="ks-cart-badge">${count}</span>
+      `;
+
+      link.dataset.ksCart = 'true';
+    });
+  }
