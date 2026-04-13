@@ -278,7 +278,7 @@
     let dName = "INPOST PACZKOMAT"; 
     let pName = "BLIK";
     let discount = 0;
-    let appliedPromo = "Нет"; // Добавили переменную для промокода
+    let appliedPromo = "Нет";
 
     function formatNum(num) {
         return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/\./g, ',');
@@ -287,6 +287,7 @@
     function refreshUI() {
         const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
         const list = document.getElementById('mini-list');
+        const delValElement = document.getElementById('del-val'); // Элемент доставки в меню
         let sum = 0;
         list.innerHTML = '';
 
@@ -306,8 +307,20 @@
 
         document.getElementById('order-info').querySelector('span').innerText = `${cart.length} ТОВАРОВ`;
         document.getElementById('sub-val').innerText = formatNum(sum) + " ZL";
-        document.getElementById('del-val').innerText = dPrice === 0 ? "FREE" : formatNum(dPrice) + " ZL";
-        document.getElementById('pay-val').innerText = pName;
+
+        // ЛОГИКА ДОСТАВКИ: Если 0 (Варшава), то текст FREE и зеленый цвет
+        if (dPrice === 0) {
+            delValElement.innerText = "БЕСПЛАТНО";
+            delValElement.style.color = "var(--green)";
+        } else {
+            delValElement.innerText = formatNum(dPrice) + " ZL";
+            delValElement.style.color = "#fff"; // Обычный белый для платной
+        }
+
+        // ЛОГИКА ОПЛАТЫ: Всегда белый цвет
+        const payValElement = document.getElementById('pay-val');
+        payValElement.innerText = pName;
+        payValElement.style.color = "#fff"; 
         
         let final = (sum - discVal) + dPrice;
         document.getElementById('total-val').innerText = formatNum(final) + " ZL";
@@ -319,7 +332,7 @@
         status.style.display = 'block';
         if(code === 'HELLO') {
             discount = 0.10;
-            appliedPromo = code; // Сохраняем имя промокода
+            appliedPromo = code;
             status.innerText = "ПРОМОКОД ПРИМЕНЕН: -10%";
             status.style.color = "var(--green)";
         } else {

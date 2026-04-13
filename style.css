@@ -2505,3 +2505,57 @@ padding-bottom: 0 !important;
 
 
 
+
+
+
+
+
+/* Контейнер для уведомлений */
+#toast-container {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+}
+
+/* Стиль самого уведомления */
+.toast-message {
+    background: rgba(16, 16, 16, 0.95); /* Темный фон как на сайте */
+    color: #4caf50; /* Зеленый текст */
+    border: 1px solid #4caf50; /* Зеленая рамка */
+    padding: 12px 24px;
+    border-radius: 50px; /* Овальная форма */
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(76, 175, 80, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    /* Анимация появления */
+    animation: slideUp 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    transition: opacity 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.toast-message.fade-out {
+    opacity: 0;
+}
