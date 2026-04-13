@@ -1840,32 +1840,72 @@ body {
 }
 
 @media (max-width: 768px) {
-.catalog-layout {
-display: flex !important;
-flex-direction: row !important;
-padding: 5px 2px !important;
-gap: 4px !important;
-width: 100% !important;
-}
-.header-logo-img {
+    .header-logo-img {
         height: 25px; /* Чуть меньше на телефонах */
     }
     .logo-container {
         gap: 6px;
     }
-/* ЛЕВАЯ ПАНЕЛЬ */
-.filter {
-    width: 130px !important;
-    flex-shrink: 0 !important;
-    background: #000 !important;
-    padding: 10px 4px !important;
 
-    position: relative !important; /* ВАЖНО */
-    height: auto !important;       /* ВАЖНО */
-    overflow: visible !important;  /* ВАЖНО */
-    will-change: transform !important;
-    box-sizing: border-box !important;
-}
+
+/* 1. Настройка основного контейнера  
+
+*/
+.catalog-layout {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important; 
+        padding: 10px 2px !important;
+        gap: 4px !important;
+        width: 100% !important;
+        overflow: visible !important;
+    justify-content: flex-start !important; 
+    }
+
+    /* 2. ФИКСАЦИЯ ФИЛЬТРА ДЛЯ ТЕЛЕФОНА */
+.filter {
+        position: fixed !important;   /* Это заставит меню всегда быть на экране */
+        top: 50px !important;        /* Сразу под шапкой (высота шапки 50px) */
+        left: 0 !important;
+        width: 130px !important;      /* Твоя ширина */
+        height: calc(100vh - 50px) !important; /* На всю высоту экрана до низа */
+        background: #000 !important;
+        z-index: 999 !important;      /* Чтобы было поверх всего */
+        padding: 10px 4px !important;
+        border-right: 1px solid #1a1a1a !important;
+        overflow-y: auto !important;  /* Если брендов много, они будут крутиться внутри */
+        display: block !important;
+    }
+
+    /* 2. СДВИГАЕМ ТОВАРЫ ВПРАВО (чтобы не залезли под меню) */
+    .main-content {
+        margin-left: 130px !important; /* Ровно на ширину меню */
+        width: calc(100% - 130px) !important;
+        flex: none !important; 
+        padding: 0 4px !important;
+    }
+
+    /* 3. КОРРЕКТИРУЕМ КОНТЕЙНЕР */
+    .catalog-layout {
+        display: block !important; /* Убираем флекс, так как меню теперь "fixed" */
+        width: 100% !important;
+    }
+
+    /* 4. ПОИСК (чтобы он был во всю ширину правой части) */
+    .search-container {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+
+    #catalog-search {
+        width: 100% !important;
+    }
+
+    /* Убираем полосу прокрутки в меню для чистоты */
+    .filter::-webkit-scrollbar {
+        width: 0px;
+    }
+
 
 
 
@@ -2056,10 +2096,7 @@ padding: 0 10px !important;
     }
 
     /* Корректируем положение фильтра, так как шапка теперь фиксированная */
-    .filter {
-        top: 50px !important; /* Должен начинаться сразу под шапкой */
-        height: calc(100vh - 50px) !important;
-    }
+
 /* 1. ПОИСК ТОВАРОВ: Уменьшаем в два раза */
 .search-container {
 width: 100% !important;
@@ -2106,28 +2143,10 @@ padding-bottom: 0 !important;
     }
 
     /* 2. ЛЕВАЯ ПАНЕЛЬ: Чтобы она УХОДИЛА ВВЕРХ при скролле */
-    .filter {
-        width: 130px !important;
-        flex-shrink: 0 !important;
-        background: #000 !important;
-        padding: 10px 4px !important;
-        
-        /* КАТЕГОРИЧЕСКИ отключаем фиксацию */
-        position: static !important; /* Или relative, главное не sticky и не fixed */
-        float: none !important;
-        height: auto !important; 
-        overflow: visible !important;
-    }
+
 
     /* Контейнер каталога */
-    .catalog-layout {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: flex-start !important;
-        width: 100% !important;
-        position: relative !important;
-        overflow: visible !important; /* Важно для обычного скролла */
-    }
+
 
     /* ПРАВАЯ ЧАСТЬ (Контент с поиском и товарами) */
     .main-content {
