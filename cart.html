@@ -75,6 +75,84 @@
         .f-item p { font-size: 9px; font-weight: 800; text-transform: uppercase; color: rgba(0,0,0,0.6); }
 
         .empty-cart { text-align: center; padding: 100px 0; color: var(--text-gray); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        @media (max-width: 768px) {
+    /* 1. Настройка контейнера товара */
+    .cart-item {
+        padding: 15px 10px !important;
+        gap: 10px !important; /* Уменьшаем общий зазор */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: blink;
+    }
+
+    /* Картинка чуть меньше на мобилках */
+    .cart-item img {
+        width: 50px !important;
+        height: 50px !important;
+        flex-shrink: 0 !important; /* Чтобы картинку не сплющило */
+    }
+
+    /* 2. Текст названия товара */
+    .item-info {
+        flex: 1 !important; /* Занимает всё свободное место в центре */
+        min-width: 0 !important; /* Важно, чтобы текст не раздувал контейнер */
+        margin-right: 5px !important;
+    }
+
+    .item-name {
+        font-size: 11px !important;
+        line-height: 1.2 !important;
+        white-space: nowrap !important; /* Не дает тексту прыгать на вторую строку */
+        overflow: hidden !important;
+        text-overflow: ellipsis !important; /* Если название слишком длинное — будет три точки */
+    }
+
+    .item-price {
+        font-size: 13px !important;
+    }
+
+    /* 3. КОНТРОЛЬ КОЛИЧЕСТВА (Выравнивание в столбик) */
+    .qty-control {
+        width: 90px !important; /* Фиксированная ширина, чтобы цифры не двигались */
+        height: 32px !important;
+        flex-shrink: 0 !important; /* Запрещаем менять размер */
+        display: flex !important;
+        justify-content: space-between !important;
+    }
+
+    .qty-btn {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 16px !important;
+    }
+
+    .qty-num {
+        width: 25px !important;
+        font-size: 12px !important;
+    }
+
+    /* 4. КРЕСТИК (Идеальное выравнивание справа) */
+    .remove-x {
+        width: 32px !important;
+        height: 32px !important;
+        margin-left: 5px !important;
+        flex-shrink: 0 !important; /* Чтобы всегда был ровный квадрат */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 14px !important;
+        border: 1px solid #333 !important;
+        color: #666 !important;
+    }
+
+    /* 5. Общие правки заголовков для мобилки */
+    .cart-header h1 {
+        font-size: 32px !important;
+    }
+    
+    .total-line span { font-size: 18px !important; }
+    .total-line b { font-size: 28px !important; }
+}
     </style>
 </head>
 <body>
@@ -83,10 +161,12 @@
 
 <div class="wrapper">
     <header>
+        <a href="index.html" class="logo-link" style="text-decoration: none; color: inherit;">
         <div class="logo-area">
             <img src="images/IMG_2073.PNG" class="logo-img">
-            <span class="logo-text">KAIF SMOKE</span>
+            <span class="logo-text">MADE PUFF</span>
         </div>
+        </a>
         <a href="index.html" class="nav-back">← НА ГЛАВНУЮ</a>
     </header>
 

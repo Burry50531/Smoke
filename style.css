@@ -1717,6 +1717,7 @@ body {
     flex: 1;
     padding-left: 10px;
     padding-right: 10px; /* Отступ от правого края экрана */
+
 }
 
 .grid-4 {
@@ -1732,8 +1733,9 @@ body {
     flex-direction: column;
     position: relative;
     border-radius: 4px; /* Совсем легкое скругление */
-    overflow: hidden;
+overflow: hidden !important; 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1;
     border-bottom: 0px solid transparent; /* Заготовка под желтую полоску */
 }
 
@@ -1742,6 +1744,7 @@ body {
     transform: translateY(-5px); /* Карточка всплывает вверх */
     box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     border-bottom: 3px solid #e6b130; /* Желтая полоска снизу */
+    z-index: 10 !important;
 }
 
 /* КАРТИНКА НА ВЕСЬ КВАДРАТ */
@@ -1752,9 +1755,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* Обрезает всё лишнее */
-    padding: 0 !important; /* Убирает любые внутренние отступы */
+overflow: hidden !important; 
+    padding: 0 !important;
     margin: 0 !important;
+    position: relative;
 }
 
 /* САМА КАРТИНКА */
@@ -1765,10 +1769,11 @@ body {
     object-position: center; /* Центрирует изображение */
     display: block;
     border: none;
+    transition: transform 0.4s ease-in-out;
 }
 
 .card:hover .card-img-container img {
-    transform: scale(1.05); /* Легкий зум фото при наведении */
+    transform: scale(1.08); /* Легкий зум фото при наведении */
 }
 
 /* ИНФО-БЛОК ПОД ФОТО */
@@ -2240,6 +2245,9 @@ padding-bottom: 0 !important;
     border-radius: 10px;
     color: #fff;
     font-size: 16px;
+    margin-bottom: 15px !important; 
+    position: relative;
+    z-index: 10; /* Чтобы поиск был выше товаров */
 }
 .category-banner-mobile {
     display: none;
