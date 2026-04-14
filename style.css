@@ -1725,7 +1725,25 @@ body {
     grid-template-columns: repeat(4, 1fr);
     gap: 15px; /* Маленький отступ между карточками для "воздуха" */
 }
+.soon-card {
+    opacity: 0.6;
+    pointer-events: none; /* Чтобы на телефоне нельзя было случайно нажать */
+}
 
+.soon-bg {
+    background: #0a0a0a !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.soon-text {
+    color: #1a1a1a;
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
 /* КАРТОЧКА ТОВАРА */
 .card {
     background: #121212; /* Темно-серый фон инфо-блока */
@@ -1852,6 +1870,13 @@ overflow: hidden !important;
         gap: 6px;
     }
 
+.soon-text {
+        font-size: 14px; /* Чуть меньше текст на телефоне */
+    }
+    
+    .soon-card .card-info {
+        min-height: 50px !important; /* Чтобы пустые карточки были одной высоты с обычными */
+    }
 
 /* 1. Настройка основного контейнера  
 

@@ -521,14 +521,47 @@ function applyFilters() {
 function setFilter(category) {
     console.log("Категория:", category);
     currentCategory = category;
-    currentBrand = 'all'; // Сброс бренда при смене категории
+    currentBrand = 'all';
 
-    applyFilters();
-    updateActiveCategory(category);
-    updateActiveBrand('all');
-    updateBrandsVisibility();
-    
-    // Если на мобилке открыто меню — здесь можно добавить его закрытие
+    const grid = document.getElementById('catalog-grid');
+    const title = document.getElementById('dynamic-title');
+
+    if (category === 'soon') {
+        if (title) title.innerText = 'СКОРО В ПРОДАЖЕ';
+
+        let soonHtml = '';
+        // Генерируем 6 карточек, чтобы на телефоне заполнилось 3 ряда по 2 карточки
+        for (let i = 0; i < 6; i++) {
+            soonHtml += `
+                <div class="card soon-card">
+                    <div class="card-img-container soon-bg">
+                        <span class="soon-text">SOON</span>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title" style="color: #444 !important; font-size: 10px !important;">ОЖИДАЕТСЯ...</div>
+                        <div class="card-price-row">
+                            <div class="card-price" style="color: #333 !important; font-size: 12px !important;">---</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        grid.innerHTML = soonHtml;
+        
+        updateActiveCategory(category);
+        updateActiveBrand('all');
+        updateBrandsVisibility();
+    } else {
+        // Обычная логика
+        if (title) {
+            title.innerText = (category === 'liquid') ? 'ЖИДКОСТИ' : 
+                             (category === 'disposable') ? 'ОДНОРАЗКИ' : 'ВСЕ КАТЕГОРИИ';
+        }
+        applyFilters();
+        updateActiveCategory(category);
+        updateActiveBrand('all');
+        updateBrandsVisibility();
+    }
 }
 
 // ==========================
