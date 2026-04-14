@@ -242,7 +242,10 @@
                     <h4 id="order-info">ВАШ ЗАКАЗ <span>0 ТОВАРОВ</span></h4>
                     <div id="mini-list" style="max-height: 200px; overflow-y: auto; margin-bottom: 20px;"></div>
                     <div class="sum-line"><span>ТОВАРЫ</span><b id="sub-val">0,00 ZL</b></div>
-                    <div class="sum-line" id="promo-line" style="display: none; color: var(--green);"><span>СКИДКА 10%</span><b id="promo-val">-0,00 ZL</b></div>
+                    <div class="sum-line" id="promo-line" style="display: none; color: var(--green);">
+    <span id="promo-text">СКИДКА 10%</span>
+    <b id="promo-val">-0,00 ZL</b>
+</div>
                     <div class="sum-line"><span>ДОСТАВКА</span><b id="del-val">12,00 ZL</b></div>
                     <div class="sum-line"><span>ОПЛАТА</span><b id="pay-val">BLIK</b></div>
                     <div class="promo-wrap">
@@ -334,34 +337,85 @@
         return isValid;
     }
 
-    function refreshUI() {
-        const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
-        const list = document.getElementById('mini-list');
-        let sum = 0; list.innerHTML = '';
-        cart.forEach(item => {
-            let p = parseFloat(item.price) || 0;
-            sum += (p * item.qty);
+function refreshUI() {
+    const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
+    const list = document.getElementById('mini-list');
+    let sum = 0; 
+    list.innerHTML = '';
+
+    cart.forEach(item => {
+        let p = parseFloat(item.price) || 0;
+        sum += (p * item.qty);
+        if(list) {
             list.innerHTML += `<div class="mini-item"><img src="${item.img}"><div style="flex:1;">${item.name} (x${item.qty})<br><b>${formatNum(p)} ZL</b></div></div>`;
-        });
-        let discVal = sum * discount;
-        document.getElementById('promo-line').style.display = discount > 0 ? 'flex' : 'none';
-        document.getElementById('promo-val').innerText = `-${formatNum(discVal)} ZL`;
-        document.getElementById('sub-val').innerText = formatNum(sum) + " ZL";
-        document.getElementById('del-val').innerText = dPrice === 0 ? "БЕСПЛАТНО" : formatNum(dPrice) + " ZL";
-        document.getElementById('del-val').style.color = dPrice === 0 ? "var(--green)" : "#fff";
-        document.getElementById('pay-val').innerText = pName;
-        document.getElementById('order-info').querySelector('span').innerText = `${cart.length} ТОВАРОВ`;
-        document.getElementById('total-val').innerText = formatNum(sum - discVal + dPrice) + " ZL";
+        }
+    });
+
+    // 1. Считаем скидку динамически!
+    let discVal = sum * discount; 
+
+    // 2. Обновляем строку с ценой скидки
+    const promoLine = document.getElementById('promo-line');
+    if (promoLine) {
+        promoLine.style.display = discount > 0 ? 'flex' : 'none';
     }
 
-    function applyPromo() {
-        const code = document.getElementById('promo-input').value.trim().toUpperCase();
-        const status = document.getElementById('promo-status');
-        status.style.display = 'block';
-        if(code === 'HELLO') { discount = 0.10; appliedPromo = code; status.innerText = "ПРОМОКОД ПРИМЕНЕН: -10%"; status.style.color = "var(--green)"; } 
-        else { discount = 0; appliedPromo = "Нет"; status.innerText = "ПРОМОКОД НЕ НАЙДЕН"; status.style.color = "var(--red)"; }
-        refreshUI();
+    const promoValElem = document.getElementById('promo-val');
+    if (promoValElem) {
+        // Здесь теперь будет появляться правильная сумма: от 5% до 15%
+        promoValElem.innerText = `-${formatNum(discVal)} ZL`;
     }
+
+    // 3. Обновляем итоговую сумму (Минус скидка + Доставка)
+    const totalValElem = document.getElementById('total-val');
+    if (totalValElem) {
+        let finalTotal = sum - discVal + dPrice;
+        totalValElem.innerText = formatNum(finalTotal) + " ZL";
+    }
+
+    // Обновляем остальные поля
+    if(document.getElementById('sub-val')) document.getElementById('sub-val').innerText = formatNum(sum) + " ZL";
+    if(document.getElementById('del-val')) {
+        document.getElementById('del-val').innerText = dPrice === 0 ? "БЕСПЛАТНО" : formatNum(dPrice) + " ZL";
+    }
+}
+
+function applyPromo() {
+    const code = document.getElementById('promo-input').value.trim().toUpperCase();
+    const status = document.getElementById('promo-status');
+    const promoText = document.getElementById('promo-text'); // Находим текст в чеке
+    status.style.display = 'block';
+
+    if (code === 'D2D7R12') { 
+        discount = 0.05; 
+        appliedPromo = code; 
+        if (promoText) promoText.innerText = "СКИДКА 5%"; // Меняем 10% на 5%
+        status.innerText = "ПРОМОКОД ПРИМЕНЕН: -5%"; 
+        status.style.color = "var(--green)"; 
+    } 
+    else if (code === 'MADE22') { 
+        discount = 0.10; 
+        appliedPromo = code; 
+        if (promoText) promoText.innerText = "СКИДКА 10%";
+        status.innerText = "ПРОМОКОД ПРИМЕНЕН: -10%"; 
+        status.style.color = "var(--green)"; 
+    }
+    else if (code === 'G5S9M10') { 
+        discount = 0.15; 
+        appliedPromo = code; 
+        if (promoText) promoText.innerText = "СКИДКА 15%";
+        status.innerText = "ПРОМОКОД ПРИМЕНЕН: -15%"; 
+        status.style.color = "var(--green)"; 
+    }
+    else { 
+        discount = 0; 
+        appliedPromo = "Нет"; 
+        status.innerText = "ПРОМОКОД НЕ НАЙДЕН"; 
+        status.style.color = "var(--red)"; 
+    }
+    
+    refreshUI(); // Пересчитываем итоговую сумму
+}
 
     function updateDel(el, price, type) {
         document.querySelectorAll('.option-item').forEach(i => i.classList.remove('active'));

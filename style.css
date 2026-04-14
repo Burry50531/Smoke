@@ -1878,7 +1878,8 @@ overflow: hidden !important;
         min-height: 50px !important; /* Чтобы пустые карточки были одной высоты с обычными */
     }
 
-/* 1. Настройка основного контейнера  
+
+
 
 */
 .catalog-layout {
