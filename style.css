@@ -1860,26 +1860,41 @@ body {
         width: 100% !important;
         overflow: visible !important;
     justify-content: flex-start !important; 
-background-color: #000000 !important; /* Чистый черный */
+background-color: #000000 !important;
+        min-height: 100vh !important;
     }
 
     /* 2. ФИКСАЦИЯ ФИЛЬТРА ДЛЯ ТЕЛЕФОНА */
-.filter {
-        position: fixed !important;   /* Это заставит меню всегда быть на экране */
-        top: 50px !important;        /* Сразу под шапкой (высота шапки 50px) */
-        left: 0 !important;
-        width: 130px !important;      /* Твоя ширина */
-        height: calc(100vh - 50px) !important; /* На всю высоту экрана до низа */
-        /* ЦВЕТ: строго черный без прозрачности */
-        background-color: #000000 !important; 
-        background: #000000 !important;
-        z-index: 999 !important;      /* Чтобы было поверх всего */
-        padding: 10px 4px !important;
-        border-right: 1px solid #1a1a1a !important;
-        overflow-y: auto !important;  /* Если брендов много, они будут крутиться внутри */
-        display: block !important;
+body, html {
+        background-color: #000000 !important;
     }
 
+    /* 2. Настраиваем панель фильтра */
+    .filter {
+        position: fixed !important;
+        top: 50px !important; /* Под шапкой */
+        left: 0 !important;
+        width: 130px !important;
+        
+        /* ВАЖНО: Растягиваем черный фон на всю высоту экрана */
+        height: 100vh !important; 
+        background-color: #000000 !important;
+        background: #000000 !important;
+        
+        /* Убираем рамки, если они создают "полоски" */
+        border-right: 1px solid #1a1a1a !important;
+        border-bottom: none !important;
+
+        z-index: 999 !important;
+        padding: 10px 4px 120px 4px !important; /* 120px снизу, чтобы бренды не прилипали к краю */
+        overflow-y: auto !important;
+        display: block !important;
+        box-sizing: border-box !important;
+    }
+.filter::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
     /* 2. СДВИГАЕМ ТОВАРЫ ВПРАВО (чтобы не залезли под меню) */
     .main-content {
         margin-left: 130px !important; /* Ровно на ширину меню */
