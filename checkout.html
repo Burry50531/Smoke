@@ -175,21 +175,21 @@
 
                 <div class="card">
                     <div class="card-header"><div class="step">2</div><h3>Метод доставки</h3></div>
-                    <div class="option-item active" onclick="updateDel(this, 12, 'paczkomat')">
+                    <div class="option-item active" onclick="updateDel(this, 20, 'paczkomat')">
                         <div class="dot"></div>
                         <div class="opt-info"><b>📦 INPOST PACZKOMAT</b><span>Самовывоз из пачкомата • 1-2 рабочих дня</span></div>
-                        <div class="price-text">12,00 zł</div>
+                        <div class="price-text">20,00 zł</div>
                     </div>
-                    <div class="option-item" onclick="updateDel(this, 14, 'courier')">
+                    <div class="option-item" onclick="updateDel(this, 25, 'courier')">
                         <div class="dot"></div>
                         <div class="opt-info"><b>🚚 INPOST КУРЬЕР</b><span>Доставка на адрес • 1-2 рабочих дня</span></div>
-                        <div class="price-text">14,00 zł</div>
+                        <div class="price-text">25,00 zł</div>
                     </div>
-                    <div class="option-item" onclick="updateDel(this, 0, 'warsaw')">
-                        <div class="dot"></div>
-                        <div class="opt-info"><b>🏙️ КУРЬЕР ПО ВАРШАВЕ</b><span>Экспресс-доставка по городу • в день заказа</span></div>
-                        <div class="price-text" style="color:var(--green)">БЕСПЛАТНО</div>
-                    </div>
+                    <div class="option-item" onclick="updateDel(this, 40, 'warsaw')">
+    <div class="dot"></div>
+    <div class="opt-info"><b>🏙️ КУРЬЕР ПО ВАРШАВЕ</b><span>Экспресс-доставка по городу • в день заказа</span></div>
+    <div class="price-text">40,00 zł</div>
+</div>
                     
                     <div class="field" id="addr-paczkomat" style="margin-top: 25px;">
                         <label>НОМЕР ПОСТОМАТА *</label>
@@ -280,7 +280,7 @@
     </div>
 
 <script>
-    let dPrice = 12; let dName = "INPOST PACZKOMAT"; let pName = "BLIK"; let discount = 0; let appliedPromo = "Нет";
+    let dPrice = 20; let dName = "INPOST PACZKOMAT"; let pName = "BLIK"; let discount = 0; let appliedPromo = "Нет";
 
     function formatNum(num) { return num.toLocaleString('en-US', { minimumFractionDigits: 2 }).replace(/\./g, ','); }
 
@@ -376,8 +376,8 @@ function refreshUI() {
     // Обновляем остальные поля
     if(document.getElementById('sub-val')) document.getElementById('sub-val').innerText = formatNum(sum) + " ZL";
     if(document.getElementById('del-val')) {
-        document.getElementById('del-val').innerText = dPrice === 0 ? "БЕСПЛАТНО" : formatNum(dPrice) + " ZL";
-    }
+    document.getElementById('del-val').innerText = formatNum(dPrice) + " ZL";
+}
 }
 
 function applyPromo() {
@@ -417,14 +417,28 @@ function applyPromo() {
     refreshUI(); // Пересчитываем итоговую сумму
 }
 
-    function updateDel(el, price, type) {
-        document.querySelectorAll('.option-item').forEach(i => i.classList.remove('active'));
-        el.classList.add('active'); dPrice = price; dName = el.querySelector('b').innerText;
-        document.getElementById('addr-paczkomat').style.display = type === 'paczkomat' ? 'block' : 'none';
-        document.getElementById('addr-details').style.display = type === 'paczkomat' ? 'none' : 'flex';
-        if(type === 'warsaw') document.getElementById('c_city').value = "Warszawa";
-        refreshUI();
+function updateDel(el, price, type) {
+    // 1. Убираем активный класс у всех и даем текущему
+    document.querySelectorAll('.option-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active'); 
+
+    // 2. Обновляем ГЛОБАЛЬНУЮ переменную цены доставки
+    dPrice = price; 
+    
+    // 3. Обновляем название доставки для сообщения в ТГ
+    dName = el.querySelector('b').innerText;
+
+    // 4. Показываем нужные поля адреса
+    document.getElementById('addr-paczkomat').style.display = type === 'paczkomat' ? 'block' : 'none';
+    document.getElementById('addr-details').style.display = type === 'paczkomat' ? 'none' : 'flex';
+    
+    if(type === 'warsaw') {
+        document.getElementById('c_city').value = "Warszawa";
     }
+
+    // 5. ВАЖНО: Запускаем пересчет интерфейса, чтобы итоговая сумма изменилась
+    refreshUI();
+}
 
     function updatePay(el, name) {
         if(el.classList.contains('disabled')) return;

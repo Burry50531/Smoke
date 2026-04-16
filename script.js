@@ -1272,3 +1272,24 @@ function interceptButtons() {
 
 
 
+
+document.querySelectorAll('.filter-item').forEach(item => {
+    // Когда коснулся пальцем
+    item.addEventListener('touchstart', function() {
+        // Убираем желтый у всех
+        document.querySelectorAll('.filter-item').forEach(el => {
+            el.classList.remove('is-active-tap');
+        });
+        // Добавляем желтый только нажатому
+        this.classList.add('is-active-tap');
+    });
+
+    // Если палец убрал (завершил клик)
+    item.addEventListener('touchend', function() {
+        // Оставляем подсветку на 200мс, чтобы была видна реакция, и убираем
+        setTimeout(() => {
+            // Если хочешь, чтобы выбранный пункт оставался желтым — удали эту строку
+            // this.classList.remove('is-active-tap'); 
+        }, 200);
+    });
+});
