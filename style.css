@@ -267,6 +267,7 @@ body {
 }
 
 @media (max-width: 768px) {
+    
     /* Контейнер для четырех блоков */
     .hero-info-bar {
         display: grid !important;

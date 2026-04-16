@@ -351,33 +351,66 @@ function refreshUI() {
         }
     });
 
-    // 1. Считаем скидку динамически!
+    // Определяем реальную цену доставки в зависимости от суммы товаров
+    let effectiveDeliveryPrice = dPrice; 
+
+    // Если сумма >= 200 И выбрана НЕ Варшава (dPrice не равен 40), тогда доставка 0
+    // Если выбрана Варшава (40), она остается 40 при любой сумме
+    if (sum >= 200 && dPrice !== 40) {
+        effectiveDeliveryPrice = 0;
+    }
+
+    // Обновляем визуальные ценники в меню выбора
+    const optionItems = document.querySelectorAll('.option-item');
+    optionItems.forEach((item, index) => {
+        const priceText = item.querySelector('.price-text');
+        
+        // Индексы 0 и 1 — это Пачкомат и обычный Курьер
+        if (index < 2) { 
+            if (sum >= 200) {
+                priceText.innerText = "БЕСПЛАТНО";
+                priceText.style.color = "var(--green)";
+            } else {
+                let standard = (index === 0) ? 20 : 25;
+                priceText.innerText = formatNum(standard) + " zł";
+                priceText.style.color = "#fff";
+            }
+        } else {
+            // Индекс 2 — это Варшава, она всегда 40
+            priceText.innerText = "40,00 zł";
+            priceText.style.color = "#fff";
+        }
+    });
+
+    // 1. Считаем скидку
     let discVal = sum * discount; 
 
-    // 2. Обновляем строку с ценой скидки
+    // 2. Обновляем промокод в чеке
     const promoLine = document.getElementById('promo-line');
-    if (promoLine) {
-        promoLine.style.display = discount > 0 ? 'flex' : 'none';
-    }
-
+    if (promoLine) promoLine.style.display = discount > 0 ? 'flex' : 'none';
     const promoValElem = document.getElementById('promo-val');
-    if (promoValElem) {
-        // Здесь теперь будет появляться правильная сумма: от 5% до 15%
-        promoValElem.innerText = `-${formatNum(discVal)} ZL`;
-    }
+    if (promoValElem) promoValElem.innerText = `-${formatNum(discVal)} ZL`;
 
-    // 3. Обновляем итоговую сумму (Минус скидка + Доставка)
+    // 3. Итоговая сумма (Товары - Скидка + Итоговая цена доставки)
     const totalValElem = document.getElementById('total-val');
     if (totalValElem) {
-        let finalTotal = sum - discVal + dPrice;
+        let finalTotal = sum - discVal + effectiveDeliveryPrice;
         totalValElem.innerText = formatNum(finalTotal) + " ZL";
     }
 
-    // Обновляем остальные поля
+    // Поля в чеке справа
     if(document.getElementById('sub-val')) document.getElementById('sub-val').innerText = formatNum(sum) + " ZL";
-    if(document.getElementById('del-val')) {
-    document.getElementById('del-val').innerText = formatNum(dPrice) + " ZL";
-}
+    
+    const delValElem = document.getElementById('del-val');
+    if(delValElem) {
+        if (effectiveDeliveryPrice === 0) {
+            delValElem.innerText = "БЕСПЛАТНО";
+            delValElem.style.color = "var(--green)";
+        } else {
+            delValElem.innerText = formatNum(effectiveDeliveryPrice) + " ZL";
+            delValElem.style.color = "#fff";
+        }
+    }
 }
 
 function applyPromo() {
