@@ -167,7 +167,7 @@
             display: flex !important;
             gap: 6px !important;
             line-height: 1 !important;
-            font-family: 'Bebas Neue',  !important;
+            font-family: 'Inter', sans-serif !important;
         }
 
         .brand-made {
@@ -188,7 +188,6 @@
         .brand-link:hover .brand-made {
             color: #e6b130 !important;
         }
-        /* СТИЛЬ ГАЛОЧКИ - ТЕПЕРЬ ОНА БУДЕТ ВИДИМА ВСЕГДА ПРИ КЛИКЕ */
         .custom-checkbox-box {
             width: 24px; height: 24px; border: 2px solid #333; border-radius: 6px;
             background: #000; display: flex; align-items: center; justify-content: center;
@@ -369,13 +368,12 @@
         if (msg) msg.style.display = 'none';
     }
 
-    // ЛОГИКА ГАЛОЧКИ 18+
     function handleAgeToggle() {
         const checkbox = document.getElementById('age-confirm');
         const visualBox = document.getElementById('custom-check-box');
         const btn = document.getElementById('submit-order-btn');
         
-        checkbox.checked = !checkbox.checked; // Меняем статус
+        checkbox.checked = !checkbox.checked; 
         
         if (checkbox.checked) {
             visualBox.classList.add('checked');
@@ -430,26 +428,21 @@ function refreshUI() {
         }
     });
 
-    // 1. Сначала считаем сумму скидки
     let discVal = sum * discount; 
     
-    // 2. Считаем чистую сумму (Товары минус Скидка)
     let amountAfterDiscount = sum - discVal;
 
-    // 3. Теперь проверяем бесплатную доставку по ЧИСТОЙ сумме
     let effectiveDeliveryPrice = dPrice; 
 
-    // Если сумма ПОСЛЕ скидки >= 200 И это не Варшава (40)
     if (amountAfterDiscount >= 200 && dPrice !== 40) {
         effectiveDeliveryPrice = 0;
     }
 
-    // 4. Обновляем визуальные ценники в меню выбора
     const optionItems = document.querySelectorAll('.option-item');
     optionItems.forEach((item, index) => {
         const priceText = item.querySelector('.price-text');
         
-        if (index < 2) { // Пачкомат и Курьер
+        if (index < 2) { 
             if (amountAfterDiscount >= 200) {
                 priceText.innerText = "БЕСПЛАТНО";
                 priceText.style.color = "var(--green)";
@@ -459,13 +452,11 @@ function refreshUI() {
                 priceText.style.color = "#fff";
             }
         } else {
-            // Варшава всегда 40
             priceText.innerText = "40,00 zł";
             priceText.style.color = "#fff";
         }
     });
 
-    // 5. Обновляем итоговые цифры в чеке
     if(document.getElementById('sub-val')) document.getElementById('sub-val').innerText = formatNum(sum) + " ZL";
 
     const promoLine = document.getElementById('promo-line');
@@ -473,7 +464,6 @@ function refreshUI() {
     const promoValElem = document.getElementById('promo-val');
     if (promoValElem) promoValElem.innerText = `-${formatNum(discVal)} ZL`;
 
-    // ИТОГО = (Товары - Скидка) + Итоговая доставка
     const totalValElem = document.getElementById('total-val');
     if (totalValElem) {
         let finalTotal = amountAfterDiscount + effectiveDeliveryPrice;
@@ -495,13 +485,13 @@ function refreshUI() {
 function applyPromo() {
     const code = document.getElementById('promo-input').value.trim().toUpperCase();
     const status = document.getElementById('promo-status');
-    const promoText = document.getElementById('promo-text'); // Находим текст в чеке
+    const promoText = document.getElementById('promo-text'); 
     status.style.display = 'block';
 
     if (code === 'D2D7R12') { 
         discount = 0.05; 
         appliedPromo = code; 
-        if (promoText) promoText.innerText = "СКИДКА 5%"; // Меняем 10% на 5%
+        if (promoText) promoText.innerText = "СКИДКА 5%"; 
         status.innerText = "ПРОМОКОД ПРИМЕНЕН: -5%"; 
         status.style.color = "var(--green)"; 
     } 

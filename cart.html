@@ -74,46 +74,45 @@ border: 1px solid #1a1a1a; border-radius: 4px;
 
 .empty-cart { text-align: center; padding: 100px 0; color: var(--text-gray); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
 @media (max-width: 768px) {
-/* 1. Настройка контейнера товара */
 .cart-item {
 padding: 15px 10px !important;
-gap: 10px !important; /* Уменьшаем общий зазор */
+gap: 10px !important; 
 display: flex !important;
 align-items: center !important;
 justify-content: blink;
 }
 
-/* Картинка чуть меньше на мобилках */
+
 .cart-item img {
 width: 50px !important;
 height: 50px !important;
-flex-shrink: 0 !important; /* Чтобы картинку не сплющило */
+flex-shrink: 0 !important; 
 }
 
-/* 2. Текст названия товара */
+
 .item-info {
-flex: 1 !important; /* Занимает всё свободное место в центре */
-min-width: 0 !important; /* Важно, чтобы текст не раздувал контейнер */
+flex: 1 !important; 
+min-width: 0 !important; 
 margin-right: 5px !important;
 }
 
 .item-name {
 font-size: 11px !important;
 line-height: 1.2 !important;
-white-space: nowrap !important; /* Не дает тексту прыгать на вторую строку */
+white-space: nowrap !important; 
 overflow: hidden !important;
-text-overflow: ellipsis !important; /* Если название слишком длинное — будет три точки */
+text-overflow: ellipsis !important; 
 }
 
 .item-price {
 font-size: 13px !important;
 }
 
-/* 3. КОНТРОЛЬ КОЛИЧЕСТВА (Выравнивание в столбик) */
+
 .qty-control {
-width: 90px !important; /* Фиксированная ширина, чтобы цифры не двигались */
+width: 90px !important; 
 height: 32px !important;
-flex-shrink: 0 !important; /* Запрещаем менять размер */
+flex-shrink: 0 !important; 
 display: flex !important;
 justify-content: space-between !important;
 }
@@ -129,12 +128,12 @@ width: 25px !important;
 font-size: 12px !important;
 }
 
-/* 4. КРЕСТИК (Идеальное выравнивание справа) */
+
 .remove-x {
 width: 32px !important;
 height: 32px !important;
 margin-left: 5px !important;
-flex-shrink: 0 !important; /* Чтобы всегда был ровный квадрат */
+flex-shrink: 0 !important; 
 display: flex !important;
 align-items: center !important;
 justify-content: center !important;
@@ -143,7 +142,6 @@ border: 1px solid #333 !important;
 color: #666 !important;
 }
 
-/* 5. Общие правки заголовков для мобилки */
 .cart-header h1 {
 font-size: 32px !important;
 }
@@ -209,7 +207,7 @@ header {
             display: flex !important;
             gap: 6px !important;
             line-height: 1 !important;
-            font-family: 'Bebas Neue',  !important;
+            font-family: 'Inter', sans-serif !important;
         }
 
         .brand-made {
@@ -273,12 +271,11 @@ header {
 
 
 <script>
-    // Функция форматирования чисел: разделение тысяч запятой и замена точки на запятую
     function formatNum(num) {
         return num.toLocaleString('en-US', { 
             minimumFractionDigits: 2, 
             maximumFractionDigits: 2 
-        }).replace(/\./g, ','); // Меняем точку на запятую (например: 1,250,00)
+        }).replace(/\./g, ','); 
     }
 
     function renderCart() {

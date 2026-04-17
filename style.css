@@ -291,7 +291,7 @@ body {
     display: flex !important;
     gap: 6px !important;
     line-height: 1 !important;
-    font-family: 'Bebas Neue',  !important;
+    font-family: 'Inter', sans-serif !important;
 }
 
 .brand-made {
