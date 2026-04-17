@@ -1,196 +1,274 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ваша Корзина | KAIF SMOKE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold: #e6b130;
-            --bg: #000000;
-            --card-bg: #111111;
-            --border: #1a1a1a;
-            --text-gray: #555;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-
-        .bg-grid {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px);
-            background-size: 45px 45px; z-index: -1;
-        }
-
-        .wrapper { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-        
-        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; }
-        .logo-area { display: flex; align-items: center; gap: 10px; }
-        .logo-img { width: 35px; height: 35px; object-fit: contain; }
-        .logo-text { font-weight: 800; font-size: 18px; letter-spacing: 1px; }
-        .nav-back { color: var(--text-gray); text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; }
-
-        .cart-header { margin-bottom: 40px; }
-        .cart-header h1 { font-size: 56px; font-weight: 900; line-height: 0.9; text-transform: uppercase; border-left: 5px solid var(--gold); padding-left: 20px; }
-        .item-count-top { color: var(--text-gray); font-size: 10px; font-weight: 800; text-transform: uppercase; margin-top: 10px; text-align: right; }
-
-        .cart-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-        .cart-item { display: flex; align-items: center; background: var(--card-bg); padding: 20px; gap: 20px; }
-        .cart-item img { width: 60px; height: 60px; object-fit: contain; background: #000; border-radius: 8px; padding: 5px; }
-        .item-info { flex: 1; }
-        .item-name { font-weight: 800; font-size: 14px; text-transform: uppercase; margin-bottom: 5px; }
-        .item-price { color: var(--gold); font-weight: 900; font-size: 16px; }
-
-        .qty-control { display: flex; align-items: center; background: #080808; border-radius: 6px; border: 1px solid #222; overflow: hidden; }
-        .qty-btn { background: transparent; color: #fff; border: none; width: 35px; height: 35px; cursor: pointer; font-size: 18px; transition: 0.2s; }
-        .qty-btn:hover { background: #1a1a1a; }
-        .qty-num { width: 30px; text-align: center; font-weight: 800; font-size: 14px; }
-
-        .remove-x { color: var(--text-gray); background: transparent; border: 1px solid #222; width: 35px; height: 35px; border-radius: 6px; cursor: pointer; margin-left: 10px; }
-
-        .summary-block { margin-top: 40px; border-top: 1px solid #222; padding-top: 20px; }
-        .summary-line { display: flex; justify-content: space-between; font-weight: 700; font-size: 12px; color: var(--text-gray); text-transform: uppercase; margin-bottom: 15px; }
-        .summary-line b { color: #fff; }
-        
-        .total-line { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
-        .total-line span { font-size: 24px; font-weight: 900; text-transform: uppercase; }
-        .total-line b { font-size: 38px; color: var(--gold); font-weight: 900; }
-
-        .btn-checkout { 
-            display: block; width: 100%; background: var(--gold); color: #000; text-align: center; 
-            padding: 22px; margin-top: 30px; text-decoration: none; font-weight: 900; font-size: 16px; 
-            border-radius: 4px; clip-path: polygon(0 0, 100% 0, 100% 70%, 95% 100%, 0 100%);
-            text-transform: uppercase;
-        }
-        .btn-continue { 
-            display: block; width: 100%; text-align: center; color: #fff; text-decoration: none; 
-            padding: 15px; margin-top: 10px; font-weight: 700; font-size: 11px; text-transform: uppercase;
-            border: 1px solid #1a1a1a; border-radius: 4px;
-        }
-
-        .yellow-footer { background: var(--gold); padding: 40px 20px; display: flex; justify-content: space-around; margin-top: 80px; }
-        .f-item { text-align: center; color: #000; }
-        .f-item h2 { font-size: 36px; font-weight: 900; margin-bottom: 5px; }
-        .f-item p { font-size: 9px; font-weight: 800; text-transform: uppercase; color: rgba(0,0,0,0.6); }
-
-        .empty-cart { text-align: center; padding: 100px 0; color: var(--text-gray); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
-        @media (max-width: 768px) {
-    /* 1. Настройка контейнера товара */
-    .cart-item {
-        padding: 15px 10px !important;
-        gap: 10px !important; /* Уменьшаем общий зазор */
-        display: flex !important;
-        align-items: center !important;
-        justify-content: blink;
-    }
-
-    /* Картинка чуть меньше на мобилках */
-    .cart-item img {
-        width: 50px !important;
-        height: 50px !important;
-        flex-shrink: 0 !important; /* Чтобы картинку не сплющило */
-    }
-
-    /* 2. Текст названия товара */
-    .item-info {
-        flex: 1 !important; /* Занимает всё свободное место в центре */
-        min-width: 0 !important; /* Важно, чтобы текст не раздувал контейнер */
-        margin-right: 5px !important;
-    }
-
-    .item-name {
-        font-size: 11px !important;
-        line-height: 1.2 !important;
-        white-space: nowrap !important; /* Не дает тексту прыгать на вторую строку */
-        overflow: hidden !important;
-        text-overflow: ellipsis !important; /* Если название слишком длинное — будет три точки */
-    }
-
-    .item-price {
-        font-size: 13px !important;
-    }
-
-    /* 3. КОНТРОЛЬ КОЛИЧЕСТВА (Выравнивание в столбик) */
-    .qty-control {
-        width: 90px !important; /* Фиксированная ширина, чтобы цифры не двигались */
-        height: 32px !important;
-        flex-shrink: 0 !important; /* Запрещаем менять размер */
-        display: flex !important;
-        justify-content: space-between !important;
-    }
-
-    .qty-btn {
-        width: 30px !important;
-        height: 30px !important;
-        font-size: 16px !important;
-    }
-
-    .qty-num {
-        width: 25px !important;
-        font-size: 12px !important;
-    }
-
-    /* 4. КРЕСТИК (Идеальное выравнивание справа) */
-    .remove-x {
-        width: 32px !important;
-        height: 32px !important;
-        margin-left: 5px !important;
-        flex-shrink: 0 !important; /* Чтобы всегда был ровный квадрат */
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        font-size: 14px !important;
-        border: 1px solid #333 !important;
-        color: #666 !important;
-    }
-
-    /* 5. Общие правки заголовков для мобилки */
-    .cart-header h1 {
-        font-size: 32px !important;
-    }
-    
-    .total-line span { font-size: 18px !important; }
-    .total-line b { font-size: 28px !important; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ваша Корзина | KAIF SMOKE</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+--gold: #e6b130;
+--bg: #000000;
+--card-bg: #111111;
+--border: #1a1a1a;
+--text-gray: #555;
 }
-    </style>
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background-color: var(--bg); color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+.bg-grid {
+position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px);
+background-size: 45px 45px; z-index: -1;
+}
+
+.wrapper { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; }
+.logo-area { display: flex; align-items: center; gap: 10px; }
+.logo-img { width: 35px; height: 35px; object-fit: contain; }
+.logo-text { font-weight: 800; font-size: 18px; letter-spacing: 1px; }
+.nav-back { color: var(--text-gray); text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+
+.cart-header { margin-bottom: 40px; }
+.cart-header h1 { font-size: 56px; font-weight: 900; line-height: 0.9; text-transform: uppercase; border-left: 5px solid var(--gold); padding-left: 20px; }
+.item-count-top { color: var(--text-gray); font-size: 10px; font-weight: 800; text-transform: uppercase; margin-top: 10px; text-align: right; }
+
+.cart-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.cart-item { display: flex; align-items: center; background: var(--card-bg); padding: 20px; gap: 20px; }
+.cart-item img { width: 60px; height: 60px; object-fit: contain; background: #000; border-radius: 8px; padding: 5px; }
+.item-info { flex: 1; }
+.item-name { font-weight: 800; font-size: 14px; text-transform: uppercase; margin-bottom: 5px; }
+.item-price { color: var(--gold); font-weight: 900; font-size: 16px; }
+
+.qty-control { display: flex; align-items: center; background: #080808; border-radius: 6px; border: 1px solid #222; overflow: hidden; }
+.qty-btn { background: transparent; color: #fff; border: none; width: 35px; height: 35px; cursor: pointer; font-size: 18px; transition: 0.2s; }
+.qty-btn:hover { background: #1a1a1a; }
+.qty-num { width: 30px; text-align: center; font-weight: 800; font-size: 14px; }
+
+.remove-x { color: var(--text-gray); background: transparent; border: 1px solid #222; width: 35px; height: 35px; border-radius: 6px; cursor: pointer; margin-left: 10px; }
+
+.summary-block { margin-top: 40px; border-top: 1px solid #222; padding-top: 20px; }
+.summary-line { display: flex; justify-content: space-between; font-weight: 700; font-size: 12px; color: var(--text-gray); text-transform: uppercase; margin-bottom: 15px; }
+.summary-line b { color: #fff; }
+.total-line { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+.total-line span { font-size: 24px; font-weight: 900; text-transform: uppercase; }
+.total-line b { font-size: 38px; color: var(--gold); font-weight: 900; }
+
+.btn-checkout {
+display: block; width: 100%; background: var(--gold); color: #000; text-align: center;
+padding: 22px; margin-top: 30px; text-decoration: none; font-weight: 900; font-size: 16px;
+border-radius: 4px; clip-path: polygon(0 0, 100% 0, 100% 70%, 95% 100%, 0 100%);
+text-transform: uppercase;
+}
+.btn-continue {
+display: block; width: 100%; text-align: center; color: #fff; text-decoration: none;
+padding: 15px; margin-top: 10px; font-weight: 700; font-size: 11px; text-transform: uppercase;
+border: 1px solid #1a1a1a; border-radius: 4px;
+}
+
+.yellow-footer { background: var(--gold); padding: 40px 20px; display: flex; justify-content: space-around; margin-top: 80px; }
+.f-item { text-align: center; color: #000; }
+.f-item h2 { font-size: 36px; font-weight: 900; margin-bottom: 5px; }
+.f-item p { font-size: 9px; font-weight: 800; text-transform: uppercase; color: rgba(0,0,0,0.6); }
+
+.empty-cart { text-align: center; padding: 100px 0; color: var(--text-gray); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+@media (max-width: 768px) {
+/* 1. Настройка контейнера товара */
+.cart-item {
+padding: 15px 10px !important;
+gap: 10px !important; /* Уменьшаем общий зазор */
+display: flex !important;
+align-items: center !important;
+justify-content: blink;
+}
+
+/* Картинка чуть меньше на мобилках */
+.cart-item img {
+width: 50px !important;
+height: 50px !important;
+flex-shrink: 0 !important; /* Чтобы картинку не сплющило */
+}
+
+/* 2. Текст названия товара */
+.item-info {
+flex: 1 !important; /* Занимает всё свободное место в центре */
+min-width: 0 !important; /* Важно, чтобы текст не раздувал контейнер */
+margin-right: 5px !important;
+}
+
+.item-name {
+font-size: 11px !important;
+line-height: 1.2 !important;
+white-space: nowrap !important; /* Не дает тексту прыгать на вторую строку */
+overflow: hidden !important;
+text-overflow: ellipsis !important; /* Если название слишком длинное — будет три точки */
+}
+
+.item-price {
+font-size: 13px !important;
+}
+
+/* 3. КОНТРОЛЬ КОЛИЧЕСТВА (Выравнивание в столбик) */
+.qty-control {
+width: 90px !important; /* Фиксированная ширина, чтобы цифры не двигались */
+height: 32px !important;
+flex-shrink: 0 !important; /* Запрещаем менять размер */
+display: flex !important;
+justify-content: space-between !important;
+}
+
+.qty-btn {
+width: 30px !important;
+height: 30px !important;
+font-size: 16px !important;
+}
+
+.qty-num {
+width: 25px !important;
+font-size: 12px !important;
+}
+
+/* 4. КРЕСТИК (Идеальное выравнивание справа) */
+.remove-x {
+width: 32px !important;
+height: 32px !important;
+margin-left: 5px !important;
+flex-shrink: 0 !important; /* Чтобы всегда был ровный квадрат */
+display: flex !important;
+align-items: center !important;
+justify-content: center !important;
+font-size: 14px !important;
+border: 1px solid #333 !important;
+color: #666 !important;
+}
+
+/* 5. Общие правки заголовков для мобилки */
+.cart-header h1 {
+font-size: 32px !important;
+}
+.total-line span { font-size: 18px !important; }
+.total-line b { font-size: 28px !important; }
+
+header {
+                padding: 0 1px !important;
+                margin-bottom: 30px;
+            }
+
+            .brand-img {
+                width: 40px !important;
+                height: 40px !important;
+            }
+
+            .brand-made, .brand-puff {
+                font-size: 20px !important;
+                letter-spacing: 0.5px !important;
+            }
+
+            .cart-item {
+                padding: 15px 10px !important;
+                gap: 10px !important;
+            }
+
+            .cart-item img {
+                width: 50px !important;
+                height: 50px !important;
+            }
+
+            .item-name {
+                font-size: 11px !important;
+                white-space: nowrap !important;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .qty-control {
+                width: 90px !important;
+            }
+
+            .cart-header h1 {
+                font-size: 32px !important;
+            } 
+}
+        .brand-link {
+            text-decoration: none !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            transition: 0.3s ease !important;
+        }
+
+        .brand-img {
+            width: 45px !important;
+            height: 45px !important;
+            object-fit: contain !important;
+            border-radius: 8px !important;
+        }
+
+        .brand-text {
+            display: flex !important;
+            gap: 6px !important;
+            line-height: 1 !important;
+            font-family: 'Bebas Neue',  !important;
+        }
+
+        .brand-made {
+            color: #ffffff !important;
+            font-size: 26px !important;
+            font-weight: 900 !important;
+            text-transform: uppercase !important;
+            transition: 0.3s ease !important;
+        }
+
+        .brand-puff {
+            color: #e6b130 !important;
+            font-size: 26px !important;
+            font-weight: 900 !important;
+            text-transform: uppercase !important;
+        }
+
+        .brand-link:hover .brand-made {
+            color: #e6b130 !important;
+        }
+</style>
 </head>
 <body>
 
 <div class="bg-grid"></div>
 
 <div class="wrapper">
-    <header>
-        <a href="index.html" class="logo-link" style="text-decoration: none; color: inherit;">
-        <div class="logo-area">
-            <img src="images/IMG_2073.PNG" class="logo-img">
-            <span class="logo-text">MADE PUFF</span>
-        </div>
-        </a>
-        <a href="index.html" class="nav-back">← НА ГЛАВНУЮ</a>
-    </header>
-
-    <div class="cart-header">
-        <h1>КОРЗИНА</h1>
-        <div class="item-count-top" id="top-counter">0 ТОВАРА</div>
-    </div>
-
-    <div id="cart-content"></div>
-
-    <div id="summary-area" style="display: none;">
-        <div class="summary-block">
-            <div class="summary-line"><span>ТОВАРОВ</span><b id="subtotal-count">0 ШТ.</b></div>
-            
-            <div class="total-line">
-                <span>ИТОГО</span>
-                <b id="total-sum">0,00 ZL</b>
+<header>
+        <a href="index.html" class="brand-link">
+            <img src="images/IMG_2073.PNG" class="brand-img" alt="Logo">
+            <div class="brand-text">
+                <span class="brand-made">MADE</span>
+                <span class="brand-puff">PUFF</span>
             </div>
-        </div>
+        </a>
+<a href="index.html" class="nav-back">← НА ГЛАВНУЮ</a>
+</header>
 
-        <a href="checkout.html" class="btn-checkout"> ОФОРМИТЬ ЗАКАЗ </a>
-        <a href="catalog.html" class="btn-continue">← ПРОДОЛЖИТЬ ПОКУПКИ</a>
-    </div>
+<div class="cart-header">
+<h1>КОРЗИНА</h1>
+<div class="item-count-top" id="top-counter">0 ТОВАРА</div>
 </div>
+
+<div id="cart-content"></div>
+
+<div id="summary-area" style="display: none;">
+<div class="summary-block">
+<div class="summary-line"><span>ТОВАРОВ</span><b id="subtotal-count">0 ШТ.</b></div>
+<div class="total-line">
+<span>ИТОГО</span>
+<b id="total-sum">0,00 ZL</b>
+</div>
+</div>
+
+<a href="checkout.html" class="btn-checkout"> ОФОРМИТЬ ЗАКАЗ </a>
+<a href="catalog.html" class="btn-continue">← ПРОДОЛЖИТЬ ПОКУПКИ</a>
+</div>
+
+
 
 
 

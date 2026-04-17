@@ -108,9 +108,86 @@
         .legal-notice { font-size: 9px; color: var(--text-gray); text-align: center; margin-top: 15px; line-height: 1.4; text-transform: uppercase; font-weight: 700; }
 
         #addr-details { display: none; flex-direction: column; gap: 5px; margin-top: 20px; }
+@media (max-width: 768px) { .container { flex-direction: column; } .sidebar { width: 100%; }
+            header {
+                padding: 0 1px !important;
+                margin-bottom: 30px;
+            }
 
-        @media (max-width: 768px) { .container { flex-direction: column; } .sidebar { width: 100%; } }
+            .brand-img {
+                width: 40px !important;
+                height: 40px !important;
+            }
 
+            .brand-made, .brand-puff {
+                font-size: 20px !important;
+                letter-spacing: 0.5px !important;
+            }
+
+            .cart-item {
+                padding: 15px 10px !important;
+                gap: 10px !important;
+            }
+
+            .cart-item img {
+                width: 50px !important;
+                height: 50px !important;
+            }
+
+            .item-name {
+                font-size: 11px !important;
+                white-space: nowrap !important;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .qty-control {
+                width: 90px !important;
+            }
+
+            .cart-header h1 {
+                font-size: 32px !important;
+            } }
+        .brand-link {
+            text-decoration: none !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            transition: 0.3s ease !important;
+        }
+
+        .brand-img {
+            width: 45px !important;
+            height: 45px !important;
+            object-fit: contain !important;
+            border-radius: 8px !important;
+        }
+
+        .brand-text {
+            display: flex !important;
+            gap: 6px !important;
+            line-height: 1 !important;
+            font-family: 'Bebas Neue',  !important;
+        }
+
+        .brand-made {
+            color: #ffffff !important;
+            font-size: 26px !important;
+            font-weight: 900 !important;
+            text-transform: uppercase !important;
+            transition: 0.3s ease !important;
+        }
+
+        .brand-puff {
+            color: #e6b130 !important;
+            font-size: 26px !important;
+            font-weight: 900 !important;
+            text-transform: uppercase !important;
+        }
+
+        .brand-link:hover .brand-made {
+            color: #e6b130 !important;
+        }
         /* СТИЛЬ ГАЛОЧКИ - ТЕПЕРЬ ОНА БУДЕТ ВИДИМА ВСЕГДА ПРИ КЛИКЕ */
         .custom-checkbox-box {
             width: 24px; height: 24px; border: 2px solid #333; border-radius: 6px;
@@ -132,14 +209,16 @@
 <body>
     <div class="bg-grid"></div>
     <div class="wrapper">
-        <header>
-            <a href="index.html" class="logo-link" style="text-decoration: none; color: inherit;">
-            <div class="header-left">
-                <img src="images/IMG_2073.PNG" alt="" class="logo-img"> <div class="logo">MADE PUFF</div>
+    <header>
+        <a href="index.html" class="brand-link">
+            <img src="images/IMG_2073.PNG" class="brand-img" alt="Logo">
+            <div class="brand-text">
+                <span class="brand-made">MADE</span>
+                <span class="brand-puff">PUFF</span>
             </div>
-            </a>
-            <a href="cart.html" class="back-link">← КОРЗИНА</a>
-        </header>
+        </a>
+        <a href="cart.html" class="back-link">← КОРЗИНА</a>
+    </header>
 
         <h1 class="main-title">ОФОРМЛЕНИЕ<br>ЗАКАЗА</h1>
 
@@ -351,23 +430,27 @@ function refreshUI() {
         }
     });
 
-    // Определяем реальную цену доставки в зависимости от суммы товаров
+    // 1. Сначала считаем сумму скидки
+    let discVal = sum * discount; 
+    
+    // 2. Считаем чистую сумму (Товары минус Скидка)
+    let amountAfterDiscount = sum - discVal;
+
+    // 3. Теперь проверяем бесплатную доставку по ЧИСТОЙ сумме
     let effectiveDeliveryPrice = dPrice; 
 
-    // Если сумма >= 200 И выбрана НЕ Варшава (dPrice не равен 40), тогда доставка 0
-    // Если выбрана Варшава (40), она остается 40 при любой сумме
-    if (sum >= 200 && dPrice !== 40) {
+    // Если сумма ПОСЛЕ скидки >= 200 И это не Варшава (40)
+    if (amountAfterDiscount >= 200 && dPrice !== 40) {
         effectiveDeliveryPrice = 0;
     }
 
-    // Обновляем визуальные ценники в меню выбора
+    // 4. Обновляем визуальные ценники в меню выбора
     const optionItems = document.querySelectorAll('.option-item');
     optionItems.forEach((item, index) => {
         const priceText = item.querySelector('.price-text');
         
-        // Индексы 0 и 1 — это Пачкомат и обычный Курьер
-        if (index < 2) { 
-            if (sum >= 200) {
+        if (index < 2) { // Пачкомат и Курьер
+            if (amountAfterDiscount >= 200) {
                 priceText.innerText = "БЕСПЛАТНО";
                 priceText.style.color = "var(--green)";
             } else {
@@ -376,31 +459,27 @@ function refreshUI() {
                 priceText.style.color = "#fff";
             }
         } else {
-            // Индекс 2 — это Варшава, она всегда 40
+            // Варшава всегда 40
             priceText.innerText = "40,00 zł";
             priceText.style.color = "#fff";
         }
     });
 
-    // 1. Считаем скидку
-    let discVal = sum * discount; 
+    // 5. Обновляем итоговые цифры в чеке
+    if(document.getElementById('sub-val')) document.getElementById('sub-val').innerText = formatNum(sum) + " ZL";
 
-    // 2. Обновляем промокод в чеке
     const promoLine = document.getElementById('promo-line');
     if (promoLine) promoLine.style.display = discount > 0 ? 'flex' : 'none';
     const promoValElem = document.getElementById('promo-val');
     if (promoValElem) promoValElem.innerText = `-${formatNum(discVal)} ZL`;
 
-    // 3. Итоговая сумма (Товары - Скидка + Итоговая цена доставки)
+    // ИТОГО = (Товары - Скидка) + Итоговая доставка
     const totalValElem = document.getElementById('total-val');
     if (totalValElem) {
-        let finalTotal = sum - discVal + effectiveDeliveryPrice;
+        let finalTotal = amountAfterDiscount + effectiveDeliveryPrice;
         totalValElem.innerText = formatNum(finalTotal) + " ZL";
     }
 
-    // Поля в чеке справа
-    if(document.getElementById('sub-val')) document.getElementById('sub-val').innerText = formatNum(sum) + " ZL";
-    
     const delValElem = document.getElementById('del-val');
     if(delValElem) {
         if (effectiveDeliveryPrice === 0) {

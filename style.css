@@ -81,7 +81,7 @@ body { background: black; color: #fff; font-family: 'Montserrat', sans-serif; ov
 body { 
     background: black; 
     color: #fff; 
-    font-family: 'Montserrat', sans-serif; 
+    font-family: 'Inter', sans-serif;
     overflow-x: hidden; /* Защита от горизонтального скролла */
     padding-top: 70px; 
 }
@@ -93,10 +93,19 @@ body {
     display: flex; 
     justify-content: space-between; /* Лого слева, всё остальное справа */
     align-items: center;
-    padding: 0 20px; 
+    padding: 0 10px; 
     background: rgba(0, 0, 0, 0.95);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 9999;
+
+    height: 70px !important; 
+    background: #000000 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 10px !important;
+    z-index: 9999 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .header-left { display: flex; align-items: center; gap: 12px; }
@@ -247,7 +256,91 @@ body {
 }
 .marquee-content { display: inline-block; animation: marquee 20s linear infinite; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* Убираем лишние инлайновые стили и задаем базу */
+/* --- ОБЩИЙ СТИЛЬ ЛОГОТИПА (ПК И МОБИЛКА) --- */
+/* --- ОБНОВЛЕННЫЕ СТИЛИ ЛОГОТИПА --- */
 
+/* --- НОВАЯ ШАПКА: ЧИСТЫЙ КОД --- */
+
+/* Контейнер всей шапки */
+/* --- ОБНУЛЕНИЕ И ЧИСТЫЙ СТИЛЬ ЛОГОТИПА --- */
+
+/* --- ОБНУЛЕНИЕ И ЧИСТЫЙ СТИЛЬ ЛОГОТИПА --- */
+
+/* Подключаем Montserrat 900 для максимальной жирности */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700;900&display=swap');
+
+/* --- ОБНУЛЕНИЕ И ЧИСТЫЙ СТИЛЬ ЛОГОТИПА --- */
+
+.brand-link {
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    transition: 0.3s ease !important;
+}
+
+.brand-img {
+    width: 45px !important;
+    height: 45px !important;
+    object-fit: contain !important;
+    border-radius: 8px !important;
+}
+
+.brand-text {
+    display: flex !important;
+    gap: 6px !important;
+    line-height: 1 !important;
+    font-family: 'Bebas Neue',  !important;
+}
+
+.brand-made {
+    color: #ffffff !important;
+    font-size: 26px !important; /* Мощный размер */
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    transition: 0.3s ease !important;
+}
+
+.brand-puff {
+    color: #e6b130 !important; /* Твой фирменный желтый */
+    font-size: 26px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+}
+
+/* ЭФФЕКТ: При наведении на всю ссылку MADE подсвечивается желтым */
+.brand-link:hover .brand-made {
+    color: #e6b130 !important;
+}
+
+/* --- МОБИЛЬНАЯ ВЕРСИЯ (ДО 768px) --- */
+@media screen and (max-width: 768px) {
+    .header.fixed-header {
+        height: 50px !important;
+        padding: 0 1px !important;
+        justify-content: flex-start !important; /* Прижимаем всё к левому краю */
+    }
+
+    .header-left {
+        flex: 1 !important;
+    }
+
+    .brand-img {
+        width: 40px !important; /* На мобилке чуть компактнее */
+        height: 40px !important;
+    }
+
+    .brand-made, .brand-puff {
+        font-size: 20px !important; /* Крупный текст на телефоне */
+        letter-spacing: 0.5px !important;
+    }
+
+    /* Толкаем корзину и бургер вправо */
+    .header-right-actions {
+        margin-left: auto !important;
+    }
+}
 /* --- ПРАВКИ ДЛЯ КОМПЬЮТЕРА (DESKTOP) --- */
 @media (min-width: 769px) {
     .header.fixed-header { padding: 0 40px; }
@@ -268,6 +361,7 @@ body {
 
 @media (max-width: 768px) {
     
+
     /* Контейнер для четырех блоков */
     .hero-info-bar {
         display: grid !important;
@@ -279,6 +373,7 @@ body {
         margin-top: 30px;
     }
 
+    /*
     /* Каждый отдельный блок (500+, 1-2 дня и т.д.) */
     .info-item {
         padding: 20px 10px !important;
@@ -381,8 +476,19 @@ body {
         transform: skewX(-15deg) translateY(-5px) !important; /* Всплывает вверх */
         filter: brightness(1.1) !important;
     }
+.hero-title {
+        /* Увеличиваем общий размер шрифта */
+        font-size: 80px !important; 
+        /* Убираем лишнее расстояние между MADE и PUFF */
+        line-height: 0.85 !important; 
+        font-weight: 900 !important;
+        text-transform: uppercase !important;
+        /* Тот самый шрифт с главной */
+        font-family: 'Bebas Neue', !important;
 
+    }
 }
+
 
 
 
@@ -1561,6 +1667,7 @@ body {
     color: #fff;
     margin: 0;
     font-family: 'Inter', sans-serif;
+    padding-top: 20px;
 }
 
 .catalog-layout {
