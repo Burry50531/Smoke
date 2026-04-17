@@ -1284,12 +1284,8 @@ document.querySelectorAll('.filter-item').forEach(item => {
         this.classList.add('is-active-tap');
     });
 
-    // Если палец убрал (завершил клик)
     item.addEventListener('touchend', function() {
-        // Оставляем подсветку на 200мс, чтобы была видна реакция, и убираем
         setTimeout(() => {
-            // Если хочешь, чтобы выбранный пункт оставался желтым — удали эту строку
-            // this.classList.remove('is-active-tap'); 
         }, 200);
     });
 });

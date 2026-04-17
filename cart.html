@@ -201,8 +201,11 @@ header {
             height: 45px !important;
             object-fit: contain !important;
             border-radius: 8px !important;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         }
-
+.brand-link:hover .brand-img {
+    transform: scale(1.2) !important; 
+}
         .brand-text {
             display: flex !important;
             gap: 6px !important;
@@ -224,8 +227,10 @@ header {
             text-transform: uppercase !important;
         }
 
-        .brand-link:hover .brand-made {
-            color: #e6b130 !important;
+        .brand-link:hover .brand-made,
+.brand-link:active .brand-made {
+    color: #e6b130 !important;
+
         }
 </style>
 </head>

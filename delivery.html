@@ -35,7 +35,6 @@
         .hero h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 900; line-height: 0.85; text-transform: uppercase; margin-bottom: 20px; }
         .hero p { color: #777; font-size: 13px; max-width: 450px; font-weight: 500; }
 
-        /* ИСПРАВЛЕННАЯ ПОЛОСКА: ЭФФЕКТ "В КРАЯ" НА МОБИЛКАХ */
         .marquee-container {
             position: relative;
             background: #0a0a0a; 
@@ -45,13 +44,11 @@
             overflow: hidden; 
             margin-bottom: 40px;
             
-            /* Магия растягивания на весь экран смартфона */
             width: 100vw;
             margin-left: calc(-50vw + 50%);
             left: 0;
         }
 
-        /* На компьютерах делаем её аккуратной и в рамках контента */
         @media (min-width: 940px) {
             .marquee-container {
                 width: 100%;

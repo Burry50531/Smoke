@@ -161,8 +161,11 @@
             height: 45px !important;
             object-fit: contain !important;
             border-radius: 8px !important;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         }
-
+.brand-link:hover .brand-img {
+    transform: scale(1.2) !important; 
+}
         .brand-text {
             display: flex !important;
             gap: 6px !important;
@@ -184,9 +187,10 @@
             text-transform: uppercase !important;
         }
 
-        .brand-link:hover .brand-made {
-            color: #e6b130 !important;
-        }
+        .brand-link:hover .brand-made,
+.brand-link:active .brand-made {
+    color: #e6b130 !important;
+}
         .custom-checkbox-box {
             width: 24px; height: 24px; border: 2px solid #333; border-radius: 6px;
             background: #000; display: flex; align-items: center; justify-content: center;
@@ -515,21 +519,17 @@ function applyPromo() {
         status.style.color = "var(--red)"; 
     }
     
-    refreshUI(); // Пересчитываем итоговую сумму
+    refreshUI(); 
 }
 
 function updateDel(el, price, type) {
-    // 1. Убираем активный класс у всех и даем текущему
     document.querySelectorAll('.option-item').forEach(i => i.classList.remove('active'));
     el.classList.add('active'); 
 
-    // 2. Обновляем ГЛОБАЛЬНУЮ переменную цены доставки
     dPrice = price; 
     
-    // 3. Обновляем название доставки для сообщения в ТГ
     dName = el.querySelector('b').innerText;
 
-    // 4. Показываем нужные поля адреса
     document.getElementById('addr-paczkomat').style.display = type === 'paczkomat' ? 'block' : 'none';
     document.getElementById('addr-details').style.display = type === 'paczkomat' ? 'none' : 'flex';
     
@@ -537,7 +537,6 @@ function updateDel(el, price, type) {
         document.getElementById('c_city').value = "Warszawa";
     }
 
-    // 5. ВАЖНО: Запускаем пересчет интерфейса, чтобы итоговая сумма изменилась
     refreshUI();
 }
 
@@ -563,7 +562,6 @@ function updateDel(el, price, type) {
             ? "InPost: " + document.getElementById('paczkomat_id').value 
             : `${document.getElementById('c_zip').value}, г. ${document.getElementById('c_city').value}, ул. ${document.getElementById('c_street').value}, д. ${document.getElementById('c_home').value}`;
 
-        // ТВОЙ НОВЫЙ ФОРМАТ СООБЩЕНИЯ
         const text = `🚀 НОВЫЙ ЗАКАЗ\n` + 
         `--------------------------\n` + 
         `👤 Клиент: ${n} ${s}\n` + 
