@@ -28,7 +28,7 @@ const products = [
     { name: "VIMTO", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/VMT.png" },
     { name: "Watermelon Bubble Gum", brand: "Elf Bar Raya D3", category: "disposable", price: "100 zł", count: "5%", img: "images/watermelom buble gum.png" },
 
-    // --- ELF BAR TRIO 120 zł 5% NEW ---
+    // --- ELF BAR TRIO 120 zł 5%  ---
     { name: "Cool Menthol", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 06_58_45.png" },
     { name: "La Grape", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 07_00_29.png" },
     { name: "Pomegranate Blast", brand: "Elf Bar Trio", category: "disposable", price: "120 zł", count: "5%", img: "images/ChatGPT Image 10 апр. 2026 г., 07_01_50.png" },
@@ -75,7 +75,7 @@ const products = [
     { name: "Spearmint", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000002ec072438e3487582908a69b.png" },
     { name: "Watermelon", brand: "ELFLIQ", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000008c80720ab3efedf228401e62.png" },
 
-    // --- VOZOL PRIME 30 ML (50MG) NEW ---
+    // --- VOZOL PRIME 30 ML (50MG)  ---
     { name: "Watermelon Ice", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000461c720a8297ac05719128ac.png" },
     { name: "Blue Razz Lemon", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_000000002e64720a8f970843ef6e439e.png" },
     { name: "Kiwi Passion Fruit Guava", brand: "VOZOL PRIME", category: "liquid", price: "55 zł", count: "50mg", img: "images/file_00000000eae0724392dcb5e16ce788b7.png" },
@@ -97,105 +97,85 @@ const products = [
 
 
 function toggleMenu() {
-    // Ищем элементы по тем ID, которые ты указал в HTML
     const menu = document.getElementById('side-menu');
     const overlay = document.getElementById('overlay');
     
-    // Переключаем класс active
     menu.classList.toggle('active');
     
-    // Если overlay существует, тоже переключаем
     if (overlay) {
         overlay.classList.toggle('active');
     }
 
-    // Запрещаем скролл страницы, когда меню открыто
     if (menu.classList.contains('active')) {
         document.body.style.overflow = 'hidden';
     } else {
         document.body.style.overflow = 'auto';
     }
 }
-// 1. НАХОДИМ ЭЛЕМЕНТЫ И ДОБАВЛЯЕМ СОБЫТИЯ (Вставь это в конец файла)
 document.addEventListener('DOMContentLoaded', () => {
     const cartWrapper = document.querySelector('.cart-wrapper');
     if (cartWrapper) {
-        // Когда мышка заходит в зону корзины
         cartWrapper.addEventListener('mouseenter', showCart);
-        // Когда мышка уходит
         cartWrapper.addEventListener('mouseleave', hideCart);
     }
 });
 
-// 2. САМИ ФУНКЦИИ ПОКАЗА (Проверь, чтобы названия классов совпадали с CSS)
 function showCart() {
     const popup = document.getElementById('cart-popup');
     if (popup) {
-        popup.style.display = 'block'; // Принудительно показываем
-        // Если у тебя в CSS анимация через класс, раскомментируй строку ниже:
-        // popup.classList.add('visible'); 
-        renderCartPopup(); // Твоя функция отрисовки товаров
+        popup.style.display = 'block'; 
+
+        renderCartPopup(); 
     }
 }
 
 function hideCart() {
     const popup = document.getElementById('cart-popup');
     if (popup) {
-        popup.style.display = 'none'; // Скрываем
-        // popup.classList.remove('visible');
+        popup.style.display = 'none'; 
     }
 }
 
-// Обновленная функция счетчиков
 function updateCounterDisplay() {
     const cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
     
-    // 1. Счетчик на иконке (желтый круг)
     const badge = document.getElementById('cart-counter');
     if (badge) {
         badge.innerText = cart.length;
         badge.style.display = cart.length > 0 ? 'flex' : 'none';
     }
     
-    // 2. Текст внутри выпадающего окна (например: "2 ТОВАРОВ")
     const popupText = document.getElementById('cart-items-count');
     if (popupText) {
         popupText.innerText = `${cart.length} ТОВАРОВ`;
     }
 }
 
-// Показать корзину
 function showCart() {
     const popup = document.getElementById('cart-popup');
     if(popup) {
         popup.classList.add('visible');
-        renderCartPopup(); // Сразу обновляем список товаров
+        renderCartPopup(); 
     }
 }
 
-// Скрыть корзину
 function hideCart() {
     const popup = document.getElementById('cart-popup');
     if(popup) popup.classList.remove('visible');
 }
 
-// ОЧИСТКА КОРЗИНЫ
 function clearCart(event) {
-    if (event) event.stopPropagation(); // Чтобы окно не закрылось сразу
+    if (event) event.stopPropagation(); 
     
     console.log("Нажата очистка");
     
-    // 1. Очищаем массив в памяти
     cart = [];
-    // 2. Очищаем в хранилище браузера
     localStorage.removeItem('kaif_cart');
     
-    // 3. Обновляем всё на экране
     updateCounterDisplay(); 
     renderCartPopup();
 }
 
-// Обновление списка товаров внутри всплывающего окна
 function renderCartPopup() {
     const list = document.getElementById('cart-items-list');
     const emptyMsg = document.getElementById('cart-empty-msg');
@@ -224,11 +204,9 @@ function renderCartPopup() {
     }
 }
 
-// Не забудь вызвать это при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     updateCounterDisplay();
 });
-// --- 2. ОТРИСОВКА КАТАЛОГА (С ДОБАВЛЕНИЕМ КЛАССОВ) ---
 function renderCatalog(items) {
     const grid = document.getElementById('catalog-grid');
     if (!grid) return;
@@ -238,7 +216,6 @@ function renderCatalog(items) {
         return;
     }
 
-    // ВАЖНО: Мы добавляем ${p.category} в class="card ..."
     grid.innerHTML = items.map(p => `
         <div class="card ${p.category}">
             <div class="card-img-container">
@@ -269,7 +246,6 @@ function renderHome() {
     `).join('');
 }
 
-// --- 3. ФУНКЦИЯ ФИЛЬТРА (ИСПРАВЛЕННАЯ) ---
 function setFilter(categoryType) {
 console.log("Фильтр по:", categoryType);
 let filtered;
@@ -277,13 +253,11 @@ let filtered;
 if (categoryType === 'all') {
 filtered = products;
 } else {
-// Теперь p.category точно существует
 filtered = products.filter(p => p.category === categoryType);
 }
 
 renderCatalog(filtered);
 
-// Подсветка кнопок
 document.querySelectorAll('.filter-item').forEach(btn => {
 btn.classList.remove('active');
 if(btn.getAttribute('onclick') === `setFilter('${categoryType}')`) {
@@ -292,7 +266,6 @@ btn.classList.add('active');
 });
 }
 
-// Функция фильтрации по брендам (Elf Bar, Vozol и т.д.)
 function filterByBrand(brandName) {
 if (brandName === 'all') {
 renderCatalog(products);
@@ -300,7 +273,6 @@ renderCatalog(products);
 const filtered = products.filter(p => p.brand === brandName);
 renderCatalog(filtered);
 }
-// Обновление активного класса для кнопок брендов
 const buttons = document.querySelectorAll('.brand-mini-btn');
 buttons.forEach(btn => {
 if(btn.getAttribute('onclick') === `filterByBrand('${brandName}')`) {
@@ -329,10 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// Используем ОДИНАКОВОЕ имя ключа для всех страниц
 let cart = JSON.parse(localStorage.getItem('kaif_cart')) || [];
 
-// Сразу при загрузке обновляем цифру на корзине
 document.addEventListener('DOMContentLoaded', () => {
     updateCounterDisplay();
 });
@@ -353,11 +323,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function updateCounterDisplay() {
-    // В твоем HTML ID именно 'cart-count'
     const counter = document.getElementById('cart-count');
     if (counter) {
         counter.innerText = cart.length;
-        // Показываем, только если больше 0
         counter.style.display = cart.length > 0 ? 'inline-block' : 'none';
         console.log("Счетчик обновлен:", cart.length);
     } else {
@@ -366,7 +334,6 @@ function updateCounterDisplay() {
 }
 
 function showToast(message) {
-    // Ищем или создаем блок уведомления
     let toast = document.getElementById('toast-notification');
     if (!toast) {
         toast = document.createElement('div');
@@ -378,7 +345,6 @@ function showToast(message) {
     toast.style.visibility = "visible";
     toast.style.opacity = "1";
 
-    // Скрываем через 2 секунды
     setTimeout(() => {
         toast.style.visibility = "hidden";
         toast.style.opacity = "0";
@@ -387,50 +353,43 @@ function showToast(message) {
 
 
 
-// 1. ДАННЫЕ О ТОВАРАХ (МЕНЯЕМ ИХ ЗДЕСЬ)
-// Важно: Пути к фото в img/ должны совпадать!
 const productData = [
     {
         title: "CHASER For Pods",
         price: "55.00",
         description: "Premium Blueberry Mint Liquid (55 zł, 50mg nicotine). Сладкая черника с холодком.",
-        image: "img/prod1.png" // Фото Blueberry
+        image: "img/prod1.png" 
     },
     {
         title: "CHASER Mix",
         price: "25.00",
         description: "Sweet Strawberry Ice Liquid (10ml, 50mg nicotine). Клубничный микс.",
-        image: "img/prod2.png" // Фото Strawberry
+        image: "img/prod2.png"
     },
     {
         title: "Baron 77mg",
         price: "30.00",
         description: "Classic Mint Nicotine Pouches. Крепкая мятная жидкость.",
-        image: "img/prod3.png" // Фото Baron
+        image: "img/prod3.png" 
     }
 ];
 
-// Изначально выбран товар с индексом 0
 let currentSelectedIndex = 0;
 
-// 2. Функция для переключения вкусов
 function selectVariant(index) {
     currentSelectedIndex = index;
     const data = productData[index];
 
-    // Находим элементы на странице
     const mainImg = document.getElementById('main-product-img');
     const titleEl = document.getElementById('product-title');
     const priceEl = document.getElementById('product-price');
     const descEl = document.getElementById('product-description');
     
-    // МЕНЯЕМ ДАННЫЕ
-    mainImg.src = data.image; // Меняем фото
-    titleEl.innerText = data.title; // Меняем название
-    descEl.innerText = data.description; // Меняем описание
-    priceEl.innerText = data.price + " zł"; // Меняем цену
+    mainImg.src = data.image; 
+    titleEl.innerText = data.title; 
+    descEl.innerText = data.description; 
+    priceEl.innerText = data.price + " zł"; 
     
-    // ОБНОВЛЯЕМ АКТИВНЫЕ КНОПКИ (Убираем "active" у всех, добавляем нужной)
     const buttons = document.querySelectorAll('.flavor-btn');
     buttons.forEach((btn, i) => {
         if(i === index) {
@@ -442,7 +401,6 @@ function selectVariant(index) {
 }
 
 function addCurrentToCart() {
-    // Берем данные текущего выбранного товара из массива
     const data = productData[currentSelectedIndex];
     
     cart.push({
@@ -462,7 +420,6 @@ function updateCounterDisplay() {
     if(counter) counter.innerText = cart.length;
 }
 
-// Функция, которая делает саму фильтрацию
 function applyUrlFilter() {
     const urlParams = new URLSearchParams(window.location.search);
     const cat = urlParams.get('cat');
@@ -470,7 +427,6 @@ function applyUrlFilter() {
     if (cat) {
         console.log("URL фильтр запущен для:", cat);
         
-        // Ждем появления карточек в DOM (максимум 2 секунды)
         let attempts = 0;
         const checkExist = setInterval(() => {
             const cards = document.querySelectorAll('.card');
@@ -479,10 +435,10 @@ function applyUrlFilter() {
             if (cards.length > 0) {
                 console.log("Карточки найдены, фильтруем...");
                 clearInterval(checkExist);
-                setFilter(cat); // Твоя функция фильтрации
+                setFilter(cat); 
             } 
             
-            if (attempts > 20) { // Если за 2 сек товары не появились - отключаемся
+            if (attempts > 20) { 
                 clearInterval(checkExist);
                 console.log("Товары не подгрузились вовремя");
             }
@@ -490,15 +446,11 @@ function applyUrlFilter() {
     }
 }
 
-// ==========================
-// ГЛОБАЛЬНОЕ СОСТОЯНИЕ
-// ==========================
+
 let currentCategory = 'all';
 let currentBrand = 'all';
 
-// ==========================
-// ОСНОВНАЯ ФИЛЬТРАЦИЯ
-// ==========================
+
 function applyFilters() {
     let filtered = products;
 
@@ -515,9 +467,7 @@ function applyFilters() {
     renderCatalog(filtered);
 }
 
-// ==========================
-// ФИЛЬТР ПО КАТЕГОРИИ
-// ==========================
+
 function setFilter(category) {
     console.log("Категория:", category);
     currentCategory = category;
@@ -530,7 +480,6 @@ function setFilter(category) {
         if (title) title.innerText = 'СКОРО В ПРОДАЖЕ';
 
         let soonHtml = '';
-        // Генерируем 6 карточек, чтобы на телефоне заполнилось 3 ряда по 2 карточки
         for (let i = 0; i < 6; i++) {
             soonHtml += `
                 <div class="card soon-card">
@@ -552,7 +501,6 @@ function setFilter(category) {
         updateActiveBrand('all');
         updateBrandsVisibility();
     } else {
-        // Обычная логика
         if (title) {
             title.innerText = (category === 'liquid') ? 'ЖИДКОСТИ' : 
                              (category === 'disposable') ? 'ОДНОРАЗКИ' : 'ВСЕ КАТЕГОРИИ';
@@ -564,9 +512,7 @@ function setFilter(category) {
     }
 }
 
-// ==========================
-// ФИЛЬТР ПО БРЕНДУ
-// ==========================
+
 function filterByBrand(brand) {
     console.log("Бренд:", brand);
     currentBrand = brand;
@@ -576,14 +522,10 @@ function filterByBrand(brand) {
     scrollToTop();
 }
 
-// ==========================
-// УЛУЧШЕННОЕ ОБНОВЛЕНИЕ КНОПОК (ПК + МОБ)
-// ==========================
+
 function updateActiveCategory(category) {
-    // Ищем все элементы фильтра (и в основном меню, и в мобильном)
     document.querySelectorAll('.filter-item, .mobile-filter-item').forEach(btn => {
         btn.classList.remove('active');
-        // Проверяем через includes, чтобы избежать ошибок с кавычками и пробелами
         if (btn.getAttribute('onclick')?.includes(`'${category}'`)) {
             btn.classList.add('active');
         }
@@ -599,9 +541,7 @@ function updateActiveBrand(brand) {
     });
 }
 
-// ==========================
-// СКРЫТИЕ БРЕНДОВ (ИСПРАВЛЕНО)
-// ==========================
+
 function updateBrandsVisibility() {
     const brandButtons = document.querySelectorAll('.brand-mini-btn');
 
@@ -613,7 +553,7 @@ function updateBrandsVisibility() {
         const brand = match[1];
 
         if (brand === 'all') {
-            btn.style.display = 'flex'; // Используем flex, если кнопки на флексах
+            btn.style.display = 'flex'; 
             return;
         }
 
@@ -622,7 +562,6 @@ function updateBrandsVisibility() {
                 && p.brand.toLowerCase() === brand.toLowerCase();
         });
 
-        // На мобилках display: none иногда перебивается, используем принудительно
         if (hasProducts) {
             btn.style.setProperty('display', 'flex', 'important');
         } else {
@@ -631,24 +570,20 @@ function updateBrandsVisibility() {
     });
 }
 
-// ==========================
-// SCROLL UP (ИСПРАВЛЕНО ДЛЯ МОБИЛОК)
-// ==========================
+
 function scrollToTop() {
-    // На некоторых телефонах smooth не срабатывает, добавляем альтернативу
+
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
     });
 }
 
-// ==========================
-// ЗАГРУЗКА СТРАНИЦЫ
-// ==========================
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Инициализация
+
     if (document.getElementById('catalog-grid')) {
-        applyFilters(); // Сразу применяем фильтры (по умолчанию all)
+        applyFilters(); 
         updateBrandsVisibility();
     }
 });
@@ -657,7 +592,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// Запускаем проверку ссылки сразу при загрузке
+
 window.addEventListener('DOMContentLoaded', applyUrlFilter);
 
 function searchProducts() {
@@ -665,7 +600,7 @@ function searchProducts() {
     let cards = document.querySelectorAll('.card');
 
     cards.forEach(card => {
-        // Ищем название внутри заголовка карточки
+
         let name = card.querySelector('.card-title').innerText.toLowerCase();
         
         if (name.includes(input)) {
@@ -684,17 +619,17 @@ function searchProducts() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Функция для обновления заголовка
+
     function updateMobileTitle(text) {
         const titleElement = document.getElementById('dynamic-title');
         if (titleElement) {
-            // Убираем лишние цифры и спецсимволы, оставляем только текст
+
             let cleanText = text.replace(/[0-9]/g, '').replace('///', '').trim();
             titleElement.innerText = cleanText.toUpperCase() || 'ВСЕ КАТЕГОРИИ';
         }
     }
 
-    // Ловим клики по категориям (Все, Жидкости, Одноразки)
+
     const categoryButtons = document.querySelectorAll('.filter-item, .all-categories-btn');
     categoryButtons.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -702,11 +637,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Ловим клики по брендам
+
     const brandButtons = document.querySelectorAll('.brand-mini-btn');
     brandButtons.forEach(btn => {
         btn.addEventListener('click', function() {
-            // Если нажали на бренд "Все", лучше написать "БРЕНДЫ" или название категории
+
             if (this.innerText.trim().toUpperCase() === 'ВСЕ') {
                 updateMobileTitle('ВСЕ БРЕНДЫ');
             } else {
@@ -719,19 +654,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function searchProducts() {
-    // Получаем текст из поиска
+
     let input = document.getElementById('catalog-search').value.toLowerCase().trim();
     let cards = document.querySelectorAll('.card');
 
     cards.forEach(card => {
-        // Ищем название внутри карточки
+
         let name = card.querySelector('.card-title').innerText.toLowerCase();
         
         if (name.includes(input)) {
-            // Показываем карточку
+
             card.style.setProperty('display', 'flex', 'important');
         } else {
-            // Скрываем карточку
+
             card.style.setProperty('display', 'none', 'important');
         }
     });
@@ -740,22 +675,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('catalog-search');
 
     if (searchInput) {
-        // Слушаем ввод текста (работает на всех устройствах)
         searchInput.addEventListener('input', function() {
             searchProducts(); 
         });
 
-        // Для надежности на мобилках: срабатывает, когда нажимают "Enter" или "Go"
         searchInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 searchProducts();
-                this.blur(); // Скрывает клавиатуру после нажатия Enter
+                this.blur(); 
             }
         });
     }
 });
 
-// --- ИСПРАВЛЕННАЯ ОТРИСОВКА КАТАЛОГА ---
 function renderCatalog(items) {
     const grid = document.getElementById('catalog-grid');
     if (!grid) return;
@@ -765,7 +697,6 @@ function renderCatalog(items) {
         return;
     }
 
-    // УБРАЛ СИМВОЛ "₽", так как валюта уже есть в p.price
     grid.innerHTML = items.map(p => `
         <div class="card ${p.category}">
             <div class="card-img-container">
@@ -1274,13 +1205,10 @@ function interceptButtons() {
 
 
 document.querySelectorAll('.filter-item').forEach(item => {
-    // Когда коснулся пальцем
     item.addEventListener('touchstart', function() {
-        // Убираем желтый у всех
         document.querySelectorAll('.filter-item').forEach(el => {
             el.classList.remove('is-active-tap');
         });
-        // Добавляем желтый только нажатому
         this.classList.add('is-active-tap');
     });
 

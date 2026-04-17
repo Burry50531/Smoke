@@ -132,6 +132,32 @@
             .big-sum { font-size: 60px; }
             .del-header b { font-size: 16px; } 
         }
+        @media screen and (max-width: 768px) {
+        .brand-img {
+        width: 40px !important; 
+        height: 40px !important;} 
+    }
+  
+.brand-link {
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    transition: 0.3s ease !important;
+}
+.brand-img {
+    width: 45px !important;
+    height: 45px !important;
+    object-fit: contain !important;
+    border-radius: 8px !important;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+
+}
+.brand-link:hover .brand-img {
+    transform: scale(1.2) !important; 
+}
+
+
     </style>
 </head>
 <body>
@@ -140,13 +166,11 @@
 
     <div class="wrapper">
 <header>
-    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
-        <img src="images/IMG_2073.PNG" alt="MADE PUFF" style="height: 45px; width: auto; display: block;">
-        
-        <div class="logo">MADE PUFF</div>
-    </a>
-    
-    <a href="index.html" class="nav-back">← НА ГЛАВНУЮ</a>
+<a href="index.html" class="brand-link">
+<img src="images/IMG_2073.PNG" alt="Logo" class="brand-img">
+<div class="logo">MADE PUFF</div>
+</a>
+<a href="index.html" class="nav-back">← НА ГЛАВНУЮ</a>
 </header>
 
         <section class="hero">
