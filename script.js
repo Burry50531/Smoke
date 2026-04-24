@@ -895,9 +895,9 @@ function renderCatalog(items) {
      2. UPGRADE CART LINK
   ────────────────────────────────────────── */
   function upgradeCartLink() {
-    // Find all cart links (href includes cart.html or корзина)
+    // Find all cart links (href includes cart or корзина)
     const links = Array.from(document.querySelectorAll('a[href]')).filter(a =>
-      a.href.includes('cart.html') || a.textContent.trim().toLowerCase().startsWith('корзина')
+      a.href.includes('cart') || a.textContent.trim().toLowerCase().startsWith('корзина')
     );
 
     links.forEach(link => {
